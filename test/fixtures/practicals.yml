@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  practical_id: MyString
+  course: one
+  start_time: 2018-01-23 17:53:17
+  end_time: 2018-01-23 17:53:17
+
+two:
+  practical_id: MyString
+  course: two
+  start_time: 2018-01-23 17:53:17
+  end_time: 2018-01-23 17:53:17
