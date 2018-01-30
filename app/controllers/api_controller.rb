@@ -10,9 +10,10 @@ class ApiController < ApplicationController
     
     if type == "nfc"
       #course = Demonstrator.get_course(data)
-      course = Demonstrator.dasdsakdjsakd(data).course
+      #course = Demonstrator.dasdsakdjsakd(data).course
       
       # Time checking to get course which has practical at the momment
+      render :json => {:course_id => 1}
     end
     
   end
