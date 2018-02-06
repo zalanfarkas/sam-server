@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  sam_course_id: MyString
+  course_title: MyString
+  staff: one
+
+two:
+  sam_course_id: MyString
+  course_title: MyString
+  staff: two
