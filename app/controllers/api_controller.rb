@@ -24,7 +24,7 @@ class ApiController < ApplicationController
         current_time = DateTime.now
         practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time)
         
-        if practicals.count > 1 || practicals.first.course.nil? || practicals.count = 0
+        if practicals.count > 1 #|| #practicals.first.course.nil? || practicals.count = 0
              render :json => {"ERROR" => "Practical not found"}
             return
         end
