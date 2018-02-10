@@ -29,7 +29,7 @@ class ApiController < ApplicationController
             return
         end
         
-        render :json => {:course_id => practicals.first.course.sam_course_id}
+        render :json => {:course_id => "testas"}
     end
     
   end
