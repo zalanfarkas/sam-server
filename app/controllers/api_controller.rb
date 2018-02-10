@@ -10,7 +10,7 @@ class ApiController < ApplicationController
     end
     
     if type == "nfc"
-        render :json => {:course_id => 1}
+        #render :json => {:course_id => 1}
       
       
         # Find demonstrator
