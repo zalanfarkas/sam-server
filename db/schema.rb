@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180206171051) do
+ActiveRecord::Schema.define(version: 20180210150825) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer "student_id"
@@ -37,7 +37,7 @@ ActiveRecord::Schema.define(version: 20180206171051) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["practical_id"], name: "index_demonstrators_on_practical_id"
-    t.index ["sam_demonstrator_id"], name: "index_demonstrators_on_sam_demonstrator_id", unique: true
+    t.index ["sam_demonstrator_id"], name: "index_demonstrators_on_sam_demonstrator_id"
   end
 
   create_table "enrolments", force: :cascade do |t|
@@ -65,6 +65,7 @@ ActiveRecord::Schema.define(version: 20180206171051) do
     t.string "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_staffs_on_card_id", unique: true
     t.index ["sam_staff_id"], name: "index_staffs_on_sam_staff_id", unique: true
   end
 
@@ -75,6 +76,7 @@ ActiveRecord::Schema.define(version: 20180206171051) do
     t.string "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["card_id"], name: "index_students_on_card_id", unique: true
     t.index ["sam_student_id"], name: "index_students_on_sam_student_id", unique: true
   end
 
