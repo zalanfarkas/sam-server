@@ -15,7 +15,7 @@ class Demonstrator < ApplicationRecord
     end
     
     
-    return Demonstrator.where(id: practicals.map(&:id))
+    return Practical.where(id: practicals.map(&:id))
   end
   
   validates :sam_demonstrator_id, presence: true
