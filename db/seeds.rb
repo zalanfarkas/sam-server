@@ -13,7 +13,7 @@ nir = Staff.create!(sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'O
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
 awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
 
-start_time = DateTime.now + 1.week
+start_time = DateTime.now
 end_time = start_time + 1.hour
 robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time)
 awad_practical = awad.practicals.create(start_time: start_time, end_time: end_time)
