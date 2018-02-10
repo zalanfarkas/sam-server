@@ -28,7 +28,7 @@ class ApiController < ApplicationController
              render :json => {"ERROR" => "Practical not found"}
             return
         end
-        
+        puts practicals.inspect
         render :json => {:course_id => "testas"}
     end
     
