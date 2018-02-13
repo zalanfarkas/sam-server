@@ -45,7 +45,7 @@ class ApiController < ApplicationController
   def record_attendance
     type = params[:type]
     data = params[:data]
-    course_id = params[:course_id]
+    course_id = params[:course_id].to_i
     
     if data.nil? || type.nil? || course_id.nil?
       return render :json => {
