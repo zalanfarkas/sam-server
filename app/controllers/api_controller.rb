@@ -54,7 +54,7 @@ class ApiController < ApplicationController
       }
     end
     
-    course = Course.find(sam_course_id: course_id)
+    course = Course.find_by(sam_course_id: course_id)
     if course.nil?
       return render :json => {
         :success => false,
