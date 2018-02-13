@@ -74,7 +74,7 @@ class ApiController < ApplicationController
       end
       
       current_time = DateTime.now
-      practicals = Practical.where('start_time <= ? AND end_time >= ? AND course_id == ?', current_time, current_time, course.id)
+      practicals = Practical.where('start_time <= ? AND end_time >= ? AND CAST(course_id AS BIGINT) == ?', current_time, current_time, course.id)
       if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
           return render :json => {
             :success => false,
