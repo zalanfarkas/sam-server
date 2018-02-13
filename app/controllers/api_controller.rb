@@ -36,7 +36,7 @@ class ApiController < ApplicationController
         
         render :json => {
           :success => true,
-          :course_id => practicals.first.course_id
+          :course_id => practicals.first.course.sam_course_id
         }
     end
     
@@ -45,7 +45,7 @@ class ApiController < ApplicationController
   def record_attendance
     type = params[:type]
     data = params[:data]
-    course_id = params[:course_id].to_i
+    course_id = params[:course_id]
     
     if data.nil? || type.nil? || course_id.nil?
       return render :json => {
@@ -54,7 +54,7 @@ class ApiController < ApplicationController
       }
     end
     
-    course = Course.find(course_id)
+    course = Course.find(sam_course_id: course_id)
     if course.nil?
       return render :json => {
         :success => false,
@@ -74,7 +74,7 @@ class ApiController < ApplicationController
       end
       
       current_time = DateTime.now
-      practicals = Practical.where('start_time <= ? AND end_time >= ? AND course_id == ?', current_time, current_time, course_id)
+      practicals = Practical.where('start_time <= ? AND end_time >= ? AND course_id == ?', current_time, current_time, course.id)
       if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
           return render :json => {
             :success => false,
