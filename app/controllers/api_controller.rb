@@ -74,8 +74,14 @@ class ApiController < ApplicationController
       end
       
       current_time = DateTime.now
-      practical = Practical.where('start_time <= ? AND end_time >= ? AND course_id == ?', current_time, current_time, course_id)
-      Attendance.create(student_id: student.id, practical_id: practical.id)
+      practicals = Practical.where('start_time <= ? AND end_time >= ? AND course_id == ?', current_time, current_time, course_id)
+      if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
+          return render :json => {
+            :success => false,
+            :error => "There are no practical at this time"
+          }
+      end
+      Attendance.create(student_id: student.id, practical_id: practicals.first.id)
       
       render :json => { :success => true, :student_id => sam_student_id }
     end
