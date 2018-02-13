@@ -22,6 +22,7 @@ class Demonstrator < ApplicationRecord
     end
     
     if person.nil?
+      puts "FUCKED"
       return nil
     elsif person.is_a?(Staff)
       sam_demonstrator_id = person.sam_staff_id
