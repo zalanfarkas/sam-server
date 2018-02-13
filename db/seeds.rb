@@ -8,7 +8,7 @@
 
 zalan = Student.create!(sam_student_id: '00000001', first_name: 'Zalan', last_name: 'Farkas', card_id: 'u00000001')
 dovydas = Student.create!(sam_student_id: '00000002', first_name: 'Dovydas', last_name: 'Pekus', card_id: 'u00000002')
-nir = Staff.create!(sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'Oren', card_id: 'u00000002')
+nir = Staff.create!(sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'Oren', card_id: 'u00000003')
 
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
 awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
