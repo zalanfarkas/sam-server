@@ -12,7 +12,6 @@ class Demonstrator < ApplicationRecord
     person = nil
     case type 
     when "nfc"
-      
       person = Staff.find_by(card_id: data)
       person = Student.find_by(card_id: data) if person == nil
     when "sam_id"
@@ -24,9 +23,9 @@ class Demonstrator < ApplicationRecord
     
     if person.nil?
       return nil
-    else if person.is_a?(Staff)
+    elsif person.is_a?(Staff)
       sam_demonstrator_id = person.sam_staff_id
-    else if person.is_a?(Student)
+    elsif person.is_a?(Student)
       sam_demonstrator_id = person.sam_student_id
     end
     
