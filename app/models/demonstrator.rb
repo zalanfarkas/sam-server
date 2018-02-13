@@ -15,7 +15,7 @@ class Demonstrator < ApplicationRecord
     when "nfc"
       person = Staff.find_by(card_id: data)
       puts "fuck off"
-      puts person
+      puts person.inspect
       puts person.nil?
       puts "done"
       person = Student.find_by(card_id: data) if person == nil
