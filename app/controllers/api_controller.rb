@@ -16,8 +16,8 @@ class ApiController < ApplicationController
         # Find demonstrator
         practicals_of_demonstrator = Demonstrator.find_practicals(type, data)
         puts "testas"
-        puts practicals_of_demonstrator
-        
+        puts practicals_of_demonstrator.inspect
+        puts "testas done"
         
         if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
           return render :json => {
