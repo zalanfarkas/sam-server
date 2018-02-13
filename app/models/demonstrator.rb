@@ -31,6 +31,9 @@ class Demonstrator < ApplicationRecord
     end
     
     demonstrations = Demonstrator.where(["sam_demonstrator_id = ?", sam_demonstrator_id])
+    put person.inspect
+    puts person.id
+    puts demonstrations.inspect
     practicals = Array.new
     demonstrations.each do |demonstrator|
       practicals << demonstrator.practical
