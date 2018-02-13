@@ -14,6 +14,10 @@ class Demonstrator < ApplicationRecord
     case type 
     when "nfc"
       person = Staff.find_by(card_id: data)
+      puts "fuck off"
+      puts person
+      puts person.nil?
+      puts "done"
       person = Student.find_by(card_id: data) if person == nil
     when "sam_id"
       person = Staff.find_by(sam_staff_id: data)
