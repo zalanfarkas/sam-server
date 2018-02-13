@@ -73,6 +73,7 @@ class ApiController < ApplicationController
         return render_json_error("Student is not enrolled for course: #{course_id}")
       end
       
+      current_time = DateTime.now
       practical = Practical.where('start_time <= ? AND end_time >= ? AND course_id == ?', current_time, current_time, course_id)
       Attendance.create(student_id: student.id, practical_id: practical.id)
       
