@@ -7,18 +7,27 @@ class Demonstrator < ApplicationRecord
     return person != nil ? person : Student.find_by(sam_student_id: self.sam_demonstrator_id)
   end
   
-  
   def self.find_practicals(type, data)
     sam_demonstrator_id = nil
+    person = nil
     case type 
     when "nfc"
-      sam_demonstrator_id = Staff.find_by(card_id: data).sam_staff_id
-      sam_demonstrator_id = Student.find_by(card_id: data).sam_student_id if sam_demonstrator_id == nil
+      
+      person = Staff.find_by(card_id: data)
+      person = Student.find_by(card_id: data) if person == nil
     when "sam_id"
-      person = Staff.find_by(sam_staff_id: data).sam_staff_id
-      person = Student.find_by(sam_student_id: data).sam_student_id if sam_demonstrator_id == nil
+      person = Staff.find_by(sam_staff_id: data)
+      person = Student.find_by(sam_student_id: data) if person == nil
     else 
       puts "NEEDS IMPLEMENTATION!!!"
+    end
+    
+    if person.nil?
+      return nil
+    else if person.is_a?(Staff)
+      sam_demonstrator_id = person.sam_staff_id
+    else if person.is_a?(Student)
+      sam_demonstrator_id = person.sam_student_id
     end
     
     demonstrations = Demonstrator.where(["sam_demonstrator_id = ?", sam_demonstrator_id])
