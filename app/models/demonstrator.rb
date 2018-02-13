@@ -7,13 +7,25 @@ class Demonstrator < ApplicationRecord
     return person != nil ? person : Student.find_by(sam_student_id: self.sam_demonstrator_id)
   end
   
-  def self.find_practicals_for(sam_demonstator_id)
-    demonstrations = Demonstrator.where(["sam_demonstrator_id = ?", sam_demonstator_id])
+  
+  def self.find_practicals(type, data)
+    sam_demonstrator_id = nil
+    case type 
+    when "nfc"
+      sam_demonstrator_id = Staff.find_by(card_id: data).sam_staff_id
+      sam_demonstrator_id = Student.find_by(card_id: data).sam_student_id if sam_demonstrator_id == nil
+    when "sam_id"
+      person = Staff.find_by(sam_staff_id: data).sam_staff_id
+      person = Student.find_by(sam_student_id: data).sam_student_id if sam_demonstrator_id == nil
+    else 
+      puts "NEEDS IMPLEMENTATION!!!"
+    end
+    
+    demonstrations = Demonstrator.where(["sam_demonstrator_id = ?", sam_demonstrator_id])
     practicals = Array.new
     demonstrations.each do |demonstrator|
       practicals << demonstrator.practical
     end
-    
     
     return Practical.where(id: practicals.map(&:id))
   end

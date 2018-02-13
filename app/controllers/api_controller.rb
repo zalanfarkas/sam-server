@@ -14,9 +14,9 @@ class ApiController < ApplicationController
     
     if type == "nfc"
         # Find demonstrator
-        practicals_of_demonstrator = Demonstrator.find_practicals_for(data)
+        practicals_of_demonstrator = Demonstrator.find_practicals(type, data)
         
-        if practicals_of_demonstrator.empty? 
+        if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
           return render :json => {
             :success => false,
             :error => "Demonstrator doesn't have practicals"
