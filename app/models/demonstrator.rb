@@ -8,6 +8,7 @@ class Demonstrator < ApplicationRecord
   end
   
   def self.find_practicals(type, data)
+    puts "didnt reach"
     sam_demonstrator_id = nil
     person = nil
     case type 
@@ -30,6 +31,7 @@ class Demonstrator < ApplicationRecord
       sam_demonstrator_id = person.sam_student_id
     end
     
+    puts "reached"
     demonstrations = Demonstrator.where(["sam_demonstrator_id = ?", sam_demonstrator_id])
     puts person.inspect
     puts person.id
