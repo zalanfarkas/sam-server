@@ -69,7 +69,7 @@ class ApiController < ApplicationController
       end
       
       # Check is student is enrolled for the course
-      if Enrolment.where(["student_id = ? and course_id = ?", student.id, course.id]).nil?
+      if Enrolment.where(["student_id = ? and CAST(course_id AS BIGINT) = ?", student.id, course.id]).nil?
         return render_json_error("Student is not enrolled for course: #{course_id}")
       end
       
