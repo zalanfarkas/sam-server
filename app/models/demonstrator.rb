@@ -8,19 +8,12 @@ class Demonstrator < ApplicationRecord
   end
   
   def self.find_practicals(type, data)
-    puts "didnt reach"
     sam_demonstrator_id = nil
     person = nil
     case type 
     when "nfc"
       person = Staff.find_by(card_id: data)
-      puts "fuck off"
-      puts person.inspect
-      puts person.nil?
-      puts "done"
-      person = Student.find_by(card_id: "u00000002") #if person == nil
-      puts "data = #{data.inspect}"
-      puts "person = #{person.inspect}"
+      person = Student.find_by(card_id: data) if person == nil
     when "sam_id"
       person = Staff.find_by(sam_staff_id: data)
       person = Student.find_by(sam_student_id: data) if person == nil
@@ -29,7 +22,6 @@ class Demonstrator < ApplicationRecord
     end
     
     if person.nil?
-      puts "FUCKED"
       return nil
     elsif person.is_a?(Staff)
       sam_demonstrator_id = person.sam_staff_id
@@ -37,7 +29,6 @@ class Demonstrator < ApplicationRecord
       sam_demonstrator_id = person.sam_student_id
     end
     
-    puts "reached"
     demonstrations = Demonstrator.where(["sam_demonstrator_id = ?", sam_demonstrator_id])
     puts person.inspect
     puts person.id
