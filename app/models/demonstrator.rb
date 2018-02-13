@@ -19,6 +19,7 @@ class Demonstrator < ApplicationRecord
       puts person.nil?
       puts "done"
       person = Student.find_by(card_id: data) if person == nil
+      puts "person = #{person}"
     when "sam_id"
       person = Staff.find_by(sam_staff_id: data)
       person = Student.find_by(sam_student_id: data) if person == nil
