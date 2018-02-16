@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Practicals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Start time</th>
+      <th>End time</th>
+      <th>Course</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @practicals.each do |practical| %>
+      <tr>
+        <td><%= practical.start_time %></td>
+        <td><%= practical.end_time %></td>
+        <td><%= practical.course %></td>
+        <td><%= link_to 'Show', practical %></td>
+        <td><%= link_to 'Edit', edit_practical_path(practical) %></td>
+        <td><%= link_to 'Destroy', practical, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Practical', new_practical_path %>

@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Demonstrators</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Sam demonstrator</th>
+      <th>Practical</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @demonstrators.each do |demonstrator| %>
+      <tr>
+        <td><%= demonstrator.sam_demonstrator_id %></td>
+        <td><%= demonstrator.practical %></td>
+        <td><%= link_to 'Show', demonstrator %></td>
+        <td><%= link_to 'Edit', edit_demonstrator_path(demonstrator) %></td>
+        <td><%= link_to 'Destroy', demonstrator, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Demonstrator', new_demonstrator_path %>

@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Sam demonstrator:</strong>
+  <%= @demonstrator.sam_demonstrator_id %>
+</p>
+
+<p>
+  <strong>Practical:</strong>
+  <%= @demonstrator.practical %>
+</p>
+
+<%= link_to 'Edit', edit_demonstrator_path(@demonstrator) %> |
+<%= link_to 'Back', demonstrators_path %>

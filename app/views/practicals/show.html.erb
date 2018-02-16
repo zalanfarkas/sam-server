@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Start time:</strong>
+  <%= @practical.start_time %>
+</p>
+
+<p>
+  <strong>End time:</strong>
+  <%= @practical.end_time %>
+</p>
+
+<p>
+  <strong>Course:</strong>
+  <%= @practical.course %>
+</p>
+
+<%= link_to 'Edit', edit_practical_path(@practical) %> |
+<%= link_to 'Back', practicals_path %>

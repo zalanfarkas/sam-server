@@ -1,0 +1,32 @@
+<%= form_with(model: practical, local: true) do |form| %>
+  <% if practical.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(practical.errors.count, "error") %> prohibited this practical from being saved:</h2>
+
+      <ul>
+      <% practical.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :start_time %>
+    <%= form.datetime_select :start_time, id: :practical_start_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :end_time %>
+    <%= form.datetime_select :end_time, id: :practical_end_time %>
+  </div>
+
+  <div class="field">
+    <%= form.label :course_id %>
+    <%= form.text_field :course_id, id: :practical_course_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

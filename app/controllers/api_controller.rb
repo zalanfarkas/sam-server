@@ -1,9 +1,15 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   
+  #temporary homepage
+  def homepage
+    render html: "hello, world!"
+  end
+  
   def get_course_id
     type = params[:type]
     data = params[:data]
+    # params with Pi ID so we can check which Pi sent it, maybe we can check against it so nobody can send a post request from home
     
     if data.nil? 
       return render :json => {

@@ -1,0 +1,27 @@
+<%= form_with(model: demonstrator, local: true) do |form| %>
+  <% if demonstrator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(demonstrator.errors.count, "error") %> prohibited this demonstrator from being saved:</h2>
+
+      <ul>
+      <% demonstrator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :sam_demonstrator_id %>
+    <%= form.text_field :sam_demonstrator_id, id: :demonstrator_sam_demonstrator_id %>
+  </div>
+
+  <div class="field">
+    <%= form.label :practical_id %>
+    <%= form.text_field :practical_id, id: :demonstrator_practical_id %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
