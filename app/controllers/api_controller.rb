@@ -15,9 +15,6 @@ class ApiController < ApplicationController
     if type == "nfc"
         # Find demonstrator
         practicals_of_demonstrator = Demonstrator.find_practicals(type, data)
-        puts "testas"
-        puts practicals_of_demonstrator.inspect
-        puts "testas done"
         
         if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
           return render :json => {
@@ -39,7 +36,8 @@ class ApiController < ApplicationController
         
         render :json => {
           :success => true,
-          :course_id => practicals.first.course.sam_course_id
+          :course_id => practicals.first.course.sam_course_id,
+          :end_time => practicals.first.end_time
         }
     end
     
@@ -76,7 +74,12 @@ class ApiController < ApplicationController
         return render_json_error("Student is not enrolled for course: #{course_id}")
       end
       
-      current_time = DateTime.now
+      if Rails.env == "production"
+        current_time = DateTime.now
+      else # if the enviroment is either test or development
+         # so we can test it even if there is no real practical at testing time
+        current_time = Practical.first.start_time
+      end
       practicals = Practical.where('start_time <= ? AND end_time >= ? AND course_id = ?', current_time, current_time, course.id)
       if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
           return render :json => {
