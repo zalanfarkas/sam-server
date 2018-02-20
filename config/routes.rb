@@ -1,10 +1,10 @@
 Rails.application.routes.draw do
   
-  devise_for :students
-  get 'static_pages/index'
-
-  devise_for :staffs
   root 'static_pages#index'
+  devise_for :students
+  devise_for :staffs
+  
+  get 'static_pages/index'
   post 'api/get_course', to: 'api#get_course_id'
   post 'api/record_attendance', to: 'api#record_attendance'
   
