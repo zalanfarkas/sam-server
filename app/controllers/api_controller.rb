@@ -1,11 +1,6 @@
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   
-  #temporary homepage
-  def homepage
-    render html: "hello, world!"
-  end
-  
   def get_course_id
     type = params[:type]
     data = params[:data]
@@ -90,9 +85,17 @@ class ApiController < ApplicationController
       if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
           return render :json => {
             :success => false,
-            :error => "There are no practical at this time"
+            :error => "There are no practicals at this time"
           }
       end
+      
+      if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).exists?
+        return render :json => {
+            :success => false,
+            :error => "Attendance was already recorded"
+          }
+      end
+      
       Attendance.create(student_id: student.id, practical_id: practicals.first.id)
       
       render :json => { :success => true, :student_id => student.sam_student_id }
