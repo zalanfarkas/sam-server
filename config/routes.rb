@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
-  root 'api#homepage'
+  
+  get 'static_pages/index'
+
+  devise_for :staffs
+  root 'static_pages#index'
   post 'api/get_course', to: 'api#get_course_id'
   post 'api/record_attendance', to: 'api#record_attendance'
   

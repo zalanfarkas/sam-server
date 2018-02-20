@@ -1,4 +1,5 @@
 class PracticalsController < ApplicationController
+  before_action :authenticate_staff!
   before_action :set_practical, only: [:show, :edit, :update, :destroy]
 
   # GET /practicals
