@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  devise_for :students
   get 'static_pages/index'
 
   devise_for :staffs

@@ -6,8 +6,8 @@
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
 
-zalan = Student.create!(sam_student_id: '00000001', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243')
-dovydas = Student.create!(sam_student_id: '00000002', first_name: 'Dovydas', last_name: 'Pekus', card_id: '226198141759')
+zalan = Student.create!(email: 'zalan@example.com', password: 'password', sam_student_id: '00000001', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243')
+dovydas = Student.create!(email: 'dovydas@example.com', password: 'password', sam_student_id: '00000002', first_name: 'Dovydas', last_name: 'Pekus', card_id: '226198141759')
 nir = Staff.create!(email: 'ninja_hacker@example.com', password: 'password', sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'Oren', card_id: 'u00000003')
 
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')

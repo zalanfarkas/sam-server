@@ -1,4 +1,10 @@
 <h1>StaticPages#index</h1>
 <p>Find me in app/views/static_pages/index.html.erb</p>
+<p> Login for Staff:</p>
 <%= link_to 'Login', new_staff_session_path %>
 <%= link_to "Logout", destroy_staff_session_path, method: :delete %>
+<br>
+<br>
+<p> Login for Students:</p>
+<%= link_to 'Login', new_student_session_path %>
+<%= link_to "Logout", destroy_student_session_path, method: :delete %>
