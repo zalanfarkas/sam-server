@@ -1,0 +1,29 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Pending Practicals</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Raspberry pi</th>
+      <th>Practical</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @pending_practicals.each do |pending_practical| %>
+      <tr>
+        <td><%= pending_practical.raspberry_pi_id %></td>
+        <td><%= pending_practical.practical %></td>
+        <td><%= link_to 'Show', pending_practical %></td>
+        <td><%= link_to 'Edit', edit_pending_practical_path(pending_practical) %></td>
+        <td><%= link_to 'Destroy', pending_practical, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Pending Practical', new_pending_practical_path %>

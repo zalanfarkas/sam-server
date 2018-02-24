@@ -1,0 +1,14 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Raspberry pi:</strong>
+  <%= @pending_practical.raspberry_pi_id %>
+</p>
+
+<p>
+  <strong>Practical:</strong>
+  <%= @pending_practical.practical %>
+</p>
+
+<%= link_to 'Edit', edit_pending_practical_path(@pending_practical) %> |
+<%= link_to 'Back', pending_practicals_path %>

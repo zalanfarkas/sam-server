@@ -1,0 +1,9 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  raspberry_pi_id: 
+  practical: one
+
+two:
+  raspberry_pi_id: 
+  practical: two

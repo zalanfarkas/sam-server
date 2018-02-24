@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'static_pages/index'
   post 'api/get_course', to: 'api#get_course_id'
   post 'api/record_attendance', to: 'api#record_attendance'
+  post 'api/pending_practicals', to: 'api#pending_practicals'
   
   resources :students
   resources :staffs
@@ -15,4 +16,5 @@ Rails.application.routes.draw do
   resources :attendances
   resources :enrolments
   resources :demonstrators
+  resources :pending_practicals
 end

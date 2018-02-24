@@ -103,6 +103,37 @@ class ApiController < ApplicationController
     
   end
   
+  def pending_practicals
+    raspberry_pi_id = params[:data]
+    pending_practical = PendingPractical.find_by(raspberry_pi_id: raspberry_pi_id)
+    
+    # There is not practical pending for raspberry pi with given id
+    if pending_practical.nil?
+      return render :json => {
+        :success => true,
+        :pending => false
+      }
+    end
+    
+    if pending_practical.course.nil?
+      return render :json => {
+        :success => false,
+        :error => "Practical doesn't have course"
+      }
+    end
+    
+    
+    render :json => {
+        :success => true,
+        :pending => true,
+        :course_id => pending_practical.first.course.sam_course_id,
+        :end_time => pending_practical.end_time
+    }
+    
+    # Delete practical from pending practicals here
+    
+  end
+  
   def render_json_error(message)
     render :json => {
       :success => false,
