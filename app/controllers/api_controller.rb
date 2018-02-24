@@ -130,8 +130,8 @@ class ApiController < ApplicationController
         :end_time => pending_practical.practical.end_time
     }
     
-    # Delete practical from pending practicals here
-    
+    # Delete practical from pending practicals
+    pending_practical.delete
   end
   
   def render_json_error(message)
