@@ -115,7 +115,7 @@ class ApiController < ApplicationController
       }
     end
     
-    if pending_practical.course.nil?
+    if pending_practical.practical.course.nil?
       return render :json => {
         :success => false,
         :error => "Practical doesn't have course"
@@ -126,8 +126,8 @@ class ApiController < ApplicationController
     render :json => {
         :success => true,
         :pending => true,
-        :course_id => pending_practical.first.course.sam_course_id,
-        :end_time => pending_practical.end_time
+        :course_id => pending_practical.practical.course.sam_course_id,
+        :end_time => pending_practical.practical.end_time
     }
     
     # Delete practical from pending practicals here
