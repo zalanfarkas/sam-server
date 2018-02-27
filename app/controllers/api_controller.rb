@@ -105,8 +105,15 @@ class ApiController < ApplicationController
   
   def pending_practicals
     raspberry_pi_id = params[:data]
-    pending_practical = PendingPractical.find_by(raspberry_pi_id: raspberry_pi_id)
     
+    if raspberry_pi_id.nil?
+      return render :json => {
+        :success => false,
+        :error => "Raspberry id must be provided"
+      }
+    end
+    
+    pending_practical = PendingPractical.find_by(raspberry_pi_id: raspberry_pi_id)
     # There is not practical pending for raspberry pi with given id
     if pending_practical.nil?
       return render :json => {
@@ -132,6 +139,36 @@ class ApiController < ApplicationController
     
     # Delete practical from pending practicals
     pending_practical.delete
+  end
+  
+  def upload_fingerprint
+    card_id = params[:card_id]
+    fingerprint = params[:fingerprint]
+    
+    if card_id.nil? || fingerprint.nil?
+      return render :json => {
+        :success => false,
+        :error => "ID and fingerprint data must be provided"
+      }
+    end
+    
+    person = nil
+    # Look for the person in students record
+    person = Student.find_by(card_id: card_id)
+    # If didn't find in student table look in staff table
+    person = Staff.find_by(card_id: card_id) if person == nil
+    
+    if person.nil?
+      return render :json => {
+        :success => false,
+        :error => "Person with given card id doesn't exists"
+      }
+    end
+    
+    person.update_attribute(:fingerprint, fingerprint)
+    return render :json => {
+      :success => true
+    }
   end
   
   def render_json_error(message)
