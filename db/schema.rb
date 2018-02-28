@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180224155726) do
+ActiveRecord::Schema.define(version: 20180228132056) do
 
   create_table "attendances", force: :cascade do |t|
     t.integer "student_id"
@@ -87,6 +87,7 @@ ActiveRecord::Schema.define(version: 20180224155726) do
     t.string "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "fingerprint_template"
     t.index ["card_id"], name: "index_staffs_on_card_id", unique: true
     t.index ["email"], name: "index_staffs_on_email", unique: true
     t.index ["reset_password_token"], name: "index_staffs_on_reset_password_token", unique: true
@@ -114,6 +115,7 @@ ActiveRecord::Schema.define(version: 20180224155726) do
     t.string "card_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.text "fingerprint_template"
     t.index ["card_id"], name: "index_students_on_card_id", unique: true
     t.index ["email"], name: "index_students_on_email", unique: true
     t.index ["reset_password_token"], name: "index_students_on_reset_password_token", unique: true
