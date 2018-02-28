@@ -7,6 +7,7 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 zalan = Student.create!(email: 'zalan@example.com', password: 'password', sam_student_id: '00000001', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243')
+Student.create!(email: 'ed@example.com', password: 'password', sam_student_id: '00000099', first_name: 'Edvinas', last_name: 'Byla', card_id: '0000')
 dovydas = Student.create!(email: 'dovydas@example.com', password: 'password', sam_student_id: '00000002', first_name: 'Dovydas', last_name: 'Pekus', card_id: '226198141759')
 nir = Staff.create!(email: 'ninja_hacker@example.com', password: 'password', sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'Oren', card_id: 'u00000003')
 
@@ -24,6 +25,9 @@ Enrolment.create(course_id: robotics.id, student_id: zalan.id)
 
 
 awad_practical = awad.practicals.create(start_time: DateTime.new(2018,2,19,9), end_time: DateTime.new(2018,2,19,10,59,59))
+awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.new(2018,3,2,10,59,59))
+Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical2.id)
+
 
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical.id)
