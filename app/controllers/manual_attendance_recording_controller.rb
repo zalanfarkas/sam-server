@@ -46,10 +46,10 @@ class ManualAttendanceRecordingController < ApplicationController
       #Attendance => student id should be sam student id
       if Attendance.where('student_id = ? AND practical_id = ?', params[:student_id], practical.id).empty?
         Attendance.create!(student_id: params[:student_id], practical_id: practical.id)
-        flash[:notice] = "Attendance is recorded successfully for student with ID: #{params[:student_id]}"
+        flash[:notice] = "Attendance is recorded successfully for student with ID: #{params[:sam_student_id]}"
         redirect_to manual_attendance_recording_index_path
       else 
-        flash[:alert] = "Attendance is already recorded for student with ID: #{params[:student_id]}"
+        flash[:alert] = "Attendance is already recorded for student with ID: #{params[:sam_student_id]}"
         redirect_to manual_attendance_recording_index_path
       end
     else
