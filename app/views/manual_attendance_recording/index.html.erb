@@ -1,5 +1,23 @@
-<h1>ManualAttendanceRecording#index</h1>
-<p>Find me in app/views/manual_attendance_recording/index.html.erb</p>
-<p>Your current practicals:</p>
-<p><%= @practicals.first.course.course_title%></p>
-<%= link_to "Record Attendance", manual_attendance_recording_search_path %>
+<p><b>Your current practicals:</b></p>
+<div class="row">
+  <div class="col-md-6">
+    <% if @error.nil? %>
+        <% @practicals.each do |practical| %>
+            <h1><%= practical.course.course_title %></h1>
+            <%=form_tag({controller: "manual_attendance_recording", action: "search"}, method: "get", class: "nifty_form") do %>
+            <div class="form-group">
+              <%= text_field_tag :student_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Enter Student ID" %>
+            </div>
+              <%= hidden_field_tag(:course_id, practical.course.id) %>
+              <div class="actions">
+                <%= submit_tag "Search", class: "btn btn-primary" %>
+              </div>
+            <% end %>
+            <br>
+        <% end %>  
+    <% else %>
+        <p><%= @error %></p>
+    <% end %>
+  </div>
+</div>
+

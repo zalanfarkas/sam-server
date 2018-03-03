@@ -2,6 +2,7 @@ Rails.application.routes.draw do
   
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
+  get 'manual_attendance_recording/attendance_recording'
   get '/r', to: "manual_attendance_recording#index"
 
   root 'static_pages#index'
