@@ -65,6 +65,7 @@ class ApiController < ApplicationController
       }
     end
     
+    student = Student.new
     course = Course.find_by(sam_course_id: course_id)
     if course.nil?
       return render :json => {
@@ -78,8 +79,17 @@ class ApiController < ApplicationController
       if student.nil?
         return render_json_error("Student not found")
       end
-      
-      # Check is student is enrolled for the course
+    elsif type == "fingerprint"
+      student = Student.find_by(fingerprint_template: data)
+      if student.nil?
+        return render_json_error("Student not found")
+      end
+    else 
+      return render_json_error("Type not found")
+    end
+    
+    
+     # Check is student is enrolled for the course
       if Enrolment.where(["student_id = ? and course_id = ?", student.id, course.id]).nil?
         return render_json_error("Student is not enrolled for course: #{course_id}")
       end
@@ -106,10 +116,7 @@ class ApiController < ApplicationController
       end
       
       Attendance.create(student_id: student.id, practical_id: practicals.first.id)
-      
       render :json => { :success => true, :student_id => student.sam_student_id }
-    end
-    
   end
   
   def pending_practicals
