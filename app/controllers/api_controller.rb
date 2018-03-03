@@ -35,10 +35,19 @@ class ApiController < ApplicationController
           }
         end
         
+        fingerprint_templates = Array.new
+        # Find all the students who are enrolled for course
+        Enrolment.where(["course_id = ?", practicals.first.course.id]).each do |enrolment|
+          fingerprint_templates << enrolment.student.fingerprint_template
+        end
+
+        # Todo add code to add demonstrator and staff templates as well
+        
         render :json => {
           :success => true,
           :course_id => practicals.first.course.sam_course_id,
-          :end_time => practicals.first.end_time
+          :end_time => practicals.first.end_time,
+          :templates => fingerprint_templates
         }
     end
     
