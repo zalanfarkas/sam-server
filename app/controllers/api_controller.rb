@@ -174,7 +174,7 @@ class ApiController < ApplicationController
       }
     end
     
-    person.update_attribute(:fingerprint, fingerprint)
+    person.update_attribute(:fingerprint_template, fingerprint)
     return render :json => {
       :success => true
     }
