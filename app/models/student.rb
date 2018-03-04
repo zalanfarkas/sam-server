@@ -7,9 +7,19 @@ class Student < ApplicationRecord
   has_many :attendances
   has_many :enrolments
   has_many :practicals, through: :attendances
-    
+  mount_uploader :picture, PictureUploader
+  validate  :picture_size
   validates :sam_student_id, presence: true, uniqueness: true
   validates :card_id, presence: true, uniqueness: true
   validates :first_name, presence: true
   validates :last_name, presence: true
+  
+  private
+  # Validates the size of an uploaded picture.
+  def picture_size
+    if picture.size > 5.megabytes
+      errors.add(:picture, "should be less than 5MB")
+    end
+  end
+
 end
