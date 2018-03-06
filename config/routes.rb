@@ -9,10 +9,11 @@ Rails.application.routes.draw do
   devise_for :staffs
   
   get 'static_pages/index'
-  post 'api/get_course', to: 'api#get_course_id'
-  post 'api/record_attendance', to: 'api#record_attendance'
-  post 'api/pending_practicals', to: 'api#pending_practicals'
-  post 'api/upload_fingerprint', to: 'api#upload_fingerprint'
+  post 'api/get_course',          to: 'api#get_course_id'
+  post 'api/record_attendance',   to: 'api#record_attendance'
+  post 'api/pending_practicals',  to: 'api#pending_practicals'
+  post 'api/upload_fingerprint',  to: 'api#upload_fingerprint'
+  post 'api/upcoming_templates',  to: 'api#upcoming_templates'
   
   resources :students
   resources :staffs

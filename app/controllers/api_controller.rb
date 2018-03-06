@@ -41,7 +41,6 @@ class ApiController < ApplicationController
           fingerprint_templates << enrolment.student.fingerprint_template
         end
 
-        # Todo add code to add demonstrator and staff templates as well
         
         render :json => {
           :success => true,
@@ -184,6 +183,31 @@ class ApiController < ApplicationController
     person.update_attribute(:fingerprint_template, fingerprint)
     return render :json => {
       :success => true
+    }
+  end
+  
+  # Fetch templates for upcoming practicals
+  def upcoming_templates
+    # Find currently running practicals
+    current_time = DateTime.now
+    practicals = Practical.where('start_time <= ? AND end_time >= ?', current_time, current_time)
+    
+    fingerprint_templates = Array.new
+    # Go through each practical
+    practicals.each do |practical|
+      # Add course coordinator template
+      fingerprint_templates << practical.course.staff.fingerprint_template
+      # Find demonstrators for each practical
+      practical.demonstrators.each do |demonstrator|
+        # Add demonstrator templates 
+        fingerprint_templates << demonstrator.find_person.fingerprint_template
+      end
+    end
+    
+    # Return templates
+    return render :json => {
+      :success => true,
+      :templates => fingerprint_templates
     }
   end
   
