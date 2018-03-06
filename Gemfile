@@ -34,6 +34,8 @@ gem 'jbuilder', '~> 2.5'
 gem 'devise'
 gem 'bootstrap', '~> 4.0.0'
 gem 'jquery-rails'
+gem 'carrierwave', '1.2.2'
+gem 'mini_magick', '4.7.0'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -59,4 +61,5 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
 group :production do
  gem 'pg', '0.20.0'
+ gem 'fog', '1.42'
 end
