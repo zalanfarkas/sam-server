@@ -21,6 +21,39 @@ class StaffsController < ApplicationController
   # GET /staffs/1/edit
   def edit
   end
+  
+  def dashboard
+    sam_student_id = params[:sam_student_id]
+    @courses = current_staff.courses
+    @hash = {}
+    if sam_student_id.nil?
+      @courses.each do |course|
+        @hash[course.course_title] = AbsenceCertificate.where("certificate_type = ? AND course_id = ?", "C6", course.id)
+      end
+    else
+      student = Student.find_by(sam_student_id: sam_student_id)
+      if !student.nil?
+        @courses.each do |course|
+          @hash[course.course_title] = AbsenceCertificate.where("certificate_type = ? AND course_id = ? AND student_id = ?", "C6", course.id, student.id)
+        end
+      else
+        flash[:alert] = "There is no student with student ID: #{sam_student_id}"
+        redirect_to dashboard_path
+      end
+    end
+      
+    p @courses.inspect
+    p @hash.inspect
+  end
+  
+  def remove_c6
+    certificate_id = params[:certificate_id]
+    student_name = params[:student_name]
+    AbsenceCertificate.destroy(certificate_id)
+    flash[:notice] = "C6 remove for #{student_name}"
+    redirect_to dashboard_path
+  end
+  
 
   # POST /staffs
   # POST /staffs.json

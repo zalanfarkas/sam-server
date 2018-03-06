@@ -3,7 +3,9 @@ Rails.application.routes.draw do
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
   get 'manual_attendance_recording/attendance_recording'
-  get '/r', to: "manual_attendance_recording#index"
+  get '/record', to: "manual_attendance_recording#index"
+  get 'dashboard', to: 'staffs#dashboard'
+  get 'remove_c6', to: 'staffs#remove_c6'
 
   root 'static_pages#index'
   devise_for :students
