@@ -186,8 +186,8 @@ class ApiController < ApplicationController
     }
   end
   
-  # Fetch templates for upcoming practicals
-  def upcoming_templates
+  # Fetch templates for currently running practicals
+  def current_templates
     # Find currently running practicals
     current_time = DateTime.now
     practicals = Practical.where('start_time <= ? AND end_time >= ?', current_time, current_time)

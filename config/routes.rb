@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   post 'api/record_attendance',   to: 'api#record_attendance'
   post 'api/pending_practicals',  to: 'api#pending_practicals'
   post 'api/upload_fingerprint',  to: 'api#upload_fingerprint'
-  post 'api/upcoming_templates',  to: 'api#upcoming_templates'
+  post 'api/current_templates',   to: 'api#current_templates'
   
   resources :students
   resources :staffs
