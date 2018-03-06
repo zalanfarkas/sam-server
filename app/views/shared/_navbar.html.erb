@@ -1,0 +1,54 @@
+<nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
+    <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
+        <ul class="navbar-nav mr-auto">
+            <li class="nav-item active">
+                <%= link_to "Home", root_path, class: "nav-link"%>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="//codeply.com">Codeply</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+            </li>
+        </ul>
+    </div>
+    <div class="mx-auto order-0">
+        <a class="navbar-brand mx-auto" href="#">Student Attendance Monitoring</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+    </div>
+    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+      
+      <% if current_student %>
+        <ul class="navbar-nav ml-auto">
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_student_session_path, method: :delete, class: "navlink" %>
+          </li>
+        </ul>
+      <% elsif current_staff %>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <%= link_to "Logout", destroy_staff_session_path, method: :delete, class: "nav-link" %>
+            </li>
+        </ul>
+      <% else %>
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <%= link_to "Staff Login", new_staff_session_path, class: "nav-link"%>
+            </li>
+            <li class="nav-item">
+                <%= link_to "Student Login", new_student_session_path, class: "nav-link"%>
+            </li>
+        </ul>
+      <% end %>
+    </div>
+</nav>
+<br>
+<br>

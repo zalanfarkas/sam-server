@@ -15,7 +15,9 @@
  */
 /*Custom bootstrap variables must be set or imported *before* bootstrap.
 */
+@import "toastr";
 @import "bootstrap";
+
 
 body {  
   color: #565a5c;
