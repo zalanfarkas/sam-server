@@ -17,6 +17,7 @@ awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
 
 start_time = DateTime.now
 end_time = start_time + 1.month
+#robot_test = DateTime.now - 4.days
 robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time)
 
 
