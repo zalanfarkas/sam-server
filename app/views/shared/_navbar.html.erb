@@ -1,18 +1,28 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item <%= "active" if request.original_fullpath == root_path %> ">
-                <%#= link_to "Home", root_path, class: "nav-link"%>
-            </li>
             <li class="nav-item <%= "active" if request.original_fullpath == dashboard_path %> ">
-                <%= link_to "Dashboard", dashboard_path, class: "nav-link" if current_staff%>
+                <%= link_to "Dashboard", dashboard_path, class: "nav-link" if current_staff%> 
             </li>
             <li class="nav-item <%= "active" if request.original_fullpath == record_path %> ">
                 <%= link_to "Manual Attendance Recording", record_path, class: "nav-link" if current_user%>
             </li>
-            <li class="nav-item">
+            <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
                 <%= link_to "Start Practical on Device", new_pending_practical_path, class: "nav-link" if current_user%>
             </li>
+            
+            <% if current_staff %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Manage Demonstrators
+                  </a>
+                  <div class="dropdown-menu">
+                    <%= link_to "List Demonstrators", demonstrator_list_path, class: "dropdown-item" %>
+                    <%= link_to "Add Demonstrator to Practical", add_demonstrator_path, class: "dropdown-item" if current_staff%>
+                    <a class="dropdown-item" href="#">Delete Demonstrators</a>
+                  </div>
+                </li>
+            <% end %>
         </ul>
     </div>
     <div class="mx-auto order-0">

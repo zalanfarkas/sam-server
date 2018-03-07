@@ -17,28 +17,29 @@ nir = Staff.create!(fingerprint_template: '123|32|11', email: 'nir@example.com',
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
 awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
 
-start_time = DateTime.now
-end_time = start_time + 1.month
-#robot_test = DateTime.now - 4.days
-robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time)
-
-
-Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
 
 Enrolment.create(course_id: robotics.id, student_id: edvinas.id)
 Enrolment.create(course_id: robotics.id, student_id: zalan.id)
 
 
-awad_practical = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+1.week)
+start_time = 1.month.ago
+end_time = start_time + 2.month
+#robot_test = DateTime.now - 4.days
+
+awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week)
 awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks)
-Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical2.id)
+robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time)
 
-
+#Demonstrator: Dovydas
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical.id)
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical2.id)
-Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical.id)
 
+#Demonstrator: Zalan
+Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical.id)
+Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical2.id)
+
+Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
 
 AbsenceCertificate.create!(course_id: 1, student_id: 1, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 1, student_id: 2, certificate_type: "C6")

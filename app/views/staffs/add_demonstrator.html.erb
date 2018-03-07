@@ -1,0 +1,31 @@
+
+<% @courses.each do |course|%>
+  <p>Add demonstrator for <b> <%= course.course_title %>: </b> </p>
+  <%= form_tag({controller: "staffs", action: "create_demonstrator"}, method: "post") do %>
+    <div class="form-group">
+      <%= text_field_tag :sam_student_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Enter Student ID" %>
+    </div>
+    <div class="form-group">
+      <%= label_tag(:practical_ids, "Select Practicals:") %>
+    </div>
+    <div class="form-group">
+      <ul>
+        <%=collection_check_boxes(:practical_ids, :practical_ids, @practicals_of_course[course.course_title], :id, :start_time) do |b| %>
+        <li>
+          <%= b.label(:"data-value" => b.value) { b.check_box + "Start time: #{b.text}" } %>
+        </li>
+        <% end %>
+        </ul>
+    </div>
+    <div class="actions">
+      <%= submit_tag("Add Demonstrator", class: "btn btn-primary") %>
+    </div>
+  <% end %>
+  <br>
+  <br>
+<% end %>
+
+
+
+  
+

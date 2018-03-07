@@ -1,0 +1,12 @@
+<% @hash.each do |course_title, practicals|%>
+  <h1><%= course_title %></h1>
+  <% practicals.each do |practical_start_time, content| %>
+    <p>Practical on <%= practical_start_time %></p>
+    Demonstrator(s):
+    <ul>
+    <% content.each do |counter,demonstrator| %>
+      <li>ID: <%= demonstrator[:sam_demonstrator_id]%>, Name: <%= demonstrator[:first_name] %> <%= demonstrator[:last_name] %> </li>
+    <% end %>
+    </ul>
+  <% end %>
+<% end %>
