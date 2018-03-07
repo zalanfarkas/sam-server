@@ -1,0 +1,38 @@
+<div class="col-md-auto">
+<div class="col-md-6 col-md-offset-3 text-center mx-auto">
+<%=form_tag({controller: "staffs", action: "dashboard"}, method: "get", class: "nifty_form") do %>
+  <div class="row">
+    <div class="col-12">
+    <div class="form-group col-6 col-md-auto">
+      <%= text_field_tag :sam_student_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Search Student by ID" %>
+    </div>
+    <div class="actions col-6 col-md-auto">
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    </div>
+    </div>
+  </div>
+<% end %>
+</div>
+<br>
+<br>
+
+<% @courses.each do |course| %>
+  <div class="col-md-auto">
+  <% if !(@hash[course.course_title].empty?) %>
+    <h1>Course Title: <%= course.course_title %> </h1>
+
+    <% @hash[course.course_title].each do |certificate| %>
+    <div class="row">
+      <div class="col-md-auto">
+        <b>Student ID: <%= certificate.student.sam_student_id %>, Name: <%= certificate.student.first_name %> <%= certificate.student.last_name %> </b>
+      <% name = "#{certificate.student.first_name} #{certificate.student.last_name}" %>
+      <%= link_to 'Remove C6', remove_c6_path(certificate_id: certificate.id, student_name: name), data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+      </div>
+    </div>
+    <% end %>
+    <br>
+  <% end %>
+  </div>
+<% end %>
+</div>
+  

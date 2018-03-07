@@ -35,9 +35,10 @@ Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: aw
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical.id)
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical2.id)
-
-
-
 Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical.id)
 
+
+AbsenceCertificate.create!(course_id: 1, student_id: 1, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 1, student_id: 2, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 2, student_id: 2, certificate_type: "C6")
 

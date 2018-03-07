@@ -1,3 +1,5 @@
+<div class="row">
+<div class="col-md-6 col-md-offset-3 text-center mx-auto">
 <%= form_with(model: pending_practical, local: true) do |form| %>
   <% if pending_practical.errors.any? %>
     <div id="error_explanation">
@@ -11,17 +13,19 @@
     </div>
   <% end %>
 
-  <div class="field">
-    <%= form.label :raspberry_pi_id %>
-    <%= form.text_field :raspberry_pi_id, id: :pending_practical_raspberry_pi_id %>
+  <div class="form-group">
+    
+    <%= form.text_field :raspberry_pi_id, id: :pending_practical_raspberry_pi_id, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Enter Device ID" %>
   </div>
-
-  <div class="field">
-    <%= form.label :practical_id %>
-    <%= form.text_field :practical_id, id: :pending_practical_practical_id %>
+  
+  <div class="form-group">
+    <%= form.select :practical_id, options_for_select(@current_practicals.map{|practical| [practical.course.course_title, practical.id]}), {}, {class: "form-control"}%>
+    
+    <%#= form.collection_select(:practical_id, @current_practicals, :id, ) %>  
   </div>
-
   <div class="actions">
-    <%= form.submit %>
+    <%= form.submit "Start Practical", class: "btn btn-primary" %>
   </div>
 <% end %>
+</div>
+</div>

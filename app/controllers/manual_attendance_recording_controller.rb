@@ -4,17 +4,27 @@ class ManualAttendanceRecordingController < ApplicationController
   
   def index
     @error = nil
-    practicals_of_demonstrator = Demonstrator.find_practicals("sam_id", authenticate_sam_user)
-    if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
-      @error = "Demonstrator doesn't have practicals"
+    current_time = DateTime.now
+    if current_user.class == Staff
+      @practicals = []
+      courses = current_staff.courses
+      courses.each do |course|
+        @practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time).select(:course_id).distinct)
+      end
+      if @practicals.nil? || @practicals.empty?
+        @error = "Lecturer doesn't have practicals at the moment"
+      end
     else
-      current_time = DateTime.now
-      @practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time).select(:course_id).distinct
-      if @practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
-        @error = "Demonstrator doesn't have practical at this time"
+      practicals_of_demonstrator = Demonstrator.find_practicals("sam_id", authenticate_sam_user)
+      if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
+        @error = "Demonstrator doesn't have practicals"
+      else
+        @practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time).select(:course_id).distinct
+        if @practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
+          @error = "Demonstrator doesn't have practical at the moment"
+        end
       end
     end
-    
   end
   
   def search
