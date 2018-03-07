@@ -50,7 +50,7 @@ class StaffsController < ApplicationController
     certificate_id = params[:certificate_id]
     student_name = params[:student_name]
     AbsenceCertificate.destroy(certificate_id)
-    flash[:notice] = "C6 remove for #{student_name}"
+    flash[:notice] = "C6 removed for #{student_name}"
     redirect_to dashboard_path
   end
   

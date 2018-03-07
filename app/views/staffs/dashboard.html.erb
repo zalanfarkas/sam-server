@@ -25,7 +25,7 @@
     <div class="row">
       <div class="col-md-auto">
         <b>Student ID: <%= certificate.student.sam_student_id %>, Name: <%= certificate.student.first_name %> <%= certificate.student.last_name %> </b>
-      <% name = "#{certificate.student.first_name} #{certificate.student.first_name}" %>
+      <% name = "#{certificate.student.first_name} #{certificate.student.last_name}" %>
       <%= link_to 'Remove C6', remove_c6_path(certificate_id: certificate.id, student_name: name), data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
       </div>
     </div>
