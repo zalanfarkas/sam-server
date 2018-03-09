@@ -14,24 +14,22 @@ class PendingPracticalsController < ApplicationController
   end
 
   # GET /pending_practicals/new
+  # due to the is_staff_for_practical? before_action we know that the users who reach this action have practical(s)
+  # but we still need to check whether they have any practicals at the moment
+  # current_practicals_for_course_coordinator and current_practicals_for_demonstrator(id) methods are inherited from application controller
   def new
     @pending_practical = PendingPractical.new
-    current_time = DateTime.now
-    if current_user.class == Staff
-      @current_practicals = []
-      @courses = current_staff.courses
-      p "courses: #{@courses.inspect}"
-      if @courses.empty?
-        @current_practicals = Demonstrator.find_practicals("sam_id", current_staff.sam_staff_id).where('start_time <= ? AND end_time >= ?', current_time, current_time)
-      else
-        @courses.each do |course|
-          @current_practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time))
-        end
-      end
+    if session[:user_type] == "staff_course_coordinator" #since staff is course coordinator, it is already checked that current_staff.courses is not empty
+      @current_practicals = current_practicals_for_course_coordinator
+    elsif session[:user_type] == "staff_course_coordinator_and_demonstrator"
+      @current_practicals = current_practicals_for_course_coordinator.concat(current_practicals_for_demonstrator(current_staff.sam_staff_id))
+    elsif session[:user_type] == "staff_demonstrator"
+      @current_practicals = current_practicals_for_demonstrator(current_staff.sam_staff_id)
+    elsif session[:user_type] == "student_demonstrator"
+      @current_practicals = current_practicals_for_demonstrator(current_student.sam_student_id)
     else
-      @current_practicals = Demonstrator.find_practicals("sam_id", current_student.sam_student_id).where('start_time <= ? AND end_time >= ?', current_time, current_time)
+      redirect_to dashboard_path
     end
-    p @current_practicals.inspect
     if @current_practicals.empty?
       flash[:warning] = "You don't have any practicals at the moment!"
       redirect_to dashboard_path
@@ -49,7 +47,7 @@ class PendingPracticalsController < ApplicationController
 
     respond_to do |format|
       if @pending_practical.save
-        format.html { redirect_to @pending_practical, notice: 'Pending practical was successfully created.' }
+        format.html { redirect_to dashboard_path, notice: 'Pending practical was successfully created.' }
         format.json { render :show, status: :created, location: @pending_practical }
       else
         format.html { render :new }
@@ -92,4 +90,7 @@ class PendingPracticalsController < ApplicationController
     def pending_practical_params
       params.require(:pending_practical).permit(:raspberry_pi_id, :practical_id)
     end
+    
+
+    
 end

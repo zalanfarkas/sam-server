@@ -17,7 +17,7 @@ class ApplicationController < ActionController::Base
       if empty_course_list && !staff_is_demonstrator
         session[:user_type] = :staff_without_course
       elsif empty_course_list && staff_is_demonstrator
-        session[:user_type] = :staff_as_demonstrator
+        session[:user_type] = :staff_demonstrator
       elsif !empty_course_list && !staff_is_demonstrator
         session[:user_type] = :staff_course_coordinator
       else
@@ -42,10 +42,25 @@ class ApplicationController < ActionController::Base
   end
   
   def is_staff_for_practical?
-    if !["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "student_demonstrator", "staff_as_demonstrator"].include?(session[:user_type])
+    if !["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "student_demonstrator", "staff_demonstrator"].include?(session[:user_type])
       flash[:alert] = "You are not staff for any practicals!"
       redirect_to dashboard_path
     end
   end
+  
+    def current_practicals_for_course_coordinator
+      current_time = DateTime.now
+      current_practicals = []
+      courses = current_staff.courses
+      courses.each do |course|
+        current_practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time))
+      end
+      return current_practicals
+    end
+    
+    def current_practicals_for_demonstrator(sam_id)
+      current_time = DateTime.now
+      return Demonstrator.find_practicals("sam_id", sam_id).where('start_time <= ? AND end_time >= ?', current_time, current_time)
+    end
   
 end
