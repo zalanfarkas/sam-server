@@ -1,12 +1,19 @@
+
+<div class="col-md-6 mx-auto">
 <% @hash.each do |course_title, practicals|%>
-  <h1><%= course_title %></h1>
+  <h1 class=""><%= course_title %></h1>
+  <ul>
   <% practicals.each do |practical_start_time, content| %>
-    <p>Practical on <%= practical_start_time %></p>
+    <li>
+    <h5>Practical on <%= practical_start_time %></h5>
     Demonstrator(s):
     <ul>
     <% content.each do |counter,demonstrator| %>
       <li>ID: <%= demonstrator[:sam_demonstrator_id]%>, Name: <%= demonstrator[:first_name] %> <%= demonstrator[:last_name] %> </li>
     <% end %>
     </ul>
+    </li>
   <% end %>
+  </ul>
 <% end %>
+</div>
