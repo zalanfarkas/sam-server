@@ -16,18 +16,25 @@ class PendingPracticalsController < ApplicationController
   def new
     @pending_practical = PendingPractical.new
     current_time = DateTime.now
-    #p current_user.id
-    #p current_user.class == Staff
     if current_user.class == Staff
       @current_practicals = []
       @courses = current_staff.courses
-      @courses.each do |course|
-        @current_practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time))
+      p "courses: #{@courses.inspect}"
+      if @courses.empty?
+        @current_practicals = Demonstrator.find_practicals("sam_id", current_staff.sam_staff_id).where('start_time <= ? AND end_time >= ?', current_time, current_time)
+      else
+        @courses.each do |course|
+          @current_practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time))
+        end
       end
     else
       @current_practicals = Demonstrator.find_practicals("sam_id", current_student.sam_student_id).where('start_time <= ? AND end_time >= ?', current_time, current_time)
     end
     p @current_practicals.inspect
+    if @current_practicals.empty?
+      flash[:warning] = "You don't have any practicals at the moment!"
+      redirect_to dashboard_path
+    end
   end
 
   # GET /pending_practicals/1/edit
