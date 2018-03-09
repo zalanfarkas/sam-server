@@ -11,7 +11,7 @@ class ManualAttendanceRecordingController < ApplicationController
       @practicals = []
       courses = current_staff.courses
       courses.each do |course|
-        @practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time).select(:course_id).distinct)
+        @practicals.concat(course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time))#.select(:course_id).distinct)
       end
       if @practicals.nil? || @practicals.empty?
         @error = "Lecturer doesn't have practicals at the moment"
@@ -21,17 +21,19 @@ class ManualAttendanceRecordingController < ApplicationController
       if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
         @error = "Demonstrator doesn't have practicals"
       else
-        @practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time).select(:course_id).distinct
+        @practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time)#.select(:course_id).distinct
         if @practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
           @error = "Demonstrator doesn't have practical at the moment"
         end
       end
     end
+    p "@practicals: #{@practicals}"
   end
   
   def search
     @error = nil
-    @sam_student_id = params[:student_id]
+    @practical_id = params[:practical_id]
+    @sam_student_id = params[:sam_student_id]
     @course_id = params[:course_id]
     if @sam_student_id != "" && @course_id != ""
       @student = Student.find_by(sam_student_id: @sam_student_id)
@@ -39,7 +41,8 @@ class ManualAttendanceRecordingController < ApplicationController
         flash[:alert] = "Invalid student ID has been submitted"
         redirect_to manual_attendance_recording_index_path
       else
-        if !Enrolment.where('student_id = ? AND course_id = ?', @sam_student_id, @course_id).empty?
+        if !Enrolment.where('student_id = ? AND course_id = ?', @student.id, @course_id).empty?
+          p Enrolment.where('student_id = ? AND course_id = ?', @student.id, @course_id).inspect
           @course = Course.find(@course_id)
         else
           @error = "Student has not been enrolled to this course"
@@ -52,12 +55,12 @@ class ManualAttendanceRecordingController < ApplicationController
   end
   
   def attendance_recording
-    if params[:course_id] != "" && params[:student_id]
-      current_time = Time.now
-      practical = Course.find(params[:course_id]).practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time).first
+    if params[:practical_id] != "" && params[:student_id]
+      #current_time = Time.now
+      #practical = Course.find(params[:course_id]).practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time).first
       #Attendance => student id should be sam student id
-      if Attendance.where('student_id = ? AND practical_id = ?', params[:student_id], practical.id).empty?
-        Attendance.create!(student_id: params[:student_id], practical_id: practical.id)
+      if Attendance.where('student_id = ? AND practical_id = ?', params[:student_id], params[:practical_id]).empty?
+        Attendance.create!(student_id: params[:student_id], practical_id: params[:practical_id])
         flash[:notice] = "Attendance is recorded successfully for student with ID: #{params[:sam_student_id]}"
         redirect_to manual_attendance_recording_index_path
       else 
@@ -66,6 +69,7 @@ class ManualAttendanceRecordingController < ApplicationController
       end
     else
       flash[:alert] = "Attendance with invalid details has not been recorded"
+      redirect_to record_path
     end
   end
   

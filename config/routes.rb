@@ -2,7 +2,7 @@ Rails.application.routes.draw do
   
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
-  get 'manual_attendance_recording/attendance_recording'
+  post 'manual_attendance_recording/attendance_recording'
   get '/record', to: "manual_attendance_recording#index"
   get 'manage_c6s', to: 'staffs#manage_c6s'
   get 'remove_c6', to: 'staffs#remove_c6'

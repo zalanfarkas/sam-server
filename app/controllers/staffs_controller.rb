@@ -39,7 +39,7 @@ class StaffsController < ApplicationController
         end
       else
         flash[:alert] = "There is no student with student ID: #{sam_student_id}"
-        redirect_to dashboard_path
+        redirect_to record_path
       end
     end
       

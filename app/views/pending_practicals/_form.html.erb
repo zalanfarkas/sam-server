@@ -19,7 +19,7 @@
   </div>
   
   <div class="form-group">
-    <%= form.select :practical_id, options_for_select(@current_practicals.map{|practical| [practical.course.course_title, practical.id]}), {}, {class: "form-control"}%>
+    <%= form.select :practical_id, options_for_select(@current_practicals.map{|practical| ["#{practical.course.course_title},  #{practical.location}", practical.id]}), {}, {class: "form-control"}%>
     
     <%#= form.collection_select(:practical_id, @current_practicals, :id, ) %>  
   </div>

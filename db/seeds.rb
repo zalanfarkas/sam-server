@@ -19,7 +19,7 @@ nir = Staff.create!(fingerprint_template: '123|32|11', email: 'nir@example.com',
 matthew = Staff.create!(fingerprint_template: '', email: 'matthew@example.com', password: 'password', sam_staff_id: "s_002", first_name: 'Matthew', last_name: 'Collinson', card_id: 'u00013')
 
 #student who is not a demonstrator
-patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '00000088', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088')
+patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '088', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088')
 
 
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
@@ -29,14 +29,18 @@ awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
 Enrolment.create(course_id: robotics.id, student_id: edvinas.id)
 Enrolment.create(course_id: robotics.id, student_id: zalan.id)
 
+Enrolment.create(course_id: robotics.id, student_id: patrik.id)
+Enrolment.create(course_id: awad.id, student_id: patrik.id)
+
+
 
 start_time = 1.month.ago
 end_time = start_time + 2.month
 #robot_test = DateTime.now - 4.days
 
-awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week)
-awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks)
-robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time)
+awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week, location: "Meston 311")
+awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks, location: "Meston 205")
+robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time, location: "FN115")
 
 #Demonstrator: Dovydas
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)
