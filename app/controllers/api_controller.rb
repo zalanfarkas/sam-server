@@ -13,42 +13,40 @@ class ApiController < ApplicationController
       }
     end
     
-    if type == "nfc"
-        # Find demonstrator
-        practicals_of_demonstrator = Demonstrator.find_practicals(type, data)
-        
-        if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
-          return render :json => {
-            :success => false,
-            :error => "Demonstrator doesn't have practicals"
-          }
-        end
-        
-        # and filter them to leave only 1 which is currently happening, and then return it
-        current_time = DateTime.now
-        practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time)
-        
-        if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
-          return render :json => {
-            :success => false,
-            :error => "Demonstrator doesn't have practical at this time"
-          }
-        end
-        
-        fingerprint_templates = Array.new
-        # Find all the students who are enrolled for course
-        Enrolment.where(["course_id = ?", practicals.first.course.id]).each do |enrolment|
-          fingerprint_templates << enrolment.student.fingerprint_template
-        end
-
-        
-        render :json => {
-          :success => true,
-          :course_id => practicals.first.course.sam_course_id,
-          :end_time => practicals.first.end_time,
-          :templates => fingerprint_templates
-        }
+ 
+    practicals_of_demonstrator = Demonstrator.find_practicals(type, data)
+    
+    if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
+      return render :json => {
+        :success => false,
+        :error => "Demonstrator doesn't have practicals"
+      }
     end
+    
+    # and filter them to leave only 1 which is currently happening, and then return it
+    current_time = DateTime.now
+    practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time)
+    
+    if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
+      return render :json => {
+        :success => false,
+        :error => "Demonstrator doesn't have practical at this time"
+      }
+    end
+    
+    fingerprint_templates = Array.new
+    # Find all the students who are enrolled for course
+    Enrolment.where(["course_id = ?", practicals.first.course.id]).each do |enrolment|
+      fingerprint_templates << enrolment.student.fingerprint_template
+    end
+
+    
+    render :json => {
+      :success => true,
+      :course_id => practicals.first.course.sam_course_id,
+      :end_time => practicals.first.end_time,
+      :templates => fingerprint_templates
+    }
     
   end
   
