@@ -89,7 +89,7 @@ class StaffsController < ApplicationController
              
             end
           else
-            flash[:warning] = "Student is already a demonstrator on one of the selected practicals"
+            flash[:warning] = "Student/Staff is already a demonstrator on one of the selected practicals"
           end
           flash[:notice] = "Demonstrator added to practical(s)!" if !failed
         end
