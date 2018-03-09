@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  before_action :authenticate_staff!
+  before_action :authenticate_staff! #probably not needed
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
@@ -23,6 +23,7 @@ class StaffsController < ApplicationController
   def edit
   end
   
+  #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
   def manage_c6s
     sam_student_id = params[:sam_student_id]
     @courses = current_staff.courses
@@ -55,20 +56,17 @@ class StaffsController < ApplicationController
     redirect_to dashboard_path
   end
   
+  #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
   def add_demonstrator
     @courses = current_staff.courses
-    if @courses.nil?
-      flash[:alert] = "You do not have any courses"
-      redirect_to dashboard_path
-    else
-      current_time = DateTime.now
-      @practicals_of_course = {}
-      @courses.each do |course|
-        @practicals_of_course[course.course_title] = course.practicals.where('start_time <= ? AND end_time >= ?', current_time, current_time)
-        p @practicals_of_course[course.course_title].inspect
-      end
+    # find future practicals
+    current_time = DateTime.now
+    @practicals_of_course = {}
+    @courses.each do |course|
+      @practicals_of_course[course.course_title] = course.practicals.where('start_time <= ?', current_time)
     end
   end
+  
   
   def create_demonstrator # testing still needed
     params[:practical_ids][:practical_ids].delete("")
@@ -79,7 +77,6 @@ class StaffsController < ApplicationController
       failed = false
       sam_student_id = params[:sam_student_id]
       if Student.exists?(sam_student_id: sam_student_id)
-        #params[:practical_ids][:practical_ids].delete("")
         create_demonstrator_params[:practical_ids].each do |practical_id|
           if !Demonstrator.exists?(sam_demonstrator_id: sam_student_id, practical_id: practical_id)
             demonstrator = Demonstrator.new
@@ -104,15 +101,16 @@ class StaffsController < ApplicationController
     end
   end
   
+  #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
   def demonstrator_list
     @hash = {}
     @courses = current_staff.courses
     @courses.each do |course|
       @hash[course.course_title] = {}
-      p "practical count: #{course.practicals.count}"
+      #p "practical count: #{course.practicals.count}"
       course.practicals.each do |practical|
         @hash[course.course_title][practical.start_time] = {}
-        p "Demonstrators on a given practical: #{Demonstrator.where("practical_id = ?", practical.id).inspect}"
+        #p "Demonstrators on a given practical: #{Demonstrator.where("practical_id = ?", practical.id).inspect}"
         demonstrators_on_given_practical = Demonstrator.where("practical_id = ?", practical.id)
         counter = demonstrators_on_given_practical.count
         counter.times do |i|
@@ -120,8 +118,7 @@ class StaffsController < ApplicationController
         end
         counter = 0
         demonstrators_on_given_practical.each do |demonstrate_on|
-          
-          p "demonstrate_on: #{demonstrate_on.inspect}"
+          #p "demonstrate_on: #{demonstrate_on.inspect}"
           demonstrator = Student.find_by(sam_student_id: demonstrate_on.sam_demonstrator_id)
           if demonstrator.nil?
             demonstrator = Staff.find_by(sam_staff_id: demonstrate_on.sam_demonstrator_id)
@@ -133,7 +130,7 @@ class StaffsController < ApplicationController
         end
       end
     end
-    p @hash.inspect
+    #p @hash.inspect
   end
 
   # POST /staffs
