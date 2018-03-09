@@ -1,5 +1,7 @@
 class ManualAttendanceRecordingController < ApplicationController
   before_action :authenticate_sam_user
+  before_action :is_staff_for_practical?
+  
   
   
   def index

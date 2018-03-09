@@ -2,16 +2,16 @@
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
             <li class="nav-item <%= "active" if request.original_fullpath == dashboard_path %> ">
-                <%= link_to "Dashboard", dashboard_path, class: "nav-link" if current_staff%> 
+                <%= link_to "Dashboard", dashboard_path, class: "nav-link" %> 
             </li>
             <li class="nav-item <%= "active" if request.original_fullpath == record_path %> ">
-                <%= link_to "Manual Attendance Recording", record_path, class: "nav-link" if current_user%>
+                <%= link_to "Manual Attendance Recording", record_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type])%>%>
             </li>
             <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
-                <%= link_to "Start Practical on Device", new_pending_practical_path, class: "nav-link" if current_user%>
+                <%= link_to "Start Practical on Device", new_pending_practical_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
             
-            <% if current_staff %>
+            <% if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator"].include?(session[:user_type]) %>
                 <li class="nav-item dropdown">
                   <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
                     Manage Demonstrators
@@ -21,6 +21,9 @@
                     <%= link_to "Add Demonstrator to Practical", add_demonstrator_path, class: "dropdown-item" if current_staff%>
                     <a class="dropdown-item" href="#">Delete Demonstrators</a>
                   </div>
+                </li>
+                <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
+                    <%= link_to "Manage C6s", manage_c6s_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
                 </li>
             <% end %>
         </ul>

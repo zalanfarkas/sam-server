@@ -3,7 +3,7 @@ class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :check_user_type_if_nil
   
-  
+  private
   def check_user_type
     if current_student
       if Demonstrator.exists?(sam_demonstrator_id: current_student.sam_student_id)
@@ -18,7 +18,7 @@ class ApplicationController < ActionController::Base
         session[:user_type] = :staff_without_course
       elsif empty_course_list && staff_is_demonstrator
         session[:user_type] = :staff_as_demonstrator
-      elif !empty_course_list && !staff_is_demonstrator
+      elsif !empty_course_list && !staff_is_demonstrator
         session[:user_type] = :staff_course_coordinator
       else
         session[:user_type] = :staff_course_coordinator_and_demonstrator
@@ -29,8 +29,23 @@ class ApplicationController < ActionController::Base
   end
   
   def check_user_type_if_nil
-    if session[:user_type] == nil && current_user
+    if current_user && session[:user_type] == nil
       check_user_type
     end
   end
+  
+  def is_course_coordinator?
+    if !["staff_course_coordinator_and_demonstrator", "staff_course_coordinator"].include?(session[:user_type])
+      flash[:alert] = "You are not a course organiser!"
+      redirect_to dashboard_path
+    end
+  end
+  
+  def is_staff_for_practical?
+    if !["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "student_demonstrator", "staff_as_demonstrator"].include?(session[:user_type])
+      flash[:alert] = "You are not staff for any practicals!"
+      redirect_to dashboard_path
+    end
+  end
+  
 end

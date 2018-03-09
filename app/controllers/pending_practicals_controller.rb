@@ -1,4 +1,5 @@
 class PendingPracticalsController < ApplicationController
+  before_action :is_staff_for_practical?
   before_action :set_pending_practical, only: [:show, :edit, :update, :destroy]
 
   # GET /pending_practicals

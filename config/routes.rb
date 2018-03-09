@@ -4,14 +4,15 @@ Rails.application.routes.draw do
   get 'manual_attendance_recording/search'
   get 'manual_attendance_recording/attendance_recording'
   get '/record', to: "manual_attendance_recording#index"
-  get 'dashboard', to: 'staffs#dashboard'
+  get 'manage_c6s', to: 'staffs#manage_c6s'
   get 'remove_c6', to: 'staffs#remove_c6'
   get 'add_demonstrator', to: 'staffs#add_demonstrator'
   post 'create_demonstrator', to: 'staffs#create_demonstrator'
   get 'demonstrator_list', to: 'staffs#demonstrator_list'
+  get 'remote', to: 'pending_practicals#new'
   
   
-
+  get 'dashboard', to: 'static_pages#index'
   root 'static_pages#index'
   devise_for :students
   devise_for :staffs

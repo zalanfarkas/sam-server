@@ -1,5 +1,6 @@
 class StaffsController < ApplicationController
   before_action :authenticate_staff!
+  before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   # GET /staffs
@@ -22,7 +23,7 @@ class StaffsController < ApplicationController
   def edit
   end
   
-  def dashboard
+  def manage_c6s
     sam_student_id = params[:sam_student_id]
     @courses = current_staff.courses
     @hash = {}
