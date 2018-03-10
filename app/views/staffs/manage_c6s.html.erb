@@ -20,11 +20,10 @@
   <div class="col-md-auto">
   <% if !(@hash[course.course_title].empty?) %>
     <h1>Course Title: <%= course.course_title %> </h1>
-    <ul>
+    <ul >
     <% @hash[course.course_title].each do |certificate| %>
     <li>
     <div class="row">
-      
       <div class="col-sm">
           <b>Student ID: <%= certificate.student.sam_student_id %>, Name: <%= certificate.student.first_name %> <%= certificate.student.last_name %> </b>
       </div>
