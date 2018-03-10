@@ -5,7 +5,7 @@
   <ul>
   <% practicals.each do |practical_start_time, content| %>
     <li>
-    <h5>Practical on <%= practical_start_time %></h5>
+    <h5>Practical on <%= practical_start_time.strftime("%A, %H:%M %d-%m-%Y") %></h5>
     Demonstrator(s):
     <ul>
     <% content.each do |counter,demonstrator| %>

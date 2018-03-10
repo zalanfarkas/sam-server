@@ -40,7 +40,7 @@ class StaffsController < ApplicationController
         end
       else
         flash[:alert] = "There is no student with student ID: #{sam_student_id}"
-        redirect_to record_path
+        redirect_to manage_c6s_path
       end
     end
       
@@ -53,7 +53,7 @@ class StaffsController < ApplicationController
     student_name = params[:student_name]
     AbsenceCertificate.destroy(certificate_id)
     flash[:notice] = "C6 removed for #{student_name}"
-    redirect_to dashboard_path
+    redirect_to manage_c6s_path
   end
   
   #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil

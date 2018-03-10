@@ -7,7 +7,7 @@
     </div>
     <% if @practicals_of_course[course.course_title].empty?%>
       <div class="form-group">
-        <p>No upcoming practicals for the courses</p>
+        <p>No upcoming practicals for the course</p>
       </div>
     <%else%>
       <div class="form-group">
@@ -17,7 +17,7 @@
         <ul>
           <%=collection_check_boxes(:practical_ids, :practical_ids, @practicals_of_course[course.course_title], :id, :start_time) do |b| %>
           <li>
-            <%= b.label(:"data-value" => b.value) { b.check_box + "Start time: #{b.text}" } %>
+            <%= b.label(:"data-value" => b.value) { b.check_box + "Start time: #{b.text.strftime("%A, %H:%M %d-%m-%Y")}" } %>
           </li>
           <% end %>
         </ul>
