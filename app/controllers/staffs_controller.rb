@@ -63,40 +63,46 @@ class StaffsController < ApplicationController
     current_time = DateTime.now
     @practicals_of_course = {}
     @courses.each do |course|
-      @practicals_of_course[course.course_title] = course.practicals.where('start_time <= ?', current_time)
+      @practicals_of_course[course.course_title] = course.practicals.where('start_time >= ?', current_time)
     end
+    p "practicals_of_course: #{@practicals_of_course}"
   end
   
   
   def create_demonstrator # testing still needed
-    params[:practical_ids][:practical_ids].delete("")
-    if create_demonstrator_params[:practical_ids].empty?
+    if params[:practical_ids].nil?
       flash[:alert] = "No selected practical submitted"
       redirect_to add_demonstrator_path
     else
-      failed = false
-      sam_student_id = params[:sam_student_id]
-      if Student.exists?(sam_student_id: sam_student_id)
-        create_demonstrator_params[:practical_ids].each do |practical_id|
-          if !Demonstrator.exists?(sam_demonstrator_id: sam_student_id, practical_id: practical_id)
-            demonstrator = Demonstrator.new
-            demonstrator.sam_demonstrator_id = sam_student_id
-            demonstrator.practical_id = practical_id.to_i
-            if !demonstrator.save
-              flash[:alert] = "Failed to save"
-              failed = true
-              break
-             
-            end
-          else
-            flash[:warning] = "Student/Staff is already a demonstrator on one of the selected practicals"
-          end
-          flash[:notice] = "Demonstrator added to practical(s)!" if !failed
-        end
-        redirect_to dashboard_path #demonstrator_list_path
+      params[:practical_ids][:practical_ids].delete("")
+      if params[:practical_ids][:practical_ids].empty?
+        flash[:alert] = "No selected practical submitted"
+        redirect_to add_demonstrator_path
       else
-        flash[:alert] = "Student (with ID: #{sam_student_id}) is not found"
-        redirect_to dashboard_path
+        failed = false
+        sam_student_id = params[:sam_student_id]
+        if Student.exists?(sam_student_id: sam_student_id)
+          create_demonstrator_params[:practical_ids].each do |practical_id|
+            if !Demonstrator.exists?(sam_demonstrator_id: sam_student_id, practical_id: practical_id)
+              demonstrator = Demonstrator.new
+              demonstrator.sam_demonstrator_id = sam_student_id
+              demonstrator.practical_id = practical_id.to_i
+              if !demonstrator.save
+                flash[:alert] = "Failed to save"
+                failed = true
+                break
+               
+              end
+            else
+              flash[:warning] = "Student/Staff is already a demonstrator on one of the selected practicals"
+            end
+            flash[:notice] = "Demonstrator added to practical(s)!" if !failed
+          end
+          redirect_to add_demonstrator_path #demonstrator_list_path
+        else
+          flash[:alert] = "Student (with ID: #{sam_student_id}) is not found"
+          redirect_to add_demonstrator_path
+        end
       end
     end
   end
@@ -126,11 +132,16 @@ class StaffsController < ApplicationController
           @hash[course.course_title][practical.start_time][counter][:sam_demonstrator_id] = demonstrate_on.sam_demonstrator_id
           @hash[course.course_title][practical.start_time][counter][:first_name] = demonstrator.first_name
           @hash[course.course_title][practical.start_time][counter][:last_name] = demonstrator.last_name
+          @hash[course.course_title][practical.start_time][counter][:email] = demonstrator.email
           counter = counter + 1
         end
       end
     end
     #p @hash.inspect
+  end
+  
+  def update_demonstrator
+    
   end
 
   # POST /staffs
