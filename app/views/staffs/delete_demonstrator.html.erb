@@ -1,0 +1,43 @@
+<div class="col-md-auto">
+<div class="col-md-6 col-md-offset-3 text-center mx-auto">
+<%=form_tag({controller: "staffs", action: "delete_demonstrator"}, method: "get", class: "nifty_form") do %>
+  <div class="row">
+    <div class="col-12">
+    <div class="form-group col-6 col-md-auto">
+      <%= text_field_tag :sam_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Search Demonstrator by ID" %>
+    </div>
+    <div class="actions col-6 col-md-auto">
+      <%= submit_tag "Search", class: "btn btn-primary" %>
+    </div>
+    </div>
+  </div>
+<% end %>
+</div>
+<br>
+<br>
+
+<div class="col-md-auto">
+<div class="col-md-12 mx-auto">
+<% if !@hash.nil? %>
+  Practicals of the Demonstrator with ID: <%= params[:sam_id] %>
+  <% @hash.each do |course, practicals| %>
+    <h1><%= course if !practicals.empty?%></h1>
+    <ul>
+    <% practicals.each do |start_time, content| %>
+      <li>
+      <div class="row">
+        <div class="col-sm">
+          <%= start_time.strftime("%A, %H:%M %d-%m-%Y") if !content.empty? %>
+        </div>
+        <div class="col-sm">
+          <%= link_to "Delete Demonstrator from this practical", destroy_demonstrator_path(id: content.first.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
+        </div>
+      </div>
+      </li>
+      
+    <%end%>
+     </ul> 
+  <% end %>
+<% end %>
+</div>
+</div>

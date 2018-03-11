@@ -1,6 +1,6 @@
 class StaffsController < ApplicationController
   before_action :authenticate_staff! #probably not needed
-  before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list]
+  before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   # GET /staffs
@@ -80,12 +80,13 @@ class StaffsController < ApplicationController
         redirect_to add_demonstrator_path
       else
         failed = false
-        sam_student_id = params[:sam_student_id]
-        if Student.exists?(sam_student_id: sam_student_id)
+        # sam_id because it can be either sam_student_id or sam_staff_id
+        sam_id = params[:sam_id]
+        if Student.exists?(sam_student_id: sam_id) || Staff.exists?(sam_staff_id: sam_id)
           create_demonstrator_params[:practical_ids].each do |practical_id|
-            if !Demonstrator.exists?(sam_demonstrator_id: sam_student_id, practical_id: practical_id)
+            if !Demonstrator.exists?(sam_demonstrator_id: sam_id, practical_id: practical_id)
               demonstrator = Demonstrator.new
-              demonstrator.sam_demonstrator_id = sam_student_id
+              demonstrator.sam_demonstrator_id = sam_id
               demonstrator.practical_id = practical_id.to_i
               if !demonstrator.save
                 flash[:alert] = "Failed to save"
@@ -100,7 +101,7 @@ class StaffsController < ApplicationController
           end
           redirect_to add_demonstrator_path #demonstrator_list_path
         else
-          flash[:alert] = "Student (with ID: #{sam_student_id}) is not found"
+          flash[:alert] = "Student (with ID: #{sam_id}) is not found"
           redirect_to add_demonstrator_path
         end
       end
@@ -140,8 +141,33 @@ class StaffsController < ApplicationController
     #p @hash.inspect
   end
   
-  def update_demonstrator
-    
+  def delete_demonstrator
+    # sam_id means sam_staff_id or sam_student_id
+    if params[:sam_id] != nil
+      if Demonstrator.exists?(sam_demonstrator_id: params[:sam_id])
+        @hash = {}
+        current_staff.courses.each do |course|
+          @hash[course.course_title] = {}
+          course.practicals.each do |practical|
+            demonstrator_on_practical = Demonstrator.where("practical_id = ? AND sam_demonstrator_id = ?", practical.id, params[:sam_id])
+            if !demonstrator_on_practical.empty?
+              @hash[course.course_title][practical.start_time] =  demonstrator_on_practical
+            end
+          end
+        end
+      else
+        flash[:alert] = "Demonstrator with ID: \"#{params[:sam_id]}\" not found"
+        redirect_to delete_demonstrator_path
+      end
+    end  
+  end
+
+  def destroy_demonstrator
+    Demonstrator.find(params[:id]).destroy
+    respond_to do |format|
+      format.html { redirect_to delete_demonstrator_path, notice: 'Demonstrator was successfully destroyed.' }
+      format.json { head :no_content }
+    end
   end
 
   # POST /staffs

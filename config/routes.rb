@@ -10,6 +10,8 @@ Rails.application.routes.draw do
   post 'create_demonstrator', to: 'staffs#create_demonstrator'
   get 'demonstrator_list', to: 'staffs#demonstrator_list'
   get 'remote', to: 'pending_practicals#new'
+  get 'delete_demonstrator', to: 'staffs#delete_demonstrator'
+  delete 'destroy_demonstrator', to: 'staffs#destroy_demonstrator'
   
   
   get 'dashboard', to: 'static_pages#index'

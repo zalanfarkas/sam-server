@@ -3,7 +3,7 @@
   <p>Add demonstrator for <b> <%= course.course_title %>: </b> </p>
   <%= form_tag({controller: "staffs", action: "create_demonstrator"}, method: "post") do %>
     <div class="form-group">
-      <%= text_field_tag :sam_student_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Enter Student ID" %>
+      <%= text_field_tag :sam_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Enter Student ID" %>
     </div>
     <% if @practicals_of_course[course.course_title].empty?%>
       <div class="form-group">

@@ -42,8 +42,11 @@ awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTi
 awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks, location: "Meston 205")
 robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time, location: "FN115")
 
-#upcoming practical
+#upcoming practicals
 robotics_practical2 = robotics.practicals.create(start_time: start_time + 2.month, end_time: end_time, location: "MR117")
+awad_practical3 = awad.practicals.create(start_time: start_time + 2.month, end_time: start_time + 3.month, location: "Meston 311")
+awad_practical4 = awad.practicals.create(start_time: start_time + 2.month, end_time: start_time + 3.month, location: "Meston 205")
+
 
 #Demonstrator: Dovydas
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)

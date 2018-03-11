@@ -18,8 +18,8 @@
                   </a>
                   <div class="dropdown-menu">
                     <%= link_to "List Demonstrators", demonstrator_list_path, class: "dropdown-item" %>
-                    <%= link_to "Add Demonstrator to Practical", add_demonstrator_path, class: "dropdown-item" if current_staff%>
-                    <a class="dropdown-item" href="#">Delete Demonstrators</a>
+                    <%= link_to "Add Demonstrator to Practical(s)", add_demonstrator_path, class: "dropdown-item"%>
+                    <%= link_to "Delete Demonstrator from Practical(s)", delete_demonstrator_path, class: "dropdown-item"%>
                   </div>
                 </li>
                 <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
