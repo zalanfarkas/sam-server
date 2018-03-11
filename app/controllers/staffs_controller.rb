@@ -1,28 +1,8 @@
 class StaffsController < ApplicationController
-  before_action :authenticate_staff! #probably not needed
+  before_action :authenticate_staff!
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
-  # GET /staffs
-  # GET /staffs.json
-  def index
-    @staffs = Staff.all
-  end
-
-  # GET /staffs/1
-  # GET /staffs/1.json
-  def show
-  end
-
-  # GET /staffs/new
-  def new
-    @staff = Staff.new
-  end
-
-  # GET /staffs/1/edit
-  def edit
-  end
-  
   #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
   def manage_c6s
     sam_student_id = params[:sam_student_id]
@@ -142,7 +122,7 @@ class StaffsController < ApplicationController
   end
   
   def delete_demonstrator
-    # sam_id means sam_staff_id or sam_student_id
+    # sam_id means either sam_staff_id or sam_student_id
     if params[:sam_id] != nil
       if Demonstrator.exists?(sam_demonstrator_id: params[:sam_id])
         @hash = {}
@@ -170,6 +150,28 @@ class StaffsController < ApplicationController
     end
   end
 
+
+  
+  # GET /staffs
+  # GET /staffs.json
+  def index
+    @staffs = Staff.all
+  end
+
+  # GET /staffs/1
+  # GET /staffs/1.json
+  def show
+  end
+
+  # GET /staffs/new
+  def new
+    @staff = Staff.new
+  end
+
+  # GET /staffs/1/edit
+  def edit
+  end
+  
   # POST /staffs
   # POST /staffs.json
   def create
