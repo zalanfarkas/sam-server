@@ -22,10 +22,18 @@ Rails.application.routes.draw do
   root 'homepages#login'
   
   devise_for :staffs, controllers: {
-        sessions: 'staffs/sessions'
+        sessions: 'staffs/sessions',
+        #confirmations: 'staffs/confirmations',
+        passwords: 'staffs/passwords',
+        #registrations: 'staffs/registrations',
+        unlocks: 'staffs/unlocks'
   }
   devise_for :students, controllers: {
-        sessions: 'students/sessions'
+        sessions: 'students/sessions',
+        #confirmations: 'students/confirmations',
+        passwords: 'students/passwords',
+        #registrations: 'students/registrations',
+        unlocks: 'students/unlocks'
   }
   get 'static_pages/index'
   post 'api/get_course',          to: 'api#get_course_id'
