@@ -20,9 +20,13 @@ Rails.application.routes.draw do
   
   get 'dashboard', to: 'homepages#dashboard'
   root 'homepages#login'
-  devise_for :students
-  devise_for :staffs
-
+  
+  devise_for :staffs, controllers: {
+        sessions: 'staffs/sessions'
+  }
+  devise_for :students, controllers: {
+        sessions: 'students/sessions'
+  }
   get 'static_pages/index'
   post 'api/get_course',          to: 'api#get_course_id'
   post 'api/record_attendance',   to: 'api#record_attendance'
