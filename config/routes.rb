@@ -1,5 +1,9 @@
 Rails.application.routes.draw do
   
+  get 'homepages/login'
+
+  get 'homepages/dashboard'
+
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
   post 'manual_attendance_recording/attendance_recording'
@@ -14,8 +18,8 @@ Rails.application.routes.draw do
   delete 'destroy_demonstrator', to: 'staffs#destroy_demonstrator'
   
   
-  get 'dashboard', to: 'static_pages#index'
-  root 'static_pages#index'
+  get 'dashboard', to: 'homepages#dashboard'
+  root 'homepages#login'
   devise_for :students
   devise_for :staffs
 
