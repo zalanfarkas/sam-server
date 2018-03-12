@@ -1,4 +1,5 @@
 class PracticalsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :authenticate_staff!
   before_action :set_practical, only: [:show, :edit, :update, :destroy]
 

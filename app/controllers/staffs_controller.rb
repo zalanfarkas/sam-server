@@ -1,4 +1,5 @@
 class StaffsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :authenticate_staff!
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]

@@ -62,5 +62,15 @@ class ApplicationController < ActionController::Base
       current_time = DateTime.now
       return Demonstrator.find_practicals("sam_id", sam_id).where('start_time <= ? AND end_time >= ?', current_time, current_time)
     end
+    
+    def redirect_if_not_found
+      logger.error "Attempt to access non-existent #{request.controller_class} #{params[:id]}"
+      flash[:notice] = 'Sorry, but that doesn\'t exist.'
+      if current_user
+        redirect_to dashboard_path
+      else
+        redirect_to root_path
+      end
+    end 
   
 end

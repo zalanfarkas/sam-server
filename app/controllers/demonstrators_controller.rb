@@ -1,4 +1,5 @@
 class DemonstratorsController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :set_demonstrator, only: [:show, :edit, :update, :destroy]
 
   # GET /demonstrators
