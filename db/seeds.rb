@@ -33,8 +33,8 @@ Enrolment.create(course_id: awad.id, student_id: patrik.id)
 
 
 
-start_time = 1.month.ago
-end_time = start_time + 2.month
+#start_time = 1.month.ago
+#end_time = start_time + 2.month
 #robot_test = DateTime.now - 4.days
 
 #awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week, location: "Meston 311")
@@ -136,15 +136,15 @@ robotics_practical_week11_3 = robotics.practicals.create(start_time: DateTime.no
 
 
 #Demonstrator: Dovydas
-Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)
-Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical.id)
-Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical2.id)
+Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical_week1_1.id)
+Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week1_1.id)
+Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week2_1.id)
 
 #Demonstrator: Zalan
-Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical.id)
-Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical2.id)
+Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week1_1.id)
+Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week2_1.id)
 
-Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
+#Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
 
 AbsenceCertificate.create!(course_id: 1, student_id: 1, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 1, student_id: 2, certificate_type: "C6")
@@ -185,9 +185,11 @@ p practicals_on_specific_weeks_for_course1.inspect
   Enrolment.create!(course_id: 1, student_id: student.id)
   Enrolment.create!(course_id: 2, student_id: student.id)
   practicals_on_specific_weeks_for_course1.each do |i|
-    Attendance.create!(student_id: student.id, practical_id: practicals_on_specific_weeks_for_course1[Faker::Number.between(0, 2)].id)
+    # work only with 3practicals/week
+    Attendance.create!(student_id: student.id, practical_id: i[Faker::Number.between(0, 2)].id)
   end
   practicals_on_specific_weeks_for_course2.each do |i|
-    Attendance.create!(student_id: student.id, practical_id: practicals_on_specific_weeks_for_course2[Faker::Number.between(0, 2)].id)
+    # work only with 3practicals/week
+    Attendance.create!(student_id: student.id, practical_id: i[Faker::Number.between(0, 2)].id)
   end
 end
