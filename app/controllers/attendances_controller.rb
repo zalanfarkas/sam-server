@@ -1,4 +1,5 @@
 class AttendancesController < ApplicationController
+  rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
 
   # GET /attendances

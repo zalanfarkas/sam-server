@@ -1,53 +1,72 @@
 <nav class="navbar navbar-expand-sm bg-dark navbar-dark ">
     <div class="navbar-collapse collapse w-100 order-1 order-md-0 dual-collapse2">
         <ul class="navbar-nav mr-auto">
-            <li class="nav-item active">
-                <%= link_to "Home", root_path, class: "nav-link"%>
+            <li class="nav-item <%= "active" if request.original_fullpath == root_path %> ">
+                <%= link_to "Home", root_path, class: "nav-link" if !current_user%> 
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="//codeply.com">Codeply</a>
+            <li class="nav-item <%= "active" if request.original_fullpath == dashboard_path %> ">
+                <%= link_to "Dashboard", dashboard_path, class: "nav-link" if current_user %> 
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+            <li class="nav-item <%= "active" if request.original_fullpath == record_path %> ">
+                <%= link_to "Manual Attendance Recording", record_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
+            <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
+                <%= link_to "Start Practical on Device", new_pending_practical_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-            </li>
+            
+            <% if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator"].include?(session[:user_type]) %>
+                <li class="nav-item dropdown">
+                  <a class="nav-link dropdown-toggle" href="#" id="navbardrop" data-toggle="dropdown">
+                    Manage Demonstrators
+                  </a>
+                  <div class="dropdown-menu">
+                    <%= link_to "List Demonstrators", demonstrator_list_path, class: "dropdown-item" %>
+                    <%= link_to "Add Demonstrator to Practical(s)", add_demonstrator_path, class: "dropdown-item"%>
+                    <%= link_to "Delete Demonstrator from Practical(s)", delete_demonstrator_path, class: "dropdown-item"%>
+                  </div>
+                </li>
+                <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
+                    <%= link_to "Manage C6s", manage_c6s_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
+                </li>
+            <% end %>
         </ul>
     </div>
     <div class="mx-auto order-0">
-        <a class="navbar-brand mx-auto" href="#">Student Attendance Monitoring</a>
+            <%= link_to "Student Attendance Monitoring", root_path, class: "navbar-brand mx-auto" %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>
     </div>
     <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
       
-      <% if current_student %>
         <ul class="navbar-nav ml-auto">
           <li class="nav-item">
-            <%= link_to "Logout", destroy_student_session_path, method: :delete, class: "navlink" %>
+            <%= link_to "USER: #{current_user.first_name}", "", class: "nav-link" if current_user %>
           </li>
-        </ul>
+        
+      <% if current_student %>
+        
+          <li class="nav-item">
+            <%= link_to "Logout", destroy_student_session_path, method: :delete, class: "nav-link" %>
+          </li>
+        
       <% elsif current_staff %>
-        <ul class="navbar-nav ml-auto">
+        
             <li class="nav-item">
                 <%= link_to "Logout", destroy_staff_session_path, method: :delete, class: "nav-link" %>
             </li>
-        </ul>
+        
       <% else %>
-        <ul class="navbar-nav ml-auto">
+        
             <li class="nav-item">
                 <%= link_to "Staff Login", new_staff_session_path, class: "nav-link"%>
             </li>
             <li class="nav-item">
                 <%= link_to "Student Login", new_student_session_path, class: "nav-link"%>
             </li>
-        </ul>
+       
       <% end %>
+      </ul>
     </div>
 </nav>
 <br>

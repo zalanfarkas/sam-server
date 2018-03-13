@@ -24,7 +24,7 @@ body {
   background-color: #F8F8F8;
 }
 
-.container {
+.container-main {
 	width: 80%;
 }
 
@@ -77,5 +77,10 @@ input[type="checkbox"]:checked:before {
   border-radius: 2px;
   padding: 10px 0;
   margin-top: 10px; 
+}
+
+.login_link{
+  text-decoration: none;
+  color: black;
 }
 

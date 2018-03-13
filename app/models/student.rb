@@ -7,6 +7,7 @@ class Student < ApplicationRecord
   has_many :attendances
   has_many :enrolments
   has_many :practicals, through: :attendances
+  has_many :absence_certificates
   mount_uploader :picture, PictureUploader
   validate  :picture_size
   validates :sam_student_id, presence: true, uniqueness: true

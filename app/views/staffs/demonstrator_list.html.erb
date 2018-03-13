@@ -1,0 +1,19 @@
+
+<div class="col-md-12 mx-auto">
+<% @hash.each do |course_title, practicals|%>
+  <h1 class=""><%= course_title %></h1>
+  <ul>
+  <% practicals.each do |practical_start_time, content| %>
+    <li>
+    <h5>Practical on <%= practical_start_time.strftime("%A, %H:%M %d-%m-%Y") %></h5>
+    Demonstrator(s):
+    <ul>
+    <% content.each do |counter,demonstrator| %>
+      <li>ID: <%= demonstrator[:sam_demonstrator_id]%>, Name: <%= demonstrator[:first_name] %> <%= demonstrator[:last_name] %>, Email: <%= demonstrator[:email] %> </li>
+    <% end %>
+    </ul>
+    </li>
+  <% end %>
+  </ul>
+<% end %>
+</div>

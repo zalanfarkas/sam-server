@@ -1,5 +1,5 @@
 
-<% if @error.nil? %>
+
   <p>
     <%= image_tag @student.picture.url if @student.picture? %>
   </p>
@@ -7,14 +7,11 @@
   <p>Last Name: <%= @student.last_name %></p>
   <p>SAM Student ID: <%= @student.sam_student_id %></p>
   <p>Course: <%= @course.course_title %></p>
-  <%=form_tag({controller: "manual_attendance_recording", action: "attendance_recording"}, method: "get", class: "nifty_form") do %>
-    <%= hidden_field_tag(:course_id, @course_id) %>
+  <%=form_tag({controller: "manual_attendance_recording", action: "attendance_recording"}, method: "post", class: "nifty_form") do %>
+    <%= hidden_field_tag(:practical_id, @practical_id) %>
     <%= hidden_field_tag(:student_id, @student.id) %>
     <%= hidden_field_tag(:sam_student_id, @student.sam_student_id) %>
     <div class="actions">
       <%= submit_tag "Record attendance", class: "btn btn-primary" %>
     </div>
   <% end %>
-<% else %>
-  <h1><%= @error %></h1>
-<% end %>

@@ -1,14 +1,40 @@
 Rails.application.routes.draw do
   
+  get 'homepages/login'
+
+  get 'homepages/dashboard'
+
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
-  get 'manual_attendance_recording/attendance_recording'
-  get '/r', to: "manual_attendance_recording#index"
-
-  root 'static_pages#index'
-  devise_for :students
-  devise_for :staffs
+  post 'manual_attendance_recording/attendance_recording'
+  get '/record', to: "manual_attendance_recording#index"
+  get 'manage_c6s', to: 'staffs#manage_c6s'
+  get 'remove_c6', to: 'staffs#remove_c6'
+  get 'add_demonstrator', to: 'staffs#add_demonstrator'
+  post 'create_demonstrator', to: 'staffs#create_demonstrator'
+  get 'demonstrator_list', to: 'staffs#demonstrator_list'
+  get 'remote', to: 'pending_practicals#new'
+  get 'delete_demonstrator', to: 'staffs#delete_demonstrator'
+  delete 'destroy_demonstrator', to: 'staffs#destroy_demonstrator'
   
+  
+  get 'dashboard', to: 'homepages#dashboard'
+  root 'homepages#login'
+  
+  devise_for :staffs, controllers: {
+        sessions: 'staffs/sessions',
+        #confirmations: 'staffs/confirmations',
+        passwords: 'staffs/passwords',
+        #registrations: 'staffs/registrations',
+        unlocks: 'staffs/unlocks'
+  }
+  devise_for :students, controllers: {
+        sessions: 'students/sessions',
+        #confirmations: 'students/confirmations',
+        passwords: 'students/passwords',
+        #registrations: 'students/registrations',
+        unlocks: 'students/unlocks'
+  }
   get 'static_pages/index'
   post 'api/get_course',          to: 'api#get_course_id'
   post 'api/record_attendance',   to: 'api#record_attendance'
