@@ -37,12 +37,14 @@ start_time = 1.month.ago
 end_time = start_time + 2.month
 #robot_test = DateTime.now - 4.days
 
-awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week, location: "Meston 311")
-awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks, location: "Meston 205")
-robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time, location: "FN115")
+#awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week, location: "Meston 311")
+#awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks, location: "Meston 205")
+#robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time, location: "FN115")
 
 #upcoming practicals
-robotics_practical2 = robotics.practicals.create(start_time: start_time + 2.month, end_time: end_time, location: "MR117")
+#robotics_practical2 = robotics.practicals.create(start_time: start_time + 2.month, end_time: end_time, location: "MR117")
+
+#awad practicals:
 awad_practical_week1_1 = awad.practicals.create(start_time: DateTime.now + 1.week, end_time: DateTime.now + 1.week + 2.hours, location: "Meston 311")
 awad_practical_week1_2 = awad.practicals.create(start_time: DateTime.now + 1.week + 1.day, end_time: DateTime.now + 1.week + 1.day + 2.hours, location: "Meston 205")
 awad_practical_week1_3 = awad.practicals.create(start_time: DateTime.now + 1.week + 3.day, end_time: DateTime.now + 1.week + 3.day + 2.hours, location: "Meston 205")
@@ -87,6 +89,52 @@ awad_practical_week11_1 = awad.practicals.create(start_time: DateTime.now + 11.w
 awad_practical_week11_2 = awad.practicals.create(start_time: DateTime.now + 11.week + 1.day, end_time: DateTime.now + 11.week + 1.day + 2.hours, location: "Meston 205")
 awad_practical_week11_3 = awad.practicals.create(start_time: DateTime.now + 11.week + 3.day, end_time: DateTime.now + 11.week + 3.day + 2.hours, location: "Meston 205")
 
+#robotics practicals:
+robotics_practical_week1_1 = robotics.practicals.create(start_time: DateTime.now + 1.week, end_time: DateTime.now + 1.week + 2.hours, location: "Meston 311")
+robotics_practical_week1_2 = robotics.practicals.create(start_time: DateTime.now + 1.week + 1.day, end_time: DateTime.now + 1.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week1_3 = robotics.practicals.create(start_time: DateTime.now + 1.week + 3.day, end_time: DateTime.now + 1.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week2_1 = robotics.practicals.create(start_time: DateTime.now + 2.week, end_time: DateTime.now + 2.week + 2.hours, location: "Meston 311")
+robotics_practical_week2_2 = robotics.practicals.create(start_time: DateTime.now + 2.week + 1.day, end_time: DateTime.now + 2.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week2_3 = robotics.practicals.create(start_time: DateTime.now + 2.week + 3.day, end_time: DateTime.now + 2.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week3_1 = robotics.practicals.create(start_time: DateTime.now + 3.week, end_time: DateTime.now + 3.week + 2.hours, location: "Meston 311")
+robotics_practical_week3_2 = robotics.practicals.create(start_time: DateTime.now + 3.week + 1.day, end_time: DateTime.now + 3.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week3_3 = robotics.practicals.create(start_time: DateTime.now + 3.week + 3.day, end_time: DateTime.now + 3.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week4_1 = robotics.practicals.create(start_time: DateTime.now + 4.week, end_time: DateTime.now + 4.week + 2.hours, location: "Meston 311")
+robotics_practical_week4_2 = robotics.practicals.create(start_time: DateTime.now + 4.week + 1.day, end_time: DateTime.now + 4.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week4_3 = robotics.practicals.create(start_time: DateTime.now + 4.week + 3.day, end_time: DateTime.now + 4.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week5_1 = robotics.practicals.create(start_time: DateTime.now + 5.week, end_time: DateTime.now + 5.week + 2.hours, location: "Meston 311")
+robotics_practical_week5_2 = robotics.practicals.create(start_time: DateTime.now + 5.week + 1.day, end_time: DateTime.now + 5.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week5_3 = robotics.practicals.create(start_time: DateTime.now + 5.week + 3.day, end_time: DateTime.now + 5.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week6_1 = robotics.practicals.create(start_time: DateTime.now + 6.week, end_time: DateTime.now + 6.week + 2.hours, location: "Meston 311")
+robotics_practical_week6_2 = robotics.practicals.create(start_time: DateTime.now + 6.week + 1.day, end_time: DateTime.now + 6.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week6_3 = robotics.practicals.create(start_time: DateTime.now + 6.week + 3.day, end_time: DateTime.now + 6.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week7_1 = robotics.practicals.create(start_time: DateTime.now + 7.week, end_time: DateTime.now + 7.week + 2.hours, location: "Meston 311")
+robotics_practical_week7_2 = robotics.practicals.create(start_time: DateTime.now + 7.week + 1.day, end_time: DateTime.now + 7.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week7_3 = robotics.practicals.create(start_time: DateTime.now + 7.week + 3.day, end_time: DateTime.now + 7.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week8_1 = robotics.practicals.create(start_time: DateTime.now + 8.week, end_time: DateTime.now + 8.week + 2.hours, location: "Meston 311")
+robotics_practical_week8_2 = robotics.practicals.create(start_time: DateTime.now + 8.week + 1.day, end_time: DateTime.now + 8.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week8_3 = robotics.practicals.create(start_time: DateTime.now + 8.week + 3.day, end_time: DateTime.now + 8.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week9_1 = robotics.practicals.create(start_time: DateTime.now + 9.week, end_time: DateTime.now + 9.week + 2.hours, location: "Meston 311")
+robotics_practical_week9_2 = robotics.practicals.create(start_time: DateTime.now + 9.week + 1.day, end_time: DateTime.now + 9.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week9_3 = robotics.practicals.create(start_time: DateTime.now + 9.week + 3.day, end_time: DateTime.now + 9.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week10_1 = robotics.practicals.create(start_time: DateTime.now + 10.week, end_time: DateTime.now + 10.week + 2.hours, location: "Meston 311")
+robotics_practical_week10_2 = robotics.practicals.create(start_time: DateTime.now + 10.week + 1.day, end_time: DateTime.now + 10.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week10_3 = robotics.practicals.create(start_time: DateTime.now + 10.week + 3.day, end_time: DateTime.now + 10.week + 3.day + 2.hours, location: "Meston 205")
+
+robotics_practical_week11_1 = robotics.practicals.create(start_time: DateTime.now + 11.week, end_time: DateTime.now + 11.week + 2.hours, location: "Meston 311")
+robotics_practical_week11_2 = robotics.practicals.create(start_time: DateTime.now + 11.week + 1.day, end_time: DateTime.now + 11.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week11_3 = robotics.practicals.create(start_time: DateTime.now + 11.week + 3.day, end_time: DateTime.now + 11.week + 3.day + 2.hours, location: "Meston 205")
+
+
 #Demonstrator: Dovydas
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical.id)
 Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical.id)
@@ -102,8 +150,44 @@ AbsenceCertificate.create!(course_id: 1, student_id: 1, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 1, student_id: 2, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 2, student_id: 2, certificate_type: "C6")
 
-#creating students
+
+practicals = Course.first.practicals
+practicals_on_specific_weeks_for_course1 = [[]]
+index = 0
+week_number = practicals.first.start_time.strftime("%U").to_i
+practicals.each do |practical|
+  if practical.start_time.strftime("%U").to_i != week_number
+    week_number = practical.start_time.strftime("%U").to_i
+    index += 1
+    practicals_on_specific_weeks_for_course1[index] = []  
+  end
+practicals_on_specific_weeks_for_course1[index] << practical
+end
+
+practicals = Course.second.practicals
+practicals_on_specific_weeks_for_course2 = [[]]
+index = 0
+week_number = practicals.first.start_time.strftime("%U").to_i
+practicals.each do |practical|
+  if practical.start_time.strftime("%U").to_i != week_number
+    week_number = practical.start_time.strftime("%U").to_i
+    index += 1
+    practicals_on_specific_weeks_for_course2[index] = []  
+  end
+practicals_on_specific_weeks_for_course2[index] << practical
+end
+p practicals_on_specific_weeks_for_course1.inspect
+
+
+#creating students who are enrolled for courses and attended on practicals
 60.times do |i|
-  Student.create!(email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name. last_name: Faker::Name.last_name)
-  
+  student = Student.create!(email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name, last_name: Faker::Name.last_name, card_id: Faker::Number.number(10), sam_student_id: Faker::Number.number(8) )
+  Enrolment.create!(course_id: 1, student_id: student.id)
+  Enrolment.create!(course_id: 2, student_id: student.id)
+  practicals_on_specific_weeks_for_course1.each do |i|
+    Attendance.create!(student_id: student.id, practical_id: practicals_on_specific_weeks_for_course1[Faker::Number.between(0, 2)].id)
+  end
+  practicals_on_specific_weeks_for_course2.each do |i|
+    Attendance.create!(student_id: student.id, practical_id: practicals_on_specific_weeks_for_course2[Faker::Number.between(0, 2)].id)
+  end
 end
