@@ -1,15 +1,20 @@
 
 <div class="col-md-12 mx-auto">
-<% @courses.each do |course|%>
-  <h1 class=""><%= course.course_title %> </h1>
-  <p> Students enrolled: <%= @num_of_students_enrolled %> </p>
+<% @practicals_on_specific_weeks.each do |course_title, content|%>
+  <h1 class=""><%= course_title %> </h1>
+  <p><b>Number of enrolled students: <%= @num_of_students_enrolled[course_title] %> </b></p>
   <ul>
-  <% course.practicals.each do |practical| %>
-    <li>
-    <h5>Practical on <%= practical.start_time.strftime("%A, %H:%M %d-%m-%Y") %></h5>
-    <p> Students attended the practical:<%= practical.attendances.count %> </p>
-    <%= link_to "See Details", practical_details_path(practical_id: practical.id) %>
-    </li>
+  <% content.each_with_index do |practicals, index| %>
+    <h3> Practical <%= index+1 %> </h3>
+    <ul>
+    <% practicals.each do |practical|%>
+      <li>
+        <%= practical.start_time %>
+        <%= link_to "See details", practical_details_path(practical_id: practical.id) %>
+      </li>
+    <% end %>
+    </ul>
+      <hr>
   <% end %>
   </ul>
 <% end %>
