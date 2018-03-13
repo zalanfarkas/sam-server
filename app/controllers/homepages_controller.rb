@@ -34,11 +34,10 @@ class HomepagesController < ApplicationController
         @attendance_statistics[course.course_title] = Array.new(@practicals_on_specific_weeks[course.course_title].count, 0)
         @practicals_on_specific_weeks[course.course_title].each_with_index do |practicals_on_same_week, index|
           practicals_on_same_week.each do |practical|
-            @attendance_statistics[course.course_title][index] + practical.attendances.count
-          p practical_ids.inspect
+            @attendance_statistics[course.course_title][index] += practical.attendances.count
+          end
         end
       end
-      #p practical_ids.inspect
       p @practicals_on_specific_weeks.inspect
     end
   end
