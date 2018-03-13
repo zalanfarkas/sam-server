@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
 zalan = Student.create!(fingerprint_template: '123|32|14', email: 'zalan@example.com', password: 'password', sam_student_id: 'u01', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243')
 #Zalan with Profile Picture
 #zalan = Student.create!(fingerprint_template: '123|32|14', email: 'zalan@example.com', password: 'password', sam_student_id: '001', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243', picture: Rails.root.join("public/cat-icon.png").open)
@@ -103,3 +102,8 @@ AbsenceCertificate.create!(course_id: 1, student_id: 1, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 1, student_id: 2, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 2, student_id: 2, certificate_type: "C6")
 
+#creating students
+60.times do |i|
+  Student.create!(email: Faker::Internet.email, password: "password", first_name: Faker::Name.first_name. last_name: Faker::Name.last_name)
+  
+end
