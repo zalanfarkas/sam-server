@@ -16,6 +16,7 @@ Rails.application.routes.draw do
   get 'remote', to: 'pending_practicals#new'
   get 'delete_demonstrator', to: 'staffs#delete_demonstrator'
   delete 'destroy_demonstrator', to: 'staffs#destroy_demonstrator'
+  get 'practical_details', to: 'staffs#practical_details'
   
   
   get 'dashboard', to: 'homepages#dashboard'
