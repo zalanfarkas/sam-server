@@ -17,8 +17,11 @@ class Demonstrator < ApplicationRecord
     when "sam_id"
       person = Staff.find_by(sam_staff_id: data)
       person = Student.find_by(sam_student_id: data) if person == nil
+    when "fingerprint"
+      person = Staff.find_by(fingerprint_template: data)
+      person = Student.find_by(fingerprint_template: data) if person == nil
     else 
-      puts "NEEDS IMPLEMENTATION!!!"
+      puts "YOU ARE TRYING TYPE WHICH IS NOT IMPLEMETED YET"
     end
     
     if person.nil?
