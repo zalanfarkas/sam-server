@@ -1,0 +1,24 @@
+
+<div class="col-md-12 mx-auto">
+<% @practicals_on_specific_weeks.each do |course_title, content|%>
+  
+  <h1 class=""><%= course_title %> </h1>
+  <p><b>Number of enrolled students: <%= @num_of_students_enrolled[course_title] %> </b></p>
+  <ul>
+  <% content.each_with_index do |practicals, index| %>
+    <h3> Practical <%= index+1 %> </h3>
+    <p> Students attended: <%= @attendance_statistics[course_title][index] %>/<%= @num_of_students_enrolled[course_title] %></p>
+    <ul>
+    <% practicals.each do |practical|%>
+      <li>
+        <%= practical.start_time %>
+        <%= link_to "See details", practical_details_path(practical_id: practical.id) %>
+      </li>
+    <% end %>
+    </ul>
+      <hr>
+  <% end %>
+  </ul>
+
+<% end %>
+</div>

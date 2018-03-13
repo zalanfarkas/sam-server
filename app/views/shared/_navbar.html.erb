@@ -11,7 +11,7 @@
                 <%= link_to "Manual Attendance Recording", record_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
             <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
-                <%= link_to "Start Practical on Device", new_pending_practical_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
+                <%= link_to "Start Practical on Device", remote_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
             
             <% if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator"].include?(session[:user_type]) %>

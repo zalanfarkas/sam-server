@@ -2,5 +2,5 @@
 <p><b>Number of Student attended: <%= @practical.attendances.count %> </b></p>
 <p>Students attended:</p>
 <% @attendances.each do |attendance| %>
-  Student ID: <%= attendance.student.sam_student_id %>   Name: <%= attendance.student.first_name%> <%= attendance.student.last_name %>
+  <p>Student ID: <%= attendance.student.sam_student_id %>   Name: <%= attendance.student.first_name%> <%= attendance.student.last_name %></p>
 <% end %>

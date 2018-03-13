@@ -1,9 +1,7 @@
 Rails.application.routes.draw do
   
   get 'homepages/login'
-
   get 'homepages/dashboard'
-
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
   post 'manual_attendance_recording/attendance_recording'
@@ -17,8 +15,7 @@ Rails.application.routes.draw do
   get 'delete_demonstrator', to: 'staffs#delete_demonstrator'
   delete 'destroy_demonstrator', to: 'staffs#destroy_demonstrator'
   get 'practical_details', to: 'staffs#practical_details'
-  
-  
+  get 'attendance_statistics', to: 'staffs#attendance_statistics'
   get 'dashboard', to: 'homepages#dashboard'
   root 'homepages#login'
   
