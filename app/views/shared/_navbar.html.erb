@@ -32,7 +32,11 @@
         </ul>
     </div>
     <div class="mx-auto order-0">
+            <% if current_user %>
+            <%= link_to "Student Attendance Monitoring", dashboard_path, class: "navbar-brand mx-auto" %>
+            <%else%>
             <%= link_to "Student Attendance Monitoring", root_path, class: "navbar-brand mx-auto" %>
+            <%end%>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
             <span class="navbar-toggler-icon"></span>
         </button>

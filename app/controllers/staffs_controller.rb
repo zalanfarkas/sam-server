@@ -150,6 +150,16 @@ class StaffsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  
+  def practical_details
+    if params[:practical_id] != nil
+      @practical = Practical.find(params[:practical_id])
+      @attendances = @practical.attendances
+    else
+      flash[:alert] = "Practical not found!"
+      redirect_to dashboard_path
+    end
+  end
 
 
   
