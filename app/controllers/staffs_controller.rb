@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
+  #rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :authenticate_staff!
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator, :practical_details, :attendance_statistics, :attendance_statistics_for_certain_student]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
@@ -197,29 +197,39 @@ class StaffsController < ApplicationController
   
   def attendance_statistics_for_certain_student
     @courses = current_staff.courses
-    if params[:sam_student_id] != "" && params[:course_id]
-      student = Student.find(sam_student_id: params[:sam_student_id])
-      course = @courses.find(params[:course_id])
-      week_number = course.practicals.first.start_time.strftime("%U").to_i
-      @practicals_on_specific_weeks = [[]]
-      index = 0
-      course.practicals.each do |practical|
-        if  practical.start_time.strftime("%U").to_i != week_number
-          week_number = practical.start_time.strftime("%U").to_i
-          index += 1
-          @practicals_on_specific_weeks[index] = []
-        end
-      @practicals_on_specific_weeks[index] << practical
-      end
-      @attendance_on_practicals = []
-      index = -1
-      @practicals_on_specific_weeks.each do |practicals|
-        index += 1
-        practicals.each do |practical|
-          if Attendance.exists?(practical_id: practical.id, student_id: student.id)
-            @attendances_on_practical[index] = true
+    if !params[:sam_student_id].nil? && !params[:course_id].nil?
+      if Student.exists?(sam_student_id: params[:sam_student_id])
+        @student = Student.find_by(sam_student_id: params[:sam_student_id])
+        @course = @courses.find(params[:course_id])
+        if Enrolment.exists?(student_id: @student.id, course_id: @course.id)
+          week_number = @course.practicals.first.start_time.strftime("%U").to_i
+          @practicals_on_specific_weeks = [[]]
+          index = 0
+          @course.practicals.each do |practical|
+            if  practical.start_time.strftime("%U").to_i != week_number
+              week_number = practical.start_time.strftime("%U").to_i
+              index += 1
+              @practicals_on_specific_weeks[index] = []
+            end
+          @practicals_on_specific_weeks[index] << practical
           end
+          @attendance_on_practicals = Array.new(@practicals_on_specific_weeks.count,false)
+          index = 0
+          @practicals_on_specific_weeks.each do |practicals|
+            practicals.each do |practical|
+              if Attendance.exists?(practical_id: practical.id, student_id: @student.id)
+                @attendance_on_practicals[index] = true
+              end
+            end
+            index += 1
+          end
+        else
+          flash[:alert] = "Student with ID: \'#{params[:sam_student_id]}\' is not enrolled for that course!"
+          redirect_to attendance_statistics_for_certain_student_path 
         end
+      else
+        flash[:alert] = "Student with ID: \'#{params[:sam_student_id]}\' not found!"
+        redirect_to attendance_statistics_for_certain_student_path
       end
     end
     p @attendance_on_practicals.inspect

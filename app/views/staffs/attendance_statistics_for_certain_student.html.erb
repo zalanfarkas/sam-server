@@ -1,5 +1,5 @@
 <div class="col-md-12 text-center mx-auto">
-  <h5>Attendance Statistics of </h5>
+  <h5>Attendance Statistics for certain Student</h5>
   <div class="row">
     <div class="col-md-6 offset-3">
       <%=form_tag({controller: "staffs", action: "attendance_statistics_for_certain_student"}, method: "get", class: "nifty_form") do %>
@@ -16,4 +16,5 @@
       <br>
     </div>
   </div>
+  <p> Attendance Statistics for <%= @student.first_name %> <%= @student.last_name %> on the Course: <%= @course.course_title %></p>
 </div>
