@@ -1,7 +1,7 @@
 class StaffsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :authenticate_staff!
-  before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator]
+  before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator, :practical_details, :attendance_statistics, :attendance_statistics_for_certain_student]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
@@ -162,7 +162,6 @@ class StaffsController < ApplicationController
   end
   
   def attendance_statistics
-    if ["staff_course_coordinator","staff_course_coordinator_and_demonstrator"].include?(session[:user_type])
       @courses = current_staff.courses
       @num_of_students_enrolled = {}
       @practicals_on_specific_weeks = {}
@@ -194,9 +193,36 @@ class StaffsController < ApplicationController
         end
       end
       #p @practicals_on_specific_weeks.inspect
-    else 
-      redirect_to dashboard_path
+  end
+  
+  def attendance_statistics_for_certain_student
+    @courses = current_staff.courses
+    if params[:sam_student_id] != "" && params[:course_id]
+      student = Student.find(sam_student_id: params[:sam_student_id])
+      course = @courses.find(params[:course_id])
+      week_number = course.practicals.first.start_time.strftime("%U").to_i
+      @practicals_on_specific_weeks = [[]]
+      index = 0
+      course.practicals.each do |practical|
+        if  practical.start_time.strftime("%U").to_i != week_number
+          week_number = practical.start_time.strftime("%U").to_i
+          index += 1
+          @practicals_on_specific_weeks[index] = []
+        end
+      @practicals_on_specific_weeks[index] << practical
+      end
+      @attendance_on_practicals = []
+      index = -1
+      @practicals_on_specific_weeks.each do |practicals|
+        index += 1
+        practicals.each do |practical|
+          if Attendance.exists?(practical_id: practical.id, student_id: student.id)
+            @attendances_on_practical[index] = true
+          end
+        end
+      end
     end
+    p @attendance_on_practicals.inspect
   end
 
   
