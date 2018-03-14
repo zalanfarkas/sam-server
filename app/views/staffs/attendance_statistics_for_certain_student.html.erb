@@ -16,5 +16,15 @@
       <br>
     </div>
   </div>
-  <p> Attendance Statistics for <%= @student.first_name %> <%= @student.last_name %> on the Course: <%= @course.course_title %></p>
+  <% if !@attendance_on_practicals.nil? %>
+    <p> Attendance Statistics for <%= @student.first_name %> <%= @student.last_name %> on the practicals of <%= @course.course_title %>:</p>
+    <p><b>The student attended <%= @attendance_on_practicals.count(true) %> out of <%= @attendance_on_practicals.count %> practicals </b></p>
+    <ul class="no_dots">
+    <% @attendance_on_practicals.each_with_index do |attendance, index| %>
+      <li>
+        Practical <%= index+1 %>: <%= if attendance == true then "Attended" else "Missed" end %>
+      </li>
+    <% end %> 
+    </ul>
+  <% end %>
 </div>

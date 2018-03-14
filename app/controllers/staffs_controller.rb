@@ -232,7 +232,7 @@ class StaffsController < ApplicationController
         redirect_to attendance_statistics_for_certain_student_path
       end
     end
-    p @attendance_on_practicals.inspect
+    #p @attendance_on_practicals.inspect
   end
 
   
