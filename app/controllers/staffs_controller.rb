@@ -1,5 +1,5 @@
 class StaffsController < ApplicationController
-  #rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
+  rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :authenticate_staff!
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator, :practical_details, :attendance_statistics, :attendance_statistics_for_certain_student]
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
@@ -168,11 +168,9 @@ class StaffsController < ApplicationController
       @attendance_statistics = {}
       @courses.each do |course|
         @num_of_students_enrolled[course.course_title] = course.enrolments.count
-        #students_of_course = Enrolment.where(course_id: course.id)#.select(:student_id)
         week_number = course.practicals.first.start_time.strftime("%U").to_i
         @practicals_on_specific_weeks[course.course_title] = [[]]
         index = 0
-        #@practicals_on_specific_weeks[course.course_title]["Practical #{index}"] = []
         course.practicals.each do |practical|
           if  practical.start_time.strftime("%U").to_i != week_number
             week_number = practical.start_time.strftime("%U").to_i
@@ -180,7 +178,6 @@ class StaffsController < ApplicationController
             @practicals_on_specific_weeks[course.course_title][index] = []
           end
           @practicals_on_specific_weeks[course.course_title][index] << practical
-          #practical.attendances
         end
       end
       @courses.each do |course|
@@ -192,7 +189,6 @@ class StaffsController < ApplicationController
           end
         end
       end
-      #p @practicals_on_specific_weeks.inspect
   end
   
   def attendance_statistics_for_certain_student
@@ -232,7 +228,6 @@ class StaffsController < ApplicationController
         redirect_to attendance_statistics_for_certain_student_path
       end
     end
-    #p @attendance_on_practicals.inspect
   end
 
   
