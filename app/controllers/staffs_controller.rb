@@ -171,7 +171,7 @@ class StaffsController < ApplicationController
         week_number = course.practicals.first.start_time.strftime("%U").to_i
         @practicals_on_specific_weeks[course.course_title] = [[]]
         index = 0
-        course.practicals.each do |practical|
+        course.practicals.where("end_time < ?", DateTime.now).each do |practical|
           if  practical.start_time.strftime("%U").to_i != week_number
             week_number = practical.start_time.strftime("%U").to_i
             index += 1
@@ -189,6 +189,7 @@ class StaffsController < ApplicationController
           end
         end
       end
+      #p @practicals_on_specific_weeks.inspect
   end
   
   def attendance_statistics_for_certain_student
@@ -201,7 +202,7 @@ class StaffsController < ApplicationController
           week_number = @course.practicals.first.start_time.strftime("%U").to_i
           @practicals_on_specific_weeks = [[]]
           index = 0
-          @course.practicals.each do |practical|
+          @course.practicals.where("end_time < ?", DateTime.now).each do |practical|
             if  practical.start_time.strftime("%U").to_i != week_number
               week_number = practical.start_time.strftime("%U").to_i
               index += 1

@@ -45,33 +45,37 @@ Enrolment.create(course_id: awad.id, student_id: patrik.id)
 #robotics_practical2 = robotics.practicals.create(start_time: start_time + 2.month, end_time: end_time, location: "MR117")
 
 #next week's Monday:
+this_monday = DateTime.now.beginning_of_week
 next_monday = DateTime.now.next_week.next_day(0)
 
 #awad practicals:
-awad_practical_week1_1 = awad.practicals.create(start_time: next_monday + 1.week, end_time: next_monday + 1.week + 2.hours, location: "Meston 311")
-awad_practical_week1_2 = awad.practicals.create(start_time: next_monday + 1.week + 1.day, end_time: next_monday + 1.week + 1.day + 2.hours, location: "Meston 205")
-awad_practical_week1_3 = awad.practicals.create(start_time: next_monday + 1.week + 3.day, end_time: next_monday + 1.week + 3.day + 2.hours, location: "Meston 205")
+#past practicals:
+awad_practical_week1_1 = awad.practicals.create(start_time: this_monday - 5.week, end_time: this_monday - 5.week + 2.hours, location: "Meston 311")
+awad_practical_week1_2 = awad.practicals.create(start_time: this_monday - 5.week + 1.day, end_time: this_monday - 5.week + 1.day + 2.hours, location: "Meston 205")
+awad_practical_week1_3 = awad.practicals.create(start_time: this_monday - 5.week + 3.day, end_time: this_monday - 5.week + 3.day + 2.hours, location: "Meston 205")
 
-awad_practical_week2_1 = awad.practicals.create(start_time: next_monday + 2.week, end_time: next_monday + 2.week + 2.hours, location: "Meston 311")
-awad_practical_week2_2 = awad.practicals.create(start_time: next_monday + 2.week + 1.day, end_time: next_monday + 2.week + 1.day + 2.hours, location: "Meston 205")
-awad_practical_week2_3 = awad.practicals.create(start_time: next_monday + 2.week + 3.day, end_time: next_monday + 2.week + 3.day + 2.hours, location: "Meston 205")
+awad_practical_week2_1 = awad.practicals.create(start_time: this_monday - 4.week, end_time: this_monday - 4.week + 2.hours, location: "Meston 311")
+awad_practical_week2_2 = awad.practicals.create(start_time: this_monday - 4.week + 1.day, end_time: this_monday - 4.week + 1.day + 2.hours, location: "Meston 205")
+awad_practical_week2_3 = awad.practicals.create(start_time: this_monday - 4.week + 3.day, end_time: this_monday - 4.week + 3.day + 2.hours, location: "Meston 205")
 
-awad_practical_week3_1 = awad.practicals.create(start_time: next_monday + 3.week, end_time: next_monday + 3.week + 2.hours, location: "Meston 311")
-awad_practical_week3_2 = awad.practicals.create(start_time: next_monday + 3.week + 1.day, end_time: next_monday + 3.week + 1.day + 2.hours, location: "Meston 205")
-awad_practical_week3_3 = awad.practicals.create(start_time: next_monday + 3.week + 3.day, end_time: next_monday + 3.week + 3.day + 2.hours, location: "Meston 205")
+awad_practical_week3_1 = awad.practicals.create(start_time: this_monday - 3.week, end_time: this_monday - 3.week + 2.hours, location: "Meston 311")
+awad_practical_week3_2 = awad.practicals.create(start_time: this_monday - 3.week + 1.day, end_time: this_monday - 3.week + 1.day + 2.hours, location: "Meston 205")
+awad_practical_week3_3 = awad.practicals.create(start_time: this_monday - 3.week + 3.day, end_time: this_monday - 3.week + 3.day + 2.hours, location: "Meston 205")
 
-awad_practical_week4_1 = awad.practicals.create(start_time: next_monday + 4.week, end_time: next_monday + 4.week + 2.hours, location: "Meston 311")
-awad_practical_week4_2 = awad.practicals.create(start_time: next_monday + 4.week + 1.day, end_time: next_monday + 4.week + 1.day + 2.hours, location: "Meston 205")
-awad_practical_week4_3 = awad.practicals.create(start_time: next_monday + 4.week + 3.day, end_time: next_monday + 4.week + 3.day + 2.hours, location: "Meston 205")
+awad_practical_week4_1 = awad.practicals.create(start_time: this_monday - 2.week, end_time: this_monday - 2.week + 2.hours, location: "Meston 311")
+awad_practical_week4_2 = awad.practicals.create(start_time: this_monday - 2.week + 1.day, end_time: this_monday - 2.week + 1.day + 2.hours, location: "Meston 205")
+awad_practical_week4_3 = awad.practicals.create(start_time: this_monday - 2.week + 3.day, end_time: this_monday - 2.week + 3.day + 2.hours, location: "Meston 205")
 
-awad_practical_week5_1 = awad.practicals.create(start_time: next_monday + 5.week, end_time: next_monday + 5.week + 2.hours, location: "Meston 311")
-awad_practical_week5_2 = awad.practicals.create(start_time: next_monday + 5.week + 1.day, end_time: next_monday + 5.week + 1.day + 2.hours, location: "Meston 205")
-awad_practical_week5_3 = awad.practicals.create(start_time: next_monday + 5.week + 3.day, end_time: next_monday + 5.week + 3.day + 2.hours, location: "Meston 205")
+awad_practical_week5_1 = awad.practicals.create(start_time: this_monday - 1.week, end_time: this_monday - 1.week + 2.hours, location: "Meston 311")
+awad_practical_week5_2 = awad.practicals.create(start_time: this_monday - 1.week + 1.day, end_time: this_monday - 1.week + 1.day + 2.hours, location: "Meston 205")
+awad_practical_week5_3 = awad.practicals.create(start_time: this_monday - 1.week + 3.day, end_time: this_monday - 1.week + 3.day + 2.hours, location: "Meston 205")
 
-awad_practical_week6_1 = awad.practicals.create(start_time: next_monday + 6.week, end_time: next_monday + 6.week + 2.hours, location: "Meston 311")
-awad_practical_week6_2 = awad.practicals.create(start_time: next_monday + 6.week + 1.day, end_time: next_monday + 6.week + 1.day + 2.hours, location: "Meston 205")
-awad_practical_week6_3 = awad.practicals.create(start_time: next_monday + 6.week + 3.day, end_time: next_monday + 6.week + 3.day + 2.hours, location: "Meston 205")
+#this week's practicals:
+awad_practical_week6_1 = awad.practicals.create(start_time: this_monday, end_time: this_monday + 2.hours, location: "Meston 311")
+awad_practical_week6_2 = awad.practicals.create(start_time: this_monday + 1.day, end_time: this_monday + 1.day + 2.hours, location: "Meston 205")
+awad_practical_week6_3 = awad.practicals.create(start_time: this_monday + 3.day, end_time: this_monday + 3.day + 2.hours, location: "Meston 205")
 
+#future practicals:
 awad_practical_week7_1 = awad.practicals.create(start_time: next_monday + 7.week, end_time: next_monday + 7.week + 2.hours, location: "Meston 311")
 awad_practical_week7_2 = awad.practicals.create(start_time: next_monday + 7.week + 1.day, end_time: next_monday + 7.week + 1.day + 2.hours, location: "Meston 205")
 awad_practical_week7_3 = awad.practicals.create(start_time: next_monday + 7.week + 3.day, end_time: next_monday + 7.week + 3.day + 2.hours, location: "Meston 205")
@@ -93,30 +97,32 @@ awad_practical_week11_2 = awad.practicals.create(start_time: next_monday + 11.we
 awad_practical_week11_3 = awad.practicals.create(start_time: next_monday + 11.week + 3.day, end_time: next_monday + 11.week + 3.day + 2.hours, location: "Meston 205")
 
 #robotics practicals:
-robotics_practical_week1_1 = robotics.practicals.create(start_time: next_monday + 1.week, end_time: next_monday + 1.week + 2.hours, location: "Meston 311")
-robotics_practical_week1_2 = robotics.practicals.create(start_time: next_monday + 1.week + 1.day, end_time: next_monday + 1.week + 1.day + 2.hours, location: "Meston 205")
-robotics_practical_week1_3 = robotics.practicals.create(start_time: next_monday + 1.week + 3.day, end_time: next_monday + 1.week + 3.day + 2.hours, location: "Meston 205")
+robotics_practical_week1_1 = robotics.practicals.create(start_time: this_monday - 5.week, end_time: this_monday - 5.week + 2.hours, location: "Meston 311")
+robotics_practical_week1_2 = robotics.practicals.create(start_time: this_monday - 5.week + 1.day, end_time: this_monday - 5.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week1_3 = robotics.practicals.create(start_time: this_monday - 5.week + 3.day, end_time: this_monday - 5.week + 3.day + 2.hours, location: "Meston 205")
 
-robotics_practical_week2_1 = robotics.practicals.create(start_time: next_monday + 2.week, end_time: next_monday + 2.week + 2.hours, location: "Meston 311")
-robotics_practical_week2_2 = robotics.practicals.create(start_time: next_monday + 2.week + 1.day, end_time: next_monday + 2.week + 1.day + 2.hours, location: "Meston 205")
-robotics_practical_week2_3 = robotics.practicals.create(start_time: next_monday + 2.week + 3.day, end_time: next_monday + 2.week + 3.day + 2.hours, location: "Meston 205")
+robotics_practical_week2_1 = robotics.practicals.create(start_time: this_monday - 4.week, end_time: this_monday - 4.week + 2.hours, location: "Meston 311")
+robotics_practical_week2_2 = robotics.practicals.create(start_time: this_monday - 4.week + 1.day, end_time: this_monday - 4.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week2_3 = robotics.practicals.create(start_time: this_monday - 4.week + 3.day, end_time: this_monday - 4.week + 3.day + 2.hours, location: "Meston 205")
 
-robotics_practical_week3_1 = robotics.practicals.create(start_time: next_monday + 3.week, end_time: next_monday + 3.week + 2.hours, location: "Meston 311")
-robotics_practical_week3_2 = robotics.practicals.create(start_time: next_monday + 3.week + 1.day, end_time: next_monday + 3.week + 1.day + 2.hours, location: "Meston 205")
-robotics_practical_week3_3 = robotics.practicals.create(start_time: next_monday + 3.week + 3.day, end_time: next_monday + 3.week + 3.day + 2.hours, location: "Meston 205")
+robotics_practical_week3_1 = robotics.practicals.create(start_time: this_monday - 3.week, end_time: this_monday - 3.week + 2.hours, location: "Meston 311")
+robotics_practical_week3_2 = robotics.practicals.create(start_time: this_monday - 3.week + 1.day, end_time: this_monday - 3.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week3_3 = robotics.practicals.create(start_time: this_monday - 3.week + 3.day, end_time: this_monday - 3.week + 3.day + 2.hours, location: "Meston 205")
 
-robotics_practical_week4_1 = robotics.practicals.create(start_time: next_monday + 4.week, end_time: next_monday + 4.week + 2.hours, location: "Meston 311")
-robotics_practical_week4_2 = robotics.practicals.create(start_time: next_monday + 4.week + 1.day, end_time: next_monday + 4.week + 1.day + 2.hours, location: "Meston 205")
-robotics_practical_week4_3 = robotics.practicals.create(start_time: next_monday + 4.week + 3.day, end_time: next_monday + 4.week + 3.day + 2.hours, location: "Meston 205")
+robotics_practical_week4_1 = robotics.practicals.create(start_time: this_monday - 2.week, end_time: this_monday - 2.week + 2.hours, location: "Meston 311")
+robotics_practical_week4_2 = robotics.practicals.create(start_time: this_monday - 2.week + 1.day, end_time: this_monday - 2.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week4_3 = robotics.practicals.create(start_time: this_monday - 2.week + 3.day, end_time: this_monday - 2.week + 3.day + 2.hours, location: "Meston 205")
 
-robotics_practical_week5_1 = robotics.practicals.create(start_time: next_monday + 5.week, end_time: next_monday + 5.week + 2.hours, location: "Meston 311")
-robotics_practical_week5_2 = robotics.practicals.create(start_time: next_monday + 5.week + 1.day, end_time: next_monday + 5.week + 1.day + 2.hours, location: "Meston 205")
-robotics_practical_week5_3 = robotics.practicals.create(start_time: next_monday + 5.week + 3.day, end_time: next_monday + 5.week + 3.day + 2.hours, location: "Meston 205")
+robotics_practical_week5_1 = robotics.practicals.create(start_time: this_monday - 1.week, end_time: this_monday - 1.week + 2.hours, location: "Meston 311")
+robotics_practical_week5_2 = robotics.practicals.create(start_time: this_monday - 1.week + 1.day, end_time: this_monday - 1.week + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week5_3 = robotics.practicals.create(start_time: this_monday - 1.week + 3.day, end_time: this_monday - 1.week + 3.day + 2.hours, location: "Meston 205")
 
-robotics_practical_week6_1 = robotics.practicals.create(start_time: next_monday + 6.week, end_time: next_monday + 6.week + 2.hours, location: "Meston 311")
-robotics_practical_week6_2 = robotics.practicals.create(start_time: next_monday + 6.week + 1.day, end_time: next_monday + 6.week + 1.day + 2.hours, location: "Meston 205")
-robotics_practical_week6_3 = robotics.practicals.create(start_time: next_monday + 6.week + 3.day, end_time: next_monday + 6.week + 3.day + 2.hours, location: "Meston 205")
+#this week's practicals
+robotics_practical_week6_1 = robotics.practicals.create(start_time: this_monday, end_time: this_monday + 2.hours, location: "Meston 311")
+robotics_practical_week6_2 = robotics.practicals.create(start_time: this_monday + 1.day, end_time: this_monday + 1.day + 2.hours, location: "Meston 205")
+robotics_practical_week6_3 = robotics.practicals.create(start_time: this_monday + 3.day, end_time: this_monday + 3.day + 2.hours, location: "Meston 205")
 
+#future practicals
 robotics_practical_week7_1 = robotics.practicals.create(start_time: next_monday + 7.week, end_time: next_monday + 7.week + 2.hours, location: "Meston 311")
 robotics_practical_week7_2 = robotics.practicals.create(start_time: next_monday + 7.week + 1.day, end_time: next_monday + 7.week + 1.day + 2.hours, location: "Meston 205")
 robotics_practical_week7_3 = robotics.practicals.create(start_time: next_monday + 7.week + 3.day, end_time: next_monday + 7.week + 3.day + 2.hours, location: "Meston 205")
