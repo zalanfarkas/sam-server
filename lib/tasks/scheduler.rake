@@ -15,8 +15,8 @@ task :check_absence => :environment do
             end
             
             if found == false
-                # Give c6
-                puts student.first_name
+                # Give c6 and send and email about it
+                AbsenceCertificate.create(student_id: student.id, course_id: enrolment.course.id, certificate_type: "C6")
                 StudentMailer.absense_notification(student, enrolment.course).deliver_now
             end
         end
