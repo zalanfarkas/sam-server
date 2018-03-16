@@ -1,0 +1,9 @@
+<h1>Absense notification</h1>
+
+Hi <%= @user.first_name %>,
+
+<p>You received C6 for not attending any of the <%=@course.course_title %> practicals last week. </p>
+
+<p>
+    To resolve it contact course coordinator <a href="mailto:<%= @course.staff.email %>"><%=@course.staff.first_name %> <%=@course.staff.last_name%></a>.
+</p>
