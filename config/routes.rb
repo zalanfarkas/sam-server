@@ -41,12 +41,12 @@ Rails.application.routes.draw do
   post 'api/upload_fingerprint',  to: 'api#upload_fingerprint'
   post 'api/current_templates',   to: 'api#current_templates'
   
-  resources :students
-  resources :staffs
-  resources :courses
-  resources :practicals
-  resources :attendances
-  resources :enrolments
-  resources :demonstrators
-  resources :pending_practicals
+  #resources :students
+  #resources :staffs
+  #resources :courses
+  #resources :practicals
+  #resources :attendances
+  #resources :enrolments
+  #resources :demonstrators
+  #resources :pending_practicals
 end
