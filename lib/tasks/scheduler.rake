@@ -16,7 +16,8 @@ task :check_absence => :environment do
             
             if found == false
                 # Give c6
-                puts "Student #{student.first_name} should get c6, because he missed practical for #{enrolment.course.course_title}"
+                puts student.first_name
+                StudentMailer.absense_notification(student, enrolment.course).deliver_now
             end
         end
     end
