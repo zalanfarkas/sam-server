@@ -10,7 +10,7 @@
             <li class="nav-item <%= "active" if request.original_fullpath == record_path %> ">
                 <%= link_to "Manual Attendance Recording", record_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
-            <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
+            <li class="nav-item <%= "active" if request.original_fullpath == remote_path %>" >
                 <%= link_to "Start Practical on Device", remote_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
             </li>
             
@@ -25,7 +25,7 @@
                     <%= link_to "Delete Demonstrator from Practical(s)", delete_demonstrator_path, class: "dropdown-item"%>
                   </div>
                 </li>
-                <li class="nav-item <%= "active" if request.original_fullpath == new_pending_practical_path %>" >
+                <li class="nav-item <%= "active" if request.original_fullpath == manage_c6s_path %>" >
                     <%= link_to "Manage C6s", manage_c6s_path, class: "nav-link" if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
                 </li>
             <% end %>

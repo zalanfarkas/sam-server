@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  root 'homepages#login'
+  
   get 'homepages/login'
   get 'homepages/dashboard'
   get 'manual_attendance_recording/index'
@@ -18,7 +20,6 @@ Rails.application.routes.draw do
   get 'attendance_statistics', to: 'staffs#attendance_statistics'
   get 'attendance_statistics_for_certain_student', to: 'staffs#attendance_statistics_for_certain_student'
   get 'dashboard', to: 'homepages#dashboard'
-  root 'homepages#login'
   
   devise_for :staffs, controllers: {
         sessions: 'staffs/sessions',
@@ -49,4 +50,6 @@ Rails.application.routes.draw do
   #resources :enrolments
   #resources :demonstrators
   #resources :pending_practicals
+  
+  get '*path' => redirect('/')
 end
