@@ -16,7 +16,7 @@ task :check_absence => :environment do
             
             if found == false
                 # Give c6
-                UserMailer.absense_notification(student, enrolment.course).deliver_now
+                StudentMailer.absense_notification(student, enrolment.course).deliver_now
             end
         end
     end
