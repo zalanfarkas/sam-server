@@ -1,26 +1,77 @@
-<ul>
-  <li>
-    <%= link_to "Init practical", remote_path%>
-  </li>
-  <li>
-    <%= link_to "Record attendance", record_path%>
-  </li>
-  <li>
-    <%= link_to "List Demonstrators", demonstrator_list_path %>
-  </li>
-  <li>
-    <%= link_to "Add Demonstrator to Practical(s)", add_demonstrator_path%>
-  </li>
-  <li>
-    <%= link_to "Delete Demonstrator from Practical(s)", delete_demonstrator_path%>
-  </li>
-  <li>
-    <%= link_to "Manage C6s", manage_c6s_path if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type])%>
-  </li>
-  <li>
-    <%= link_to "Attendande Statistics", attendance_statistics_path%>
-  </li>
-   <li>
-    <%= link_to "Attendande Statistics for certain student", attendance_statistics_for_certain_student_path%>
-  </li>
-</ul>
+<% if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_as_demonstrator", "student_demonstrator"].include?(session[:user_type]) %>
+
+<div class="row text-center text-lg-left">
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= remote_path %>" class="d-block mb-4 h-100 ttttt">
+             <i class="fa fa-play icon"></i>
+             <p class="text">Start practical</p>
+             <!--.fa-play-->
+           </a>
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= record_path %>" class="d-block mb-4 h-100">
+             <i class="fa fa-floppy-o icon"></i>
+             <div class="text">Record attendance</div>
+           </a>
+         </div>
+       </div>
+<% end %>
+
+<% if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator"].include?(session[:user_type]) %>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= demonstrator_list_path %>" class="d-block mb-4 h-100">
+             <i class="fa fa-th-list icon"></i>
+             <div class="text">List Demonstrators</div>
+           </a>
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= add_demonstrator_path %>" class="d-block mb-4 h-100">
+              <i class="fa fa-user-plus icon"></i>
+             <div class="text">Add Demonstrator</div>
+           </a>
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= delete_demonstrator_path %>" class="d-block mb-4 h-100">
+             <i class="fa fa-trash icon"></i>
+             <p class="text">Delete Demonstrator</p>
+           </a>
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= manage_c6s_path %>" class="d-block mb-4 h-100">
+             <i class="fa fa-pencil-square-o icon"></i>
+             <p class="text">Manage C6s</p>
+           </a>
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= attendance_statistics_path %>" class="d-block mb-4 h-100">
+             <i class="fa fa-signal icon"></i>
+             <p class="text">Attendande Statistics</p>
+           </a>
+         </div>
+       </div>
+       <div class="col-lg-3 col-md-4 col-xs-6">
+         <div class="menu-button-big">
+           <a href="<%= attendance_history_path %>" class="d-block mb-4 h-100">
+             <i class="fa fa-history icon"></i>
+             <p class="text">Attendande History</p>
+           </a>
+         </div>
+       </div>
+</div>
+<% end %>
+
+<% if ["staff_without_course", "student"].include?(session[:user_type]) %>
+  Don't have access
+<% end %>

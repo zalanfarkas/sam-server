@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   delete 'destroy_demonstrator', to: 'staffs#destroy_demonstrator'
   get 'practical_details', to: 'staffs#practical_details'
   get 'attendance_statistics', to: 'staffs#attendance_statistics'
-  get 'attendance_statistics_for_certain_student', to: 'staffs#attendance_statistics_for_certain_student'
+  get 'attendance_history', to: 'staffs#attendance_statistics_for_certain_student'
   get 'dashboard', to: 'homepages#dashboard'
   
   devise_for :staffs, controllers: {

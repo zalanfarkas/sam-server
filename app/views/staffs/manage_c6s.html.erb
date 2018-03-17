@@ -30,7 +30,7 @@
       <% name = "#{certificate.student.first_name} #{certificate.student.last_name}" %>
       <div class="col-sm">
         <%= link_to 'Remove C6', remove_c6_path(certificate_id: certificate.id, student_name: name), data: { confirm: "Do you want to remove C6 for #{name}?" }, class: "btn btn-primary" %>
-        <%= link_to 'See attendance history of student', attendance_statistics_for_certain_student_path(course_id: course.id, sam_student_id: certificate.student.sam_student_id) %>
+        <%= link_to 'See attendance history of student', attendance_history_path(course_id: course.id, sam_student_id: certificate.student.sam_student_id) %>
       </div>
     </div>
     </li>

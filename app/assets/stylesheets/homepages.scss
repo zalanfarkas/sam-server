@@ -1,3 +1,41 @@
 // Place all the styles related to the Homepages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+.menu-button-big {
+  margin-bottom: 10px;
+  border-radius: 10px;
+  background: #343a40;
+  text-align: center;
+  height: 8rem;
+  a:hover {
+      text-decoration: none;
+  }
+  .text {
+       color: white;
+       font-size: 1rem;
+       text-transform: uppercase;
+  }
+  
+  .icon {
+      padding: 10px;
+      text-align: center;
+      font-size: 4rem;
+      color: white;
+      min-height: 5rem;
+  }
+}
+
+
+.menu-button-big:hover {
+    background: black;
+}
+.menu-button {
+   background: red;
+   border-radius: 10px;
+   margin: 10px;
+}
+
+.menu-button-content {
+   min-height: 100px;
+   margin-bottom: 100px;
+}
