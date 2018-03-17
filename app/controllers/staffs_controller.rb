@@ -82,7 +82,7 @@ class StaffsController < ApplicationController
           end
           redirect_to add_demonstrator_path #demonstrator_list_path
         else
-          flash[:alert] = "Student (with ID: #{sam_id}) is not found"
+          flash[:alert] = "Student/Staff (with ID: #{sam_id}) is not found"
           redirect_to add_demonstrator_path
         end
       end
