@@ -1,8 +1,8 @@
 class Staff < ApplicationRecord
   # Include default devise modules. Others available are:
-  # :confirmable, :timeoutable and :omniauthable, :registerable,
+  # :confirmable, :timeoutable and :omniauthable, :registerable, :rememberable
   devise :database_authenticatable, :lockable,
-         :recoverable, :trackable, :validatable, :timeoutable, :rememberable
+         :recoverable, :trackable, :validatable, :timeoutable
          
   has_many :courses
   validates :sam_staff_id, presence: true, uniqueness: true
