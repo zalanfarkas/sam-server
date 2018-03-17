@@ -8,6 +8,9 @@ task :check_absence => :environment do
             found = false
             # Find all practicals for the previous week of that enrolment
             practicals = enrolment.course.practicals.where('start_time >= ? AND end_time <= ?', current_time - 7.days, current_time)
+            # If there were no practicals last week then skip that course
+            next if practicals.count == 0
+            # Look through each practical for the attendance
             practicals.each do |practical|
                if practical.students.exists?(:id => student.id)
                    found = true

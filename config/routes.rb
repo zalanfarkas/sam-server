@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   #resources :enrolments
   #resources :demonstrators
   resources :pending_practicals, :path => '', only: [:new, :create]
+
   
   get '*path' => redirect('/')
 end
