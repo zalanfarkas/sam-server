@@ -49,7 +49,7 @@ Rails.application.routes.draw do
   #resources :attendances
   #resources :enrolments
   #resources :demonstrators
-  #resources :pending_practicals
+  resources :pending_practicals
   
   get '*path' => redirect('/')
 end
