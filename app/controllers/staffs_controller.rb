@@ -129,7 +129,7 @@ class StaffsController < ApplicationController
         @hash = {}
         current_staff.courses.each do |course|
           @hash[course.course_title] = {}
-          course.practicals.each do |practical|
+          course.practicals.where("start_time > ?", DateTime.now).each do |practical|
             demonstrator_on_practical = Demonstrator.where("practical_id = ? AND sam_demonstrator_id = ?", practical.id, params[:sam_id])
             if !demonstrator_on_practical.empty?
               @hash[course.course_title][practical.start_time] =  demonstrator_on_practical

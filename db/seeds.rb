@@ -145,13 +145,13 @@ robotics_practical_week11_3 = robotics.practicals.create(start_time: next_monday
 
 
 #Demonstrator: Dovydas
-Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical_week1_1.id)
-Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week1_1.id)
-Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week2_1.id)
+#Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical_week1_1.id)
+#Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week1_1.id)
+#Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week2_1.id)
 
 #Demonstrator: Zalan
-Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week1_1.id)
-Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week2_1.id)
+#Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week1_1.id)
+#Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week2_1.id)
 
 #Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
 
@@ -200,5 +200,12 @@ picture_array = ['guy1.jpeg','guy2.jpeg']
   practicals_on_specific_weeks_for_course2.each do |practical_number2|
     # work only with 3practicals/week
     Attendance.create!(student_id: student.id, practical_id: practical_number2[Faker::Number.between(0, 2)].id)
+  end
+end
+
+Course.all.each do |course|
+  course.practicals.each do |practical|
+    Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: practical.id)
+    Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: practical.id)
   end
 end
