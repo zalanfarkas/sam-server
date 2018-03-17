@@ -72,5 +72,15 @@ class ApplicationController < ActionController::Base
         redirect_to root_path
       end
     end 
+    
+  def after_sign_out_path_for(resource_or_scope)
+    if resource_or_scope == :staff
+      new_staff_session_path
+    elsif resource_or_scope == :student
+      new_student_session_path
+    else
+      root_path
+    end
+  end
   
 end
