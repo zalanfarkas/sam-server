@@ -55,6 +55,12 @@ input[type="checkbox"]:checked:before {
   color: #ff5a5f;
 }
 
+.btn {
+    border-radius: 2px;
+    font-weight: bold;
+    padding: 10px 25px 10px 25px;
+}
+
 .btn-primary.btn {
   border: 1px solid #ff5a5f;
   border-radius: 2px;

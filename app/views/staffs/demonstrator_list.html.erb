@@ -11,7 +11,7 @@
               <% practicals.each do |practical_start_time, content| %>
                  <div class="card">
                     <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#<%= course_title %>_<%= practical_start_time %>"><%= practical_start_time.strftime("%a #{practical_start_time.day.ordinalize} of %b %Y") %></a>
+                        <a class="card-link" data-toggle="collapse" href="#<%= course_title %>_<%= practical_start_time %>"><%= practical_start_time.strftime("%I:%M %p | %a #{practical_start_time.day.ordinalize} of %b %Y") %></a>
                     </div>
                     <div id="<%= course_title %>_<%= practical_start_time %>" class="collapse" data-parent="#accordion_second">
                       <div class="card-body">
