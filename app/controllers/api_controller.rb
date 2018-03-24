@@ -41,7 +41,7 @@ class ApiController < ApplicationController
     fingerprint_templates = Array.new
     # Find all the students who are enrolled for course
     Enrolment.where(["course_id = ?", practicals.first.course.id]).each do |enrolment|
-      fingerprint_templates << enrolment.student.fingerprint_template if !enrolment.student.fingerprint_template.present?
+      fingerprint_templates << enrolment.student.fingerprint_template if enrolment.student.fingerprint_template.present?
     end
 
     
@@ -212,7 +212,7 @@ class ApiController < ApplicationController
       # Find demonstrators for each practical
       practical.demonstrators.each do |demonstrator|
         # Add demonstrator templates 
-        fingerprint_templates << demonstrator.find_person.fingerprint_template if !demonstrator.find_person.fingerprint_template.present?
+        fingerprint_templates << demonstrator.find_person.fingerprint_template if demonstrator.find_person.fingerprint_template.present?
       end
     end
     
