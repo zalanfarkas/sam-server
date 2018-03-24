@@ -2,18 +2,20 @@
   <div id="accordion">
   <% @hash.each do |course_title, practicals| %>
     <div class="card primary-color">
-      <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#<%= course_title %>"><%= course_title %></a>
-      </div>
+      <a class="card-link" data-toggle="collapse" href="#<%= course_title %>">
+        <div class="card-header">
+          <%= course_title %>
+        </div>
+      </a>
       <div id="<%= course_title %>" class="collapse" data-parent="#accordion">
           <div class="card-body">
-            <div id="accordion_second">
+            <div id="accordion_<%= course_title %>" class="accordion_second">
               <% practicals.each do |practical_start_time, content| %>
                  <div class="card">
-                    <div class="card-header">
-                        <a class="card-link" data-toggle="collapse" href="#<%= course_title %>_<%= practical_start_time %>"><%= practical_start_time.strftime("%I:%M %p | %a #{practical_start_time.day.ordinalize} of %b %Y") %></a>
-                    </div>
-                    <div id="<%= course_title %>_<%= practical_start_time %>" class="collapse" data-parent="#accordion_second">
+                   <a class="card-link" data-toggle="collapse" href="#<%= course_title %>_<%= practical_start_time %>">
+                    <div class="card-header"> <%= practical_start_time.strftime("%I:%M %p | %a #{practical_start_time.day.ordinalize} of %b %Y") %></div>
+                  </a>
+                    <div id="<%= course_title %>_<%= practical_start_time %>" class="collapse" data-parent="#accordion_<%= course_title %>">
                       <div class="card-body">
                         <% if content.empty? %>
                            No demonstrators
