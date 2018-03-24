@@ -9,7 +9,7 @@ class ApiController < ApplicationController
     if data.nil? 
       return render :json => {
         :success => false,
-        :error => "Data must be provided"
+        :error => "NO DATA RECEIVED"
       }
     end
     
@@ -19,7 +19,9 @@ class ApiController < ApplicationController
     if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
       return render :json => {
         :success => false,
-        :error => "Demonstrator doesn't have practicals"
+        # spaces are intentional to fit the text properly to the LCD screen
+        :error => "YOU ARE NOT                             A DEMONSTRATOR"
+        #Demonstrator doesn't have practicals, NO PRACTICALS
       }
     end
     
@@ -30,7 +32,9 @@ class ApiController < ApplicationController
     if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
       return render :json => {
         :success => false,
-        :error => "Demonstrator doesn't have practical at this time"
+        # spaces are intentional to fit the text properly to the LCD screen
+        :error => "NO CURRENT                              PRACTICALS"
+        #Demonstrator doesn't have practical at this time
       }
     end
     
@@ -58,7 +62,9 @@ class ApiController < ApplicationController
     if data.nil? || type.nil? || course_id.nil?
       return render :json => {
         :success => false,
-        :error => "Data, type or course id is empty"
+        :error => "MISSING DATA"
+        #DATA, TYPE OR COURSE ID IS EMPTY
+        #Data, type or course id is empty
       }
     end
     
@@ -67,22 +73,24 @@ class ApiController < ApplicationController
     if course.nil?
       return render :json => {
         :success => false,
-        :error => "Course is not found"
+        :error => "COURSE NOT FOUND"
       }
     end
     
     if type == "nfc"
       student = Student.find_by(card_id: data)
       if student.nil?
-        return render_json_error("Student not found")
+        # spaces are intentional to fit the text properly to the LCD screen
+        return render_json_error("STUDENT                                 NOT FOUND")
       end
     elsif type == "fingerprint"
       student = Student.find_by(fingerprint_template: data)
       if student.nil?
-        return render_json_error("Student not found")
+        # spaces are intentional to fit the text properly to the LCD screen
+        return render_json_error("STUDENT                                 NOT FOUND")
       end
     else 
-      return render_json_error("Type not found")
+      return render_json_error("TYPE NOT FOUND")
     end
     
     
@@ -101,14 +109,16 @@ class ApiController < ApplicationController
       if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
           return render :json => {
             :success => false,
-            :error => "There are no practicals at this time"
+            # spaces are intentional to fit the text properly to the LCD screen
+            :error => "NO PRACTICALS                           AT THE MOMENT" #There are no practicals at this time
           }
       end
       
       if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).exists?
         return render :json => {
             :success => false,
-            :error => "Attendance was already recorded"
+            # spaces are intentional to fit the text properly to the LCD screen
+            :error => "ALREADY                                 RECORDED"
           }
       end
       
@@ -122,7 +132,8 @@ class ApiController < ApplicationController
     if raspberry_pi_id.nil?
       return render :json => {
         :success => false,
-        :error => "Raspberry id must be provided"
+        # spaces are intentional to fit the text properly to the LCD screen
+        :error => "NO DEVICE ID                            SUBMITTED"
       }
     end
     
@@ -138,7 +149,8 @@ class ApiController < ApplicationController
     if pending_practical.practical.course.nil?
       return render :json => {
         :success => false,
-        :error => "Practical doesn't have course"
+        # spaces are intentional to fit the text properly to the LCD screen
+        :error => "PRACTICAL HAS                           NO COURSE" #
       }
     end
     
@@ -161,7 +173,8 @@ class ApiController < ApplicationController
     if card_id.nil? || fingerprint.nil?
       return render :json => {
         :success => false,
-        :error => "ID and fingerprint data must be provided"
+        # spaces are intentional to fit the text properly to the LCD screen
+        :error => "MISSING ID                              OR FINGERPRINT" #ID and fingerprint data must be provided
       }
     end
     
@@ -174,7 +187,8 @@ class ApiController < ApplicationController
     if person.nil?
       return render :json => {
         :success => false,
-        :error => "Person with given card id doesn't exists"
+        # spaces are intentional to fit the text properly to the LCD screen
+        :error => "PERSON'S ID                             NOT FOUND" # Person with given card id doesn't exists
       }
     end
     
