@@ -1,19 +1,52 @@
-
 <div class="col-md-12 mx-auto">
-<% @hash.each do |course_title, practicals|%>
-  <h1 class=""><%= course_title %></h1>
-  <ul>
-  <% practicals.each do |practical_start_time, content| %>
-    <li>
-    <h5>Practical on <%= practical_start_time.strftime("%A, %H:%M %d-%m-%Y") %></h5>
-    Demonstrator(s):
-    <ul>
-    <% content.each do |counter,demonstrator| %>
-      <li>ID: <%= demonstrator[:sam_demonstrator_id]%>, Name: <%= demonstrator[:first_name] %> <%= demonstrator[:last_name] %>, Email: <%= demonstrator[:email] %> </li>
+  <div id="accordion">
+  <% @hash.each do |course_title, practicals| %>
+    <div class="card primary-color">
+      <div class="card-header">
+        <a class="card-link" data-toggle="collapse" href="#<%= course_title %>"><%= course_title %></a>
+      </div>
+      <div id="<%= course_title %>" class="collapse" data-parent="#accordion">
+          <div class="card-body">
+            <div id="accordion_second">
+              <% practicals.each do |practical_start_time, content| %>
+                 <div class="card">
+                    <div class="card-header">
+                        <a class="card-link" data-toggle="collapse" href="#<%= course_title %>_<%= practical_start_time %>"><%= practical_start_time.strftime("%a #{practical_start_time.day.ordinalize} of %b %Y") %></a>
+                    </div>
+                    <div id="<%= course_title %>_<%= practical_start_time %>" class="collapse" data-parent="#accordion_second">
+                      <div class="card-body">
+                        <% if content.empty? %>
+                           No demonstrators
+                       <% else %>
+                          <table class="table table-dark table-striped">
+                          <thead>
+                            <tr>
+                              <th>ID</th>
+                              <th>Firstname</th>
+                              <th>Lastname</th>
+                              <th>Email</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% content.each do |counter,demonstrator| %>
+                            <tr>
+                              <td><%= demonstrator[:sam_demonstrator_id] %></td>
+                              <td><%= demonstrator[:first_name] %> </td>
+                              <td><%= demonstrator[:last_name] %></td>
+                              <td><%= demonstrator[:email] %></td>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+                        <% end %>
+                      </div>
+                    </div>
+                  </div>
+              <% end %>
+            </div>
+          </div>
+        </div>
+    </div>
     <% end %>
-    </ul>
-    </li>
-  <% end %>
-  </ul>
-<% end %>
-</div>
+  </div>
+  </div>

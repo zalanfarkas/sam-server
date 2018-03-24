@@ -1,0 +1,20 @@
+#accordion {
+    .card {
+        margin-bottom: 5px;
+        a {
+            color: #E8E8E8;
+        }
+        a:hover {
+            color: white;
+        }
+    }
+}
+
+#accordion_second {
+    a {
+        color: #333333 !important;
+    }
+    a:hover {
+        color: black !important;
+    }
+}
