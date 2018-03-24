@@ -19,9 +19,9 @@
 <% @courses.each do |course| %>
   <% if !(@hash[course.course_title].empty?) %>
     <div class="card primary-color">
-      <div class="card-header">
-        <a class="card-link" data-toggle="collapse" href="#<%= course.course_title %>"><%= course.course_title %></a>
-      </div>
+      <a class="card-link" data-toggle="collapse" href="#<%= course.course_title %>">
+        <div class="card-header"><%= course.course_title %></div>
+      </a>
       <div id="<%= course.course_title %>" class="collapse" data-parent="#accordion">
         <div class="card-body">
           <table class="table table-dark table-striped">
