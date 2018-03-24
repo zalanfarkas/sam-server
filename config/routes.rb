@@ -51,6 +51,6 @@ Rails.application.routes.draw do
   #resources :demonstrators
   resources :pending_practicals, :path => '', only: [:new, :create]
 
-  
+  #redirect to root if the entered url is not found
   get '*path' => redirect('/')
 end
