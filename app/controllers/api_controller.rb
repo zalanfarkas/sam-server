@@ -95,8 +95,9 @@ class ApiController < ApplicationController
     
     
      # Check is student is enrolled for the course
-      if Enrolment.where(["student_id = ? and course_id = ?", student.id, course.id]).exists?
-        return render_json_error("Student is not enrolled for course: #{course_id}")
+      if Enrolment.where(["student_id = ? and course_id = ?", student.id, course.id]).empty?
+        return render_json_error("NOT ENROLLED                            FOR #{course_id}")
+        #Student is not enrolled for course:
       end
       
       if Rails.env == "production"
@@ -114,7 +115,7 @@ class ApiController < ApplicationController
           }
       end
       
-      if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).exists?
+      if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).empty?
         return render :json => {
             :success => false,
             # spaces are intentional to fit the text properly to the LCD screen
