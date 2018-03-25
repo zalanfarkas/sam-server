@@ -1,6 +1,19 @@
-<h3>Practical on <%= @practical.start_time %> </h3>
-<p><b>Number of Student attended: <%= @practical.attendances.count %> </b></p>
-<p>Students attended:</p>
-<% @attendances.each do |attendance| %>
-  <p>Student ID: <%= attendance.student.sam_student_id %>   Name: <%= attendance.student.first_name%> <%= attendance.student.last_name %></p>
-<% end %>
+
+<button type="button" class="btn btn-info btn-block"><span class="float-left"><%= @practical.start_time.strftime("%I:%M %p | %a #{@practical.start_time.day.ordinalize} of %b %Y") %> - Practical</span> <span class="float-right">Student Attended: <strong><%= @practical.attendances.count %></strong></span></button>
+<table class="table table-dark table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Firstname</th>
+        <th>Lastname</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% @attendances.each do |attendance| %>
+      <tr>
+        <td><%= attendance.student.sam_student_id %></td>
+        <td><%= attendance.student.first_name %></td>
+        <td><%= attendance.student.last_name %></td>
+      </tr>
+  <% end %>
+  </table>

@@ -22,7 +22,7 @@
                   
                   <% practicals.each do |practical|%>
                     <li>
-                      <%= practical.start_time %>
+                      <%= practical.start_time.strftime("%I:%M %p | %a #{practical.start_time.day.ordinalize} of %b %Y") %>
                       <%= link_to "See details", practical_details_path(practical_id: practical.id) %>
                     </li>
                   <% end %>
