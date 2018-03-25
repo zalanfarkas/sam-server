@@ -155,9 +155,9 @@ robotics_practical_week11_3 = robotics.practicals.create(start_time: next_monday
 
 #Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
 
-AbsenceCertificate.create!(course_id: 1, student_id: 1, certificate_type: "C6")
-AbsenceCertificate.create!(course_id: 1, student_id: 2, certificate_type: "C6")
-AbsenceCertificate.create!(course_id: 2, student_id: 2, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 1, student_id: 11, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 1, student_id: 10, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 2, student_id: 22, certificate_type: "C6")
 
 
 practicals = Course.first.practicals

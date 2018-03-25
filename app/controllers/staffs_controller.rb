@@ -222,11 +222,11 @@ class StaffsController < ApplicationController
           end
         else
           flash[:alert] = "Student with ID: \'#{params[:sam_student_id]}\' is not enrolled for that course!"
-          redirect_to attendance_statistics_for_certain_student_path 
+          redirect_to attendance_history_path 
         end
       else
         flash[:alert] = "Student with ID: \'#{params[:sam_student_id]}\' not found!"
-        redirect_to attendance_statistics_for_certain_student_path
+        redirect_to attendance_history_path
       end
     end
   end
