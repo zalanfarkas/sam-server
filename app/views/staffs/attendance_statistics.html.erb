@@ -1,24 +1,39 @@
-
 <div class="col-md-12 mx-auto">
-<% @practicals_on_specific_weeks.each do |course_title, content|%>
-  
-  <h1 class=""><%= course_title %> </h1>
-  <p><b>Number of enrolled students: <%= @num_of_students_enrolled[course_title] %> </b></p>
-  <ul>
-  <% content.each_with_index do |practicals, index| %>
-    <h3> Practical <%= index+1 %> </h3>
-    <p> Students attended: <%= @attendance_statistics[course_title][index] %>/<%= @num_of_students_enrolled[course_title] %></p>
-    <ul>
-    <% practicals.each do |practical|%>
-      <li>
-        <%= practical.start_time %>
-        <%= link_to "See details", practical_details_path(practical_id: practical.id) %>
-      </li>
-    <% end %>
-    </ul>
-      <hr>
+<div id="accordion">
+<% @practicals_on_specific_weeks.each do |course_title, content| %>
+  <div class="card primary-color">
+    <a class="card-link" data-toggle="collapse" href="#<%= course_title %>">
+      <div class="card-header"><%= course_title %></div>
+    </a>
+    
+  <div id="<%= course_title %>" class="collapse" data-parent="#accordion">
+    <div class="card-body">
+      <div id="accordion_<%= course_title %>" class="accordion_second">
+        <% content.each_with_index do |practicals, index| %>
+          <div class="card">
+            <a class="card-link" data-toggle="collapse" href="#<%= course_title %>_practical_<%= index+1 %>">
+                <div class="card-header"> Week <%= index+1 %> </div>
+            </a>
+            <div id="<%= course_title %>_practical_<%= index+1 %>" class="collapse" data-parent="#accordion_<%= course_title %>">
+               
+                <div class="card-body">
+                  <p> Students attended: <strong></b><%= @attendance_statistics[course_title][index] %>/<%= @num_of_students_enrolled[course_title] %></strong></p>
+                  <hr>
+                  
+                  <% practicals.each do |practical|%>
+                    <li>
+                      <%= practical.start_time.strftime("%I:%M %p | %a #{practical.start_time.day.ordinalize} of %b %Y") %>
+                      <%= link_to "See details", practical_details_path(practical_id: practical.id) %>
+                    </li>
+                  <% end %>
+                </div>
+            </div>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+  </div>
   <% end %>
-  </ul>
-
-<% end %>
+</div>
 </div>

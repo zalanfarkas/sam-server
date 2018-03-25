@@ -181,7 +181,6 @@ class StaffsController < ApplicationController
         end
       end
       @courses.each do |course|
-        
         @attendance_statistics[course.course_title] = Array.new(@practicals_on_specific_weeks[course.course_title].count, 0)
         @practicals_on_specific_weeks[course.course_title].each_with_index do |practicals_on_same_week, index|
           practicals_on_same_week.each do |practical|
