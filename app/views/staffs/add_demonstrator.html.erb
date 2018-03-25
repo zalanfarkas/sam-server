@@ -23,7 +23,7 @@
         <ul>
           <%=collection_check_boxes(:practical_ids, :practical_ids, @practicals_of_course[course.course_title], :id, :start_time) do |b| %>
           <li>
-            <%= b.label(:"data-value" => b.value) { b.check_box + "Start time: #{b.text.strftime("%A, %H:%M %d-%m-%Y")}" } %>
+            <%= b.label(:"data-value" => b.value) { b.check_box + "Start time: #{b.text.strftime("%I:%M %p | %a #{b.text.day.ordinalize} of %b %Y")}" } %>
           </li>
           <% end %>
         </ul>

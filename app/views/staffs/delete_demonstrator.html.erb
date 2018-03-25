@@ -13,31 +13,43 @@
   </div>
 <% end %>
 </div>
-<br>
-<br>
 
+<hr>
 <div class="col-md-auto">
 <div class="col-md-12 mx-auto">
 <% if !@hash.nil? %>
-  Practicals of the Demonstrator with ID: <%= params[:sam_id] %>
+  <div id="accordion">
   <% @hash.each do |course, practicals| %>
-    <h1><%= course if !practicals.empty?%></h1>
-    <ul>
-    <% practicals.each do |start_time, content| %>
-      <li>
-      <div class="row">
-        <div class="col-sm">
-          <%= start_time.strftime("%A, %H:%M %d-%m-%Y") if !content.empty? %>
+    <% if !practicals.empty? %>
+      <div class="card primary-color">
+        <a class="card-link" data-toggle="collapse" href="#<%= course %>">
+          <div class="card-header"><%= course %></div>
+        </a>
+        <div id="<%= course %>" class="collapse" data-parent="#accordion">
+          <div class="card-body">
+            
+                      <table class="table table-dark table-striped">
+                          <thead>
+                            <tr>
+                              <th class="text-center">Practical Date</th>
+                              <th class="text-center">Action</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <% practicals.each do |start_time, content| %>
+                            <tr>
+                              <td class="text-center align-middle"><%= start_time.strftime("%I:%M %p | %a #{start_time.day.ordinalize} of %b %Y") if !content.empty? %></td>
+                              <td class="text-center align-middle"><%= link_to "Remove Demonstrator", destroy_demonstrator_path(id: content.first.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %></td>
+                            </tr>
+                            <% end %>
+                          </tbody>
+                        </table>
+          </div>
         </div>
-        <div class="col-sm">
-          <%= link_to "Delete Demonstrator from this practical", destroy_demonstrator_path(id: content.first.id), method: :delete, data: { confirm: 'Are you sure?' }, class: "btn btn-primary" %>
         </div>
-      </div>
-      </li>
-      
-    <%end%>
-     </ul> 
+    <% end %>
   <% end %>
+  </div>
 <% end %>
 </div>
 </div>
