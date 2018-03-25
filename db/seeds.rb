@@ -156,10 +156,6 @@ robotics_practical_week11_3 = robotics.practicals.create(start_time: next_monday
 
 #Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
 
-AbsenceCertificate.create!(course_id: 1, student_id: 11, certificate_type: "C6")
-AbsenceCertificate.create!(course_id: 1, student_id: 10, certificate_type: "C6")
-AbsenceCertificate.create!(course_id: 2, student_id: 22, certificate_type: "C6")
-
 
 practicals = Course.first.practicals
 practicals_on_specific_weeks_for_course1 = [[]]
@@ -210,3 +206,7 @@ Course.all.each do |course|
     Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: practical.id)
   end
 end
+
+AbsenceCertificate.create!(course_id: 1, student_id: 11, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 1, student_id: 10, certificate_type: "C6")
+AbsenceCertificate.create!(course_id: 2, student_id: 22, certificate_type: "C6")
