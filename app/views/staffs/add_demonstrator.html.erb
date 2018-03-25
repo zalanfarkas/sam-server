@@ -1,7 +1,13 @@
-
-<% @courses.each do |course|%>
-  <p>Add demonstrator for <b> <%= course.course_title %>: </b> </p>
-  <%= form_tag({controller: "staffs", action: "create_demonstrator"}, method: "post") do %>
+<h3>Add demonstrator</h3>
+<div id="accordion">
+  <% @courses.each do |course|%>
+      <div class="card primary-color">
+      <a class="card-link" data-toggle="collapse" href="#<%= course.course_title %>">
+        <div class="card-header"><%= course.course_title %></div>
+      </a>
+      <div id="<%= course.course_title %>" class="collapse" data-parent="#accordion">
+        <div class="card-body dark-card">
+          <%= form_tag({controller: "staffs", action: "create_demonstrator"}, method: "post") do %>
     <div class="form-group">
       <%= text_field_tag :sam_id, nil, autofocus: true, autocomplete: "off", class: "form-control", placeholder: "Enter Student/Staff ID" %>
     </div>
@@ -28,11 +34,9 @@
       <%= submit_tag("Add Demonstrator", class: "btn btn-primary") %>
     </div>
   <% end %>
-  <br>
-  <br>
-<% end %>
-
-
-
+        </div>
+      </div>
+      </div>
+    <% end %>
+</div>
   
-
