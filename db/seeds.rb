@@ -19,7 +19,7 @@ matthew = Staff.create!(email: 'matthew@example.com', password: 'password', sam_
 
 #student who is not a demonstrator
 patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '33333333', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
-alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+#alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 
 
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
@@ -192,11 +192,11 @@ picture_array = ['guy1.jpeg','guy2.jpeg']
   Enrolment.create!(course_id: 2, student_id: student.id)
   practicals_on_specific_weeks_for_course1.each do |practical_number1|
     # work only with 3practicals/week
-    Attendance.create!(student_id: student.id, practical_id: practical_number1[Faker::Number.between(0, 2)].id)
+    #Attendance.create!(student_id: student.id, practical_id: practical_number1[Faker::Number.between(0, 2)].id)
   end
   practicals_on_specific_weeks_for_course2.each do |practical_number2|
     # work only with 3practicals/week
-    Attendance.create!(student_id: student.id, practical_id: practical_number2[Faker::Number.between(0, 2)].id)
+    #Attendance.create!(student_id: student.id, practical_id: practical_number2[Faker::Number.between(0, 2)].id)
   end
 end
 
