@@ -5,10 +5,10 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-zalan = Student.create!(email: 'zalan@example.com', password: 'password', sam_student_id: '12345678', first_name: 'Zalan', last_name: 'Farkas', card_id: '13645246150', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
+zalan = Student.create!(email: 'milkshake.9601@gmail.com', password: 'password', sam_student_id: '12345678', first_name: 'Zalan', last_name: 'Farkas', card_id: '13645246150', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
 #Zalan with Profile Picture
 #zalan = Student.create!(fingerprint_template: '123|32|14', email: 'zalan@example.com', password: 'password', sam_student_id: '001', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243', picture: Rails.root.join("public/cat-icon.png").open)
-edvinas = Student.create!(fingerprint_template: '3|1|92|7|132|0|255|254|255|254|255|254|255|254|255|254|255|254|254|14|252|6|248|6|248|2|240|2|224|0|224|0|224|0|224|0|224|0|224|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|81|29|153|190|92|175|215|158|34|58|195|158|44|193|217|158|63|36|194|127|91|51|236|191|117|186|212|58|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0|0', email: 'ed@example.com', password: 'password', sam_student_id: '11111111', first_name: 'Edvinas', last_name: 'Byla', card_id: '0000', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+edvinas = Student.create!(email: 'ed@example.com', password: 'password', sam_student_id: '11111111', first_name: 'Edvinas', last_name: 'Byla', card_id: '13642940185', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 dovydas = Student.create!(email: 'dovydas@example.com', password: 'password', sam_student_id: '22222222', first_name: 'Dovydas', last_name: 'Pekus', card_id: '226198141759', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
 
 #staff with two courses
@@ -19,8 +19,8 @@ matthew = Staff.create!(email: 'matthew@example.com', password: 'password', sam_
 
 #student who is not a demonstrator
 patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '33333333', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
-#alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
-
+alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+vladimir = Student.create!(email: 'vladimir@example.com', password: 'password', sam_student_id: '55555555', first_name: 'Vladimir', last_name: 'Yesipov', card_id: '136421539124', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 
 robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
 awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
@@ -31,8 +31,8 @@ Enrolment.create(course_id: robotics.id, student_id: zalan.id)
 
 Enrolment.create(course_id: robotics.id, student_id: patrik.id)
 Enrolment.create(course_id: awad.id, student_id: patrik.id)
-
-
+Enrolment.create(course_id: awad.id, student_id: edvinas.id)
+Enrolment.create(course_id: awad.id, student_id: alex.id)
 
 #start_time = 1.month.ago
 #end_time = start_time + 2.month
