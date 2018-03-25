@@ -16,15 +16,33 @@
       <br>
     </div>
   </div>
+  
+  
   <% if !@attendance_on_practicals.nil? %>
-    <p> Attendance Statistics for <%= @student.first_name %> <%= @student.last_name %> on the practicals of <%= @course.course_title %>:</p>
-    <p><b>The student attended <%= @attendance_on_practicals.count(true) %> out of <%= @attendance_on_practicals.count %> practicals </b></p>
-    <ul class="no_dots">
-    <% @attendance_on_practicals.each_with_index do |attendance, index| %>
-      <li>
-        Practical <%= index+1 %>: <%= if attendance == true then "Attended" else "Missed" end %>
-      </li>
-    <% end %> 
-    </ul>
+    <div class="row">
+      <div class="col-md-8 offset-2">
+    <button type="button" class="btn btn-dark btn-block"><span class="float-left"><%= @student.first_name %> <%= @student.last_name %></span> <span class="float-right">Course: <%= @course.course_title %></span></button>
+    <table class="table table table-hover">
+        <thead>
+          <tr>
+            <th>Week number</th>
+            <th>Status</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% @attendance_on_practicals.each_with_index do |attendance, index| %>
+          <tr>
+            <td><%= index+1 %></td>
+            <% if attendance == true then %>
+              <td class="table-success"><i class="fa fa-check-circle"></i> 
+            <% else %>
+              <td class="table-danger"><i class="fa fa-times-circle"></i> 
+            <% end %>
+          </tr>
+      <% end %>
+      </table>
+    
+    </div>
+    </div>
   <% end %>
 </div>
