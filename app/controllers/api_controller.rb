@@ -115,7 +115,7 @@ class ApiController < ApplicationController
           }
       end
       
-      if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).empty?
+      if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).exists?
         return render :json => {
             :success => false,
             # spaces are intentional to fit the text properly to the LCD screen
