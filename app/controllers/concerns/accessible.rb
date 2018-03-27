@@ -1,3 +1,5 @@
+#concern to prevent cross-model visits for devise models
+#logged-in staff cannot visit student login page and vica-versa
 module Accessible
   extend ActiveSupport::Concern
   included do

@@ -1,6 +1,14 @@
+# controller is responsible for handling attendance recording
+# when the user record attendance thorugh the web interface
 class ManualAttendanceRecordingController < ApplicationController
+  # redirects if the user tries to access non-existing
+  # database record by specifying url parameter manually
   rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
+  # only authenticated users (both staff and student demonstrators)
+  # can access all the methods defined below
   before_action :authenticate_user!
+  # simple students and staff without any courses are 
+  # prevented from accessing these methods
   before_action :is_staff_for_practical?
   
   
@@ -19,6 +27,9 @@ class ManualAttendanceRecordingController < ApplicationController
     else
       redirect_to dashboard_path
     end
+    # if the user does not have any current practicals
+    # they are redirected to the dashboard and
+    # a meaningful warning message is displayed
     if @current_practicals.empty?
       flash[:warning] = "You don't have any practicals at the moment!"
       redirect_to dashboard_path
@@ -26,16 +37,22 @@ class ManualAttendanceRecordingController < ApplicationController
 
   end
   
+  # after the user submitted a student ID, this method is called
   def search
     @practical_id = params[:practical_id]
     @sam_student_id = params[:sam_student_id]
     @course_id = params[:course_id]
     if @sam_student_id != "" && @course_id != ""
       @student = Student.find_by(sam_student_id: @sam_student_id)
+      # if student ID is not found in the database,
+      # set error message and redirect
       if @student.nil?
         flash[:alert] = "Invalid student ID has been submitted"
         redirect_to record_path
       else
+        # if student is in the correct practical, set course
+        # otherwise, the student wants to record attendance in a wrong practical,
+        # set error message and redirect
         if !Enrolment.where('student_id = ? AND course_id = ?', @student.id, @course_id).empty?
           @course = Course.find(@course_id)
         else
@@ -43,11 +60,13 @@ class ManualAttendanceRecordingController < ApplicationController
           redirect_to record_path
         end
       end
+    # if the submitted ID field is empty, set error message and redirect
     else
       flash[:alert] = "Empty search has been submitted!"
       redirect_to record_path
     end
   end
+  
   
   def attendance_recording
     if params[:practical_id] != "" && params[:student_id]

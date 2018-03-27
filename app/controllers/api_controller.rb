@@ -1,3 +1,5 @@
+# this controller isreposible for the communication
+# between server and raspberry pi units
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   

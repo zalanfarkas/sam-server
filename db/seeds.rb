@@ -1,49 +1,35 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+# seeding/bulding an example database to show use cases,
+# boundary cases and to test the system
+
+# students who are demonstrators
 zalan = Student.create!(email: 'milkshake.9601@gmail.com', password: 'password', sam_student_id: '12345678', first_name: 'Zalan', last_name: 'Farkas', card_id: '13645246150', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
-#Zalan with Profile Picture
-#zalan = Student.create!(fingerprint_template: '123|32|14', email: 'zalan@example.com', password: 'password', sam_student_id: '001', first_name: 'Zalan', last_name: 'Farkas', card_id: '200139105217243', picture: Rails.root.join("public/cat-icon.png").open)
-edvinas = Student.create!(email: 'ed@example.com', password: 'password', sam_student_id: '11111111', first_name: 'Edvinas', last_name: 'Byla', card_id: '13642940185', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 dovydas = Student.create!(email: 'dovydas@example.com', password: 'password', sam_student_id: '22222222', first_name: 'Dovydas', last_name: 'Pekus', card_id: '226198141759', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
+
+#students who are not demonstrators
+patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '33333333', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+vladimir = Student.create!(email: 'vladimir@example.com', password: 'password', sam_student_id: '55555555', first_name: 'Vladimir', last_name: 'Yesipov', card_id: '136421539124', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+edvinas = Student.create!(email: 'ed@example.com', password: 'password', sam_student_id: '11111111', first_name: 'Edvinas', last_name: 'Byla', card_id: '13642940185', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 
 #staff with two courses
 nir = Staff.create!(email: 'nir@example.com', password: 'password', sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'Oren', card_id: 'u00000003')
+robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
+awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
 
 #staff without any courses
 matthew = Staff.create!(email: 'matthew@example.com', password: 'password', sam_staff_id: "s_002", first_name: 'Matthew', last_name: 'Collinson', card_id: 'u00013')
 
-#student who is not a demonstrator
-patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '33333333', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
-alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
-vladimir = Student.create!(email: 'vladimir@example.com', password: 'password', sam_student_id: '55555555', first_name: 'Vladimir', last_name: 'Yesipov', card_id: '136421539124', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+# staff who is only demonstrator
+jeff = Staff.create!(email: 'jeff@example.com', password: 'password', sam_staff_id: "s_008", first_name: 'Jeff', last_name: 'Smith', card_id: 'u00015')
 
-robotics = nir.courses.create!(sam_course_id: 'CS3001', course_title: 'Robotics')
-awad = nir.courses.create!(sam_course_id: 'CS3002', course_title: 'AWAD')
-
-
+# create enrolments
 Enrolment.create(course_id: robotics.id, student_id: edvinas.id)
 Enrolment.create(course_id: robotics.id, student_id: zalan.id)
-
 Enrolment.create(course_id: robotics.id, student_id: patrik.id)
 Enrolment.create(course_id: awad.id, student_id: patrik.id)
 Enrolment.create(course_id: awad.id, student_id: edvinas.id)
 Enrolment.create(course_id: awad.id, student_id: alex.id)
-
-#start_time = 1.month.ago
-#end_time = start_time + 2.month
-#robot_test = DateTime.now - 4.days
-
-#awad_practical = awad.practicals.create(start_time: 7.days.ago, end_time: DateTime.now+1.week, location: "Meston 311")
-#awad_practical2 = awad.practicals.create(start_time: DateTime.now, end_time: DateTime.now+2.weeks, location: "Meston 205")
-#robotics_practical = robotics.practicals.create(start_time: start_time, end_time: end_time, location: "FN115")
-
-#upcoming practicals
-#robotics_practical2 = robotics.practicals.create(start_time: start_time + 2.month, end_time: end_time, location: "MR117")
+Enrolment.create(course_id: awad.id, student_id: zalan.id)
 
 #next week's Monday:
 this_monday = DateTime.now.beginning_of_week
@@ -145,18 +131,7 @@ robotics_practical_week11_2 = robotics.practicals.create(start_time: next_monday
 robotics_practical_week11_3 = robotics.practicals.create(start_time: next_monday + 4.week + 3.day, end_time: next_monday + 4.week + 3.day + 2.hours, location: "Meston 205")
 
 
-#Demonstrator: Dovydas
-#Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: robotics_practical_week1_1.id)
-#Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week1_1.id)
-#Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: awad_practical_week2_1.id)
-
-#Demonstrator: Zalan
-#Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week1_1.id)
-#Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: awad_practical_week2_1.id)
-
-#Attendance.create!(student_id: zalan.id, practical_id: robotics_practical.id)
-
-
+# groupping first course's practicals by week
 practicals = Course.first.practicals
 practicals_on_specific_weeks_for_course1 = [[]]
 index = 0
@@ -170,6 +145,7 @@ practicals.each do |practical|
 practicals_on_specific_weeks_for_course1[index] << practical
 end
 
+# groupping first course's practicals by week
 practicals = Course.second.practicals
 practicals_on_specific_weeks_for_course2 = [[]]
 index = 0
@@ -182,7 +158,6 @@ practicals.each do |practical|
   end
 practicals_on_specific_weeks_for_course2[index] << practical
 end
-#p practicals_on_specific_weeks_for_course1.inspect
 
 picture_array = ['guy1.jpeg','guy2.jpeg']
 #creating students who are enrolled for courses and attended on practicals
@@ -200,13 +175,16 @@ picture_array = ['guy1.jpeg','guy2.jpeg']
   end
 end
 
+# adding demonstrators for practicals
 Course.all.each do |course|
   course.practicals.each do |practical|
     Demonstrator.create!(sam_demonstrator_id: zalan.sam_student_id, practical_id: practical.id)
     Demonstrator.create!(sam_demonstrator_id: dovydas.sam_student_id, practical_id: practical.id)
+    Demonstrator.create!(sam_demonstrator_id: jeff.sam_staff_id, practical_id: practical.id)
   end
 end
 
+# issuing absence certificates
 AbsenceCertificate.create!(course_id: 1, student_id: 11, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 1, student_id: 10, certificate_type: "C6")
 AbsenceCertificate.create!(course_id: 2, student_id: 22, certificate_type: "C6")

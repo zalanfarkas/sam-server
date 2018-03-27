@@ -1,3 +1,6 @@
+# file used by bundler to download and setup 
+# all the dependencies of the application
+
 source 'https://rubygems.org'
 
 git_source(:github) do |repo_name|

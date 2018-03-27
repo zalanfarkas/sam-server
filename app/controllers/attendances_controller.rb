@@ -1,3 +1,6 @@
+# controller is automatically generated
+# kept only for testing purposes
+# real life users cannot access it
 class AttendancesController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :set_attendance, only: [:show, :edit, :update, :destroy]
