@@ -2,18 +2,20 @@
 
 # SAM-SERVER application 
 
-for the SAM (Student Attendance Monitoring) project of Team Foxtrot 2018 at University of Aberdeen
+part of the SAM (Student Attendance Monitoring) project of Team Foxtrot 2018 at University of Aberdeen
 
 Copyright (c) 2018 Team Foxtrot
 
 Licensed under MIT License
 
-## Getting started on Linux dustributions
+## Getting started
 
-* If running on local machine: install ruby and rubygems
+* The following guide is for Ubuntu Linux and its variations!
+
+* If running on local machine: install ruby and rubygems (Therefore, it can be skipped on Cloud9 IDE.)
 
 * We will be resizing images using the image manipulation program ImageMagick, which we need to install on the development environment. 
-  When using Heroku for deployment ImageMagick comes pre-installed in production.)
+  When using Heroku for deployment ImageMagick comes pre-installed in production.
 
 ```
 $ sudo yum install -y ImageMagick
