@@ -12,7 +12,7 @@ Licensed under MIT License
 
 * The following guide is for Ubuntu Linux and its variations!
 
-* If running on local machine: install ruby and rubygems (Therefore, it can be skipped on Cloud9 IDE.)
+* If running on local machine: install ruby and rubygems (This step can be skipped on Cloud9 IDE.)
 
 * We will be resizing images using the image manipulation program ImageMagick, which we need to install on the development environment. 
   When using Heroku for deployment ImageMagick comes pre-installed in production.
