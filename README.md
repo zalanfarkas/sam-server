@@ -1,8 +1,11 @@
 # README
 
 # SAM-SERVER application 
+
 for the SAM (Student Attendance Monitoring) project of Team Foxtrot 2018 at University of Aberdeen
+
 Copyright (c) 2018 Team Foxtrot
+
 Licensed under MIT License
 
 ## Getting started on Linux dustributions
