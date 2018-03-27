@@ -37,11 +37,13 @@ class ManualAttendanceRecordingController < ApplicationController
 
   end
   
-  # after the user submitted a student ID, this method is called
+  # after the user submitted a student ID for attendance recording, 
+  #this method is called
   def search
     @practical_id = params[:practical_id]
     @sam_student_id = params[:sam_student_id]
     @course_id = params[:course_id]
+    # verifies that each necessary parameter is submitted
     if @sam_student_id != "" && @course_id != ""
       @student = Student.find_by(sam_student_id: @sam_student_id)
       # if student ID is not found in the database,
@@ -67,17 +69,22 @@ class ManualAttendanceRecordingController < ApplicationController
     end
   end
   
-  
+  # updating the attendance table of the database by the appropriate new entry
   def attendance_recording
+    # verifies that each necessary parameter is submitted
     if params[:practical_id] != "" && params[:student_id]
+      # if the same attendance entry does not exist, it is going to be inserted
       if Attendance.where('student_id = ? AND practical_id = ?', params[:student_id], params[:practical_id]).empty?
         Attendance.create!(student_id: params[:student_id], practical_id: params[:practical_id])
+        # sets notification/feedback message and redirets
         flash[:notice] = "Attendance is recorded successfully for student with ID: #{params[:sam_student_id]}"
         redirect_to record_path
+      # if the attendance have been already recorded, sets alert message and redirects
       else 
         flash[:alert] = "Attendance is already recorded for student with ID: #{params[:sam_student_id]}"
         redirect_to record_path
       end
+    # if not all the necessary paramaters are submitted, sets error message and redirects
     else
       flash[:alert] = "Attendance with invalid details has not been recorded"
       redirect_to record_path

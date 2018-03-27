@@ -1,3 +1,6 @@
+# controller is automatically generated
+# kept only for testing purposes
+# real life users cannot access it
 class PracticalsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :authenticate_staff!
