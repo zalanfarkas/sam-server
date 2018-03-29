@@ -1,5 +1,9 @@
-# this controller isreposible for the communication
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# This controller is reposible for the communication
 # between server and raspberry pi units
+
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   
