@@ -170,11 +170,11 @@ picture_array = ['guy1.jpeg','guy2.jpeg']
   Enrolment.create!(course_id: 2, student_id: student.id)
   practicals_on_specific_weeks_for_course1.each do |practical_number1|
     # work only with 3practicals/week
-    #Attendance.create!(student_id: student.id, practical_id: practical_number1[Faker::Number.between(0, 2)].id)
+    Attendance.create!(student_id: student.id, practical_id: practical_number1[Faker::Number.between(0, 2)].id)
   end
   practicals_on_specific_weeks_for_course2.each do |practical_number2|
     # work only with 3practicals/week
-    #Attendance.create!(student_id: student.id, practical_id: practical_number2[Faker::Number.between(0, 2)].id)
+    Attendance.create!(student_id: student.id, practical_id: practical_number2[Faker::Number.between(0, 2)].id)
   end
 end
 
