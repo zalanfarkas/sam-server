@@ -7,3 +7,7 @@ one:
 two:
   student: two
   practical: two
+  
+three:
+  student: three
+  practical: two

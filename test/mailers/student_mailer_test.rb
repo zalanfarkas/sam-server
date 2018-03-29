@@ -5,7 +5,9 @@ require 'test_helper'
 
 class StudentMailerTest < ActionMailer::TestCase
   test "absense_notification" do
-    mail = StudentMailer.absense_notification
+    user = Student.first
+    course = Course.first
+    mail = StudentMailer.absense_notification(user, course)
     assert_equal "Absense Form", mail.subject
     assert_match "Hi", mail.body.encoded
   end
