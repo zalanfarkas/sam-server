@@ -45,7 +45,7 @@
                               <td class="text-center align-middle"><%= certificate.student.last_name %></td>
                               <% name = "#{certificate.student.first_name} #{certificate.student.last_name}" %>
                               <td class="text-center align-middle"><%= link_to 'Open', attendance_history_path(course_id: course.id, sam_student_id: certificate.student.sam_student_id), class: "btn btn-info" %></td>
-                               <td class="text-center align-middle"><%= link_to 'Remove', remove_c6_path(certificate_id: certificate.id, student_id: certificate.student), data: { confirm: "Do you want to remove C6 for #{name}?" }, class: "btn btn-primary" %></td>
+                               <td class="text-center align-middle"><%= link_to 'Remove', remove_c6_path(certificate_id: certificate.id, student_name: name), data: { confirm: "Do you want to remove C6 for #{name}?" }, class: "btn btn-primary" %></td>
                             </tr>
                             <% end %>
                           </tbody>
