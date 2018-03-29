@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 # controller is automatically generated
 # kept only for testing purposes
 # real life users cannot access it

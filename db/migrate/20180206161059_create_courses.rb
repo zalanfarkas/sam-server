@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 class CreateCourses < ActiveRecord::Migration[5.1]
   def change
     create_table :courses do |t|

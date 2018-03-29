@@ -1,4 +1,7 @@
-# seeding/bulding an example database to show use cases,
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# used for seeding/bulding an example database to show use cases,
 # boundary cases and to test the system
 
 # students who are demonstrators

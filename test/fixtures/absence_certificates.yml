@@ -3,9 +3,9 @@
 one:
   student: one
   course: one
-  certificate_type: MyString
+  certificate_type: C6
 
 two:
   student: two
   course: two
-  certificate_type: MyString
+  certificate_type: C7

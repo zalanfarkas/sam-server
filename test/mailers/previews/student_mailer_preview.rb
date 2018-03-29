@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 # Preview all emails at http://localhost:3000/rails/mailers/student_mailer
 class StudentMailerPreview < ActionMailer::Preview
 

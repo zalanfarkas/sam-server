@@ -1,10 +1,13 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 # superclass of each other controller
 # contains methods used by many subclasses
 class ApplicationController < ActionController::Base
   
   # generates methods such as current_user which checks
   # whether either a staff or a student is logged in
-  devise_group :user, contains: [:student, :staff]
+  devise_group :user, contains: [:staff, :student]
   
   # prevents Cross-site request forgery attacks
   protect_from_forgery with: :exception

@@ -1,3 +1,8 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+#configuration file for the Devise library
+
 # frozen_string_literal: true
 
 # Use this hook to configure devise mailer, warden hooks and so forth.

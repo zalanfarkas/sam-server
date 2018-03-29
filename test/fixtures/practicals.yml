@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  start_time: 2018-02-06 16:22:22
-  end_time: 2018-02-06 16:22:22
+  start_time: <%= DateTime.now %>
+  end_time: <%= DateTime.now + 1.hour %>
   course: one
 
 two:
-  start_time: 2018-02-06 16:22:22
-  end_time: 2018-02-06 16:22:22
+  start_time: <%= DateTime.now %>
+  end_time: <%= DateTime.now + 1.hour %>
   course: two

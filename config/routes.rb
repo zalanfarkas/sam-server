@@ -1,5 +1,11 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# defines URLs and match them to certain controller actions
+# so that the user can access those methods by entering a URL or clicking on a link
 Rails.application.routes.draw do
   
+  #root page: '/'
   root 'homepages#login'
   
   get 'homepages/login'
@@ -7,7 +13,7 @@ Rails.application.routes.draw do
   get 'manual_attendance_recording/index'
   get 'manual_attendance_recording/search'
   post 'manual_attendance_recording/attendance_recording'
-  get '/record', to: "manual_attendance_recording#index"
+  get 'record', to: "manual_attendance_recording#index"
   get 'manage_c6s', to: 'staffs#manage_c6s'
   get 'remove_c6', to: 'staffs#remove_c6'
   get 'add_demonstrator', to: 'staffs#add_demonstrator'
@@ -20,6 +26,7 @@ Rails.application.routes.draw do
   get 'attendance_statistics', to: 'staffs#attendance_statistics'
   get 'attendance_history', to: 'staffs#attendance_statistics_for_certain_student'
   get 'dashboard', to: 'homepages#dashboard'
+  resources :pending_practicals, :path => '', only: [:new, :create]
   
   devise_for :staffs, controllers: {
         sessions: 'staffs/sessions',
@@ -42,6 +49,8 @@ Rails.application.routes.draw do
   post 'api/upload_fingerprint',  to: 'api#upload_fingerprint'
   post 'api/current_templates',   to: 'api#current_templates'
   
+  
+  # URLs matched to controller action which are used only for testing purposes
   #resources :students
   #resources :staffs
   #resources :courses
@@ -49,7 +58,7 @@ Rails.application.routes.draw do
   #resources :attendances
   #resources :enrolments
   #resources :demonstrators
-  resources :pending_practicals, :path => '', only: [:new, :create]
+  
 
   #redirect to root if the entered url is not found
   get '*path' => redirect('/')

@@ -1,3 +1,6 @@
+// controller is automatically generated
+// kept only for testing purposes
+// real life users cannot access it
 // This is a manifest file that'll be compiled into application.js, which will include all the files
 // listed below.
 //

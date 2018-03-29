@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 # controller is responsible for handling attendance recording
 # when the user record attendance thorugh the web interface
 class ManualAttendanceRecordingController < ApplicationController

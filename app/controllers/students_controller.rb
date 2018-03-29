@@ -1,3 +1,9 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# controller is automatically generated
+# kept only for testing purposes
+# real life users cannot access it
 class StudentsController < ApplicationController
   rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
   before_action :set_student, only: [:show, :edit, :update, :destroy]

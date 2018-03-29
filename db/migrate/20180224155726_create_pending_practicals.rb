@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 class CreatePendingPracticals < ActiveRecord::Migration[5.1]
   def change
     create_table :pending_practicals do |t|

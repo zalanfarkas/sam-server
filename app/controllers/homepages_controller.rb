@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 # controller is reponsible for handling homepages
 class HomepagesController < ApplicationController
   # redirects if the user tries to access non-existing

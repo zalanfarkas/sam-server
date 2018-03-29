@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 # frozen_string_literal: true
 
 class DeviseCreateStudents < ActiveRecord::Migration[5.1]

@@ -1,7 +1,18 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# this controller is reposible for handling the administrative features available only to course coordinators
 class StaffsController < ApplicationController
+  # redirects if the user tries to access non-existing
+  # database record by specifying url parameter manually
   rescue_from ActiveRecord::RecordNotFound, with: :redirect_if_not_found
+  # only authenticated staff member
+  # can access all the methods defined below
   before_action :authenticate_staff!
+  # only authenticated course coordinator
+  # can access all the methods listed in the array parameter
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator, :practical_details, :attendance_statistics, :attendance_statistics_for_certain_student]
+  # sets @staff instance variable 
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   #due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
@@ -231,6 +242,9 @@ class StaffsController < ApplicationController
   end
 
   
+  # AUTO-GENERATED code 
+  # used 
+  
   # GET /staffs
   # GET /staffs.json
   def index
@@ -301,6 +315,10 @@ class StaffsController < ApplicationController
     def staff_params
       params.require(:staff).permit(:sam_staff_id, :first_name, :last_name, :card_id, practical_ids)
     end
+    
+    
+  ###### end of auto-generated code ######
+  
     def create_demonstrator_params
       params.require(:practical_ids).permit(:sam_student_id, practical_ids: [])
     end

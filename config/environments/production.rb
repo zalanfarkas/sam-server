@@ -1,3 +1,8 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+#configuration of the production environment
+
 Rails.application.configure do
   # Settings specified here will take precedence over those in config/application.rb.
 

@@ -1,3 +1,6 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
 require File.expand_path('../../config/environment', __FILE__)
 require 'rails/test_help'
 

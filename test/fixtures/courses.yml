@@ -1,11 +1,11 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  sam_course_id: MyString
-  course_title: MyString
+  sam_course_id: CS3001
+  course_title: Robotics
   staff: one
 
 two:
-  sam_course_id: MyString
-  course_title: MyString
+  sam_course_id: CS3002
+  course_title: AWAD
   staff: two

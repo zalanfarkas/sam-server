@@ -1,3 +1,15 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# task called by a cron job of the hosting environment 
+# it checks whether the student attended 
+# at least one practical for each of their courses
+# if not, it issues a absence certificate (interts it into the database)
+# and it also sends a notification about the missed practicals to the student by email
+
+# to send emails, it calls the student_mailer class declared in app/mailers/student_mailer.rb
+
+
 desc "Issue Absence Forms to sudents"
 task :check_absence => :environment do
     current_time = DateTime.now

@@ -1,3 +1,7 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# mailer class used to send email notification to students
 class StudentMailer < ApplicationMailer
 
   # Subject can be set in your I18n file at config/locales/en.yml

@@ -1,3 +1,11 @@
+# Copyright (c) 2018 Team Foxtrot
+# Licensed under MIT License
+
+# configuration file for the CarrierWave library 
+# responsible for handling student ID picture field of the
+# student table in the database
+
+# it uploads images to Amazon Web Services' S3 file storage in production
 if Rails.env.production?
   CarrierWave.configure do |config|
     config.fog_credentials = {
