@@ -201,10 +201,13 @@ class StaffsController < ApplicationController
 
   # deletes the selected demonstrator from a given practical
   def destroy_demonstrator
-    Demonstrator.find(params[:id]).destroy
+    demonstrator = Demonstrator.find(params[:id])
+    sam_demonstrator_id = demonstrator.sam_demonstrator_id
+    demonstrator.destroy
+
     # after successful deletion, it sets a feedback message and redirects the user to the delete_demonstrator page
     respond_to do |format|
-      format.html { redirect_to delete_demonstrator_path, notice: 'Demonstrator was successfully destroyed.' }
+      format.html { redirect_to delete_demonstrator_path(sam_id: sam_demonstrator_id), notice: 'Demonstrator was successfully destroyed.' }
       format.json { head :no_content }
     end
   end

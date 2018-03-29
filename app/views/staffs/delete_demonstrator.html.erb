@@ -21,6 +21,7 @@
 <div class="col-md-auto">
 <div class="col-md-12 mx-auto">
 <% if !@hash.nil? %>
+  <p> University ID number of the Demonstrator: <b><%= params[:sam_id] %> </b> </p>
   <div id="accordion">
   <% @hash.each do |course, practicals| %>
     <% if !practicals.empty? %>
