@@ -16,8 +16,24 @@ one:
 two: 
   email: 'zac@gmail.com' 
   encrypted_password: 'password'
-  sam_student_id: '12345679'
+  sam_student_id: '11111111'
   first_name: 'Zac'
   last_name: 'Fay'
   card_id: '13645246155'
+  
+three: 
+  email: 'ed@gmail.com' 
+  encrypted_password: 'password'
+  sam_student_id: '22222222'
+  first_name: 'Ed'
+  last_name: 'Test'
+  card_id: '00000000'
+  
+four: 
+  email: 'test@gmail.com' 
+  encrypted_password: 'password'
+  sam_student_id: '333344444'
+  first_name: 'John'
+  last_name: 'Test'
+  card_id: '11223344'
 # column: value
