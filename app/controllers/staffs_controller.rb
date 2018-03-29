@@ -12,7 +12,7 @@ class StaffsController < ApplicationController
   # only authenticated course coordinator
   # can access all the methods listed in the array parameter
   before_action :is_course_coordinator?, only: [:manage_c6s, :remove_c6, :add_demonstrator, :create_demonstrator, :demonstrator_list, :delete_demonstrator, :destroy_demonstrator, :practical_details, :attendance_statistics, :attendance_statistics_for_certain_student]
-  # sets @staff instance variable 
+  # sets @staff instance variable for the methods listed in the array parameter
   before_action :set_staff, only: [:show, :edit, :update, :destroy]
 
   # due to the is_course_coordinator? before action all users who reach this action have courses so no need to check whether it is nil
@@ -29,9 +29,9 @@ class StaffsController < ApplicationController
         @hash[course.course_title] = AbsenceCertificate.where("certificate_type = ? AND course_id = ?", "C6", course.id)
       end
     else
-      # if a student ID is submitted, the absence certificates for that student is displayed
+      # if a student ID is submitted, the absence certificates for that student are displayed
       student = Student.find_by(sam_student_id: sam_student_id)
-      # if the student exists in the database, a hash is filled with their absence certificates (to be rendered/presented later in the view)
+      # if the student exists in the database, a hash is filled with their absence certificates (to be rendered/presented later in the corresponding view)
       if !student.nil?
         @courses.each do |course|
           @hash[course.course_title] = AbsenceCertificate.where("certificate_type = ? AND course_id = ? AND student_id = ?", "C6", course.id, student.id)
@@ -45,7 +45,7 @@ class StaffsController < ApplicationController
   end
   
   
-  # it called when the course coordinator click "Remove" for C6s
+  # it called when the course coordinator click "Remove" (Remove C6)
   # it deletes the appropriate absence certificate entry from the database
   def remove_c6
     certificate_id = params[:certificate_id]
@@ -112,7 +112,8 @@ class StaffsController < ApplicationController
               flash[:warning] = "Student/Staff is already a demonstrator on one of the selected practicals"
             end
             
-            # if the whole demonstrator creation procedure was successful, it sets a feedback message to notify the user about it
+            # if the whole demonstrator creation procedure was successful, 
+            # it sets a feedback message to notify the user about the success
             flash[:notice] = "Demonstrator added to practical(s)!" if !failed
           end
           redirect_to add_demonstrator_path #demonstrator_list_path
@@ -143,12 +144,12 @@ class StaffsController < ApplicationController
         demonstrators_on_given_practical = Demonstrator.where("practical_id = ?", practical.id)
         # counts how many demonstrators will be on the practical
         counter = demonstrators_on_given_practical.count
-        # initialising hash for each demonstrator
+        # initialising a hash for each demonstrator
         counter.times do |i|
           @hash[course.course_title][practical.start_time][i] = {}
         end
         counter = 0
-        # goes thorugh each demonstrator for a practical and restrieves their necessary information
+        # goes through each demonstrator for a practical and restrieves their necessary information
         demonstrators_on_given_practical.each do |demonstrate_on|
           # checks whether the demonstrator is a staff member or a student
           demonstrator = Student.find_by(sam_student_id: demonstrate_on.sam_demonstrator_id)
@@ -190,7 +191,7 @@ class StaffsController < ApplicationController
           end
         end
       
-      # if the submitted ID number is not found. it sets aler message and redirects the user to the delete_demonstrator page
+      # if the submitted ID number is not found. it sets an alert message and redirects the user to the delete_demonstrator page
       else
         flash[:alert] = "Demonstrator with ID: \"#{params[:sam_id]}\" not found"
         redirect_to delete_demonstrator_path
@@ -208,14 +209,14 @@ class StaffsController < ApplicationController
     end
   end
   
-  # collects students attended on a certain practical => basically, 
-  # it prepares an attendance sheet to be displayed
-  # it also makes possible for the user to see the number of students attended on that practical
+  # collects students attended a certain practical 
+  # => basically, it prepares an attendance sheet to be displayed
+  # it also makes possible for the user to see the number of students attended that practical
   def practical_details
     if params[:practical_id] != nil
       @practical = Practical.find(params[:practical_id])
       @attendances = @practical.attendances
-    # in case of invalid practical id, it sets alert 
+    # in case of invalid practical id, it sets an alert 
     # message and redirects the user to the dashboard
     else
       flash[:alert] = "Practical not found!"
@@ -253,7 +254,7 @@ class StaffsController < ApplicationController
         end
       end
       
-      # calculates how many student attended on the practicals during the week
+      # calculates how many student attended the practicals during the week
       @courses.each do |course|
         @attendance_statistics[course.course_title] = Array.new(@practicals_on_specific_weeks[course.course_title].count, 0)
         @practicals_on_specific_weeks[course.course_title].each_with_index do |practicals_on_same_week, index|
