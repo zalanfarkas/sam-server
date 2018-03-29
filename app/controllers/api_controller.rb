@@ -1,16 +1,15 @@
-# Copyright (c) 2018 Team Foxtrot
-# Licensed under MIT License
-
-# this controller is reposible for the communication
+# this controller isreposible for the communication
 # between server and raspberry pi units
 class ApiController < ApplicationController
   skip_before_action :verify_authenticity_token
   
+  # Get course id and other practical details
   def get_course_id
+    # Get type of input device and data from that device
     type = params[:type]
     data = params[:data]
-    # params with Pi ID so we can check which Pi sent it, maybe we can check against it so nobody can send a post request from home
-    
+  
+    # If data is missing return error
     if data.nil? 
       return render :json => {
         :success => false,
@@ -18,38 +17,39 @@ class ApiController < ApplicationController
       }
     end
     
- 
+    # Find all the  practicals for given person
     practicals_of_demonstrator = Demonstrator.find_practicals(type, data)
     
+    # If person doesn't have practicals sends response to PI
     if practicals_of_demonstrator.nil? || practicals_of_demonstrator.empty? 
       return render :json => {
         :success => false,
         # spaces are intentional to fit the text properly to the LCD screen
         :error => "YOU ARE NOT                             A DEMONSTRATOR"
-        #Demonstrator doesn't have practicals, NO PRACTICALS
       }
     end
     
-    # and filter them to leave only 1 which is currently happening, and then return it
+    # Filter practicals to leave only 1 which is currently happening, and then return it
     current_time = DateTime.now
     practicals = practicals_of_demonstrator.where('start_time <= ? AND end_time >= ?', current_time, current_time)
     
-    if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
+    # Check if person has currently running practicals
+    if practicals.empty?
       return render :json => {
         :success => false,
         # spaces are intentional to fit the text properly to the LCD screen
         :error => "NO CURRENT                              PRACTICALS"
-        #Demonstrator doesn't have practical at this time
       }
     end
     
+    # Create array for fingerprint templates
     fingerprint_templates = Array.new
-    # Find all the students who are enrolled for course
+    # Find all the students who are enrolled for course and put their fingerprint template to array
     Enrolment.where(["course_id = ?", practicals.first.course.id]).each do |enrolment|
       fingerprint_templates << enrolment.student.fingerprint_template if enrolment.student.fingerprint_template.present?
     end
 
-    
+    # Return json with practical information
     render :json => {
       :success => true,
       :course_id => practicals.first.course.sam_course_id,
@@ -59,20 +59,21 @@ class ApiController < ApplicationController
     
   end
   
+  # Tries to record attendance
   def record_attendance
     type = params[:type]
     data = params[:data]
     course_id = params[:course_id]
     
+    # If some field are empty, show error to the user
     if data.nil? || type.nil? || course_id.nil?
       return render :json => {
         :success => false,
         :error => "MISSING DATA"
-        #DATA, TYPE OR COURSE ID IS EMPTY
-        #Data, type or course id is empty
       }
     end
     
+    # Try to find course from given parameter
     student = Student.new
     course = Course.find_by(sam_course_id: course_id)
     if course.nil?
@@ -83,26 +84,28 @@ class ApiController < ApplicationController
     end
     
     if type == "nfc"
+      # Try to find student using nfc data
       student = Student.find_by(card_id: data)
       if student.nil?
         # spaces are intentional to fit the text properly to the LCD screen
         return render_json_error("STUDENT                                 NOT FOUND")
       end
     elsif type == "fingerprint"
+      # Try to find student using fingerprint data
       student = Student.find_by(fingerprint_template: data)
       if student.nil?
         # spaces are intentional to fit the text properly to the LCD screen
         return render_json_error("STUDENT                                 NOT FOUND")
       end
     else 
+      # Given type is not found
       return render_json_error("TYPE NOT FOUND")
     end
     
     
-     # Check is student is enrolled for the course
+      # Check is student is enrolled for the course
       if Enrolment.where(["student_id = ? and course_id = ?", student.id, course.id]).empty?
         return render_json_error("NOT ENROLLED                            FOR #{course_id}")
-        #Student is not enrolled for course:
       end
       
       if Rails.env == "production"
@@ -111,8 +114,10 @@ class ApiController < ApplicationController
          # so we can test it even if there is no real practical at testing time
         current_time = Practical.first.start_time
       end
+      
+      # Find currently running practicals for the course
       practicals = Practical.where('start_time <= ? AND end_time >= ? AND course_id = ?', current_time, current_time, course.id)
-      if practicals.empty? #|| #practicals.first.course.nil? || practicals.count = 0
+      if practicals.empty?
           return render :json => {
             :success => false,
             # spaces are intentional to fit the text properly to the LCD screen
@@ -120,6 +125,7 @@ class ApiController < ApplicationController
           }
       end
       
+      # Check if student has already recorded attendance
       if Attendance.where('student_id = ? AND practical_id = ?', student.id, practicals.first.id).exists?
         return render :json => {
             :success => false,
@@ -128,13 +134,17 @@ class ApiController < ApplicationController
           }
       end
       
+      # Record attendance and send response
       Attendance.create(student_id: student.id, practical_id: practicals.first.id)
       render :json => { :success => true, :student_id => student.sam_student_id }
   end
   
+  # Returns pending practicals
   def pending_practicals
+    # Gets raspberry pi id
     raspberry_pi_id = params[:data]
     
+    # If id is not provided return error
     if raspberry_pi_id.nil?
       return render :json => {
         :success => false,
@@ -143,6 +153,7 @@ class ApiController < ApplicationController
       }
     end
     
+    # Try to get pending practical
     pending_practical = PendingPractical.find_by(raspberry_pi_id: raspberry_pi_id)
     # There is not practical pending for raspberry pi with given id
     if pending_practical.nil?
@@ -152,6 +163,7 @@ class ApiController < ApplicationController
       }
     end
     
+    # If practical doesn't have course return error
     if pending_practical.practical.course.nil?
       return render :json => {
         :success => false,
@@ -160,7 +172,7 @@ class ApiController < ApplicationController
       }
     end
     
-    
+    # Return pending practicals
     render :json => {
         :success => true,
         :pending => true,
@@ -172,10 +184,12 @@ class ApiController < ApplicationController
     pending_practical.delete
   end
   
+  # Uploads fingerprint to database
   def upload_fingerprint
     card_id = params[:card_id]
     fingerprint = params[:fingerprint]
     
+    # If card id or fingerpint template not provided, return an error
     if card_id.nil? || fingerprint.nil?
       return render :json => {
         :success => false,
@@ -190,6 +204,7 @@ class ApiController < ApplicationController
     # If didn't find in student table look in staff table
     person = Staff.find_by(card_id: card_id) if person == nil
     
+    # If person not found return error
     if person.nil?
       return render :json => {
         :success => false,
@@ -198,6 +213,7 @@ class ApiController < ApplicationController
       }
     end
     
+    # Update person's fingerprint template
     person.update_attribute(:fingerprint_template, fingerprint)
     return render :json => {
       :success => true
