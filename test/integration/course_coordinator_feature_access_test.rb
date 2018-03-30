@@ -39,17 +39,20 @@ class CourseCoordinatorFeatureAccessTest < ActionDispatch::IntegrationTest
   test "course coordinator can access managing C6s feature" do
     get manage_c6s_path
     assert_response :success
+    assert_select 'form input[name=?]', "sam_student_id"
   end
   
   test "course coordinator can access 'add demonstrator' feature" do
     get add_demonstrator_path
     assert_response :success
+    assert_select 'form input[name=?]', "sam_id"
   end
   
   
   test "course coordinator can access 'demonstrator list' feature" do
     get demonstrator_list_path
     assert_response :success
+    assert_select 'div[id=?]', "accordion"
   end
   
   test "course coordinator can access 'remote practical initialisation on Raspberry Pi device' feature" do
@@ -61,16 +64,19 @@ class CourseCoordinatorFeatureAccessTest < ActionDispatch::IntegrationTest
   test "course coordinator can access 'delete demonstrator' feature => 'show page'" do
     get delete_demonstrator_path
     assert_response :success
+    assert_select 'form input[name=?]', "sam_id"
   end
   
   test "course coordinator can access 'attendance statistics' feature" do
     get attendance_statistics_path
     assert_response :success
+    assert_select 'p', /Students attended:/
   end
   
   test "course coordinator can access 'attendance history' feature" do
     get attendance_history_path
     assert_response :success
+    assert_select 'h5', /Search Attendance Statistics for certain Student/
   end
 
 end
