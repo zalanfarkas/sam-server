@@ -5,7 +5,7 @@
 <p><b>Your current practicals:</b></p>
 <div class="row">
   <div class="col-md-6 offset-3">
-
+        <!--creates a form for each of the current practicals (current practicals are collected in the corresponding controller action)-->
         <% @current_practicals.each do |practical| %>
             <h1><%= practical.course.course_title %></h1> <p>Location: <%= practical.location %></p> 
             <%=form_tag({controller: "manual_attendance_recording", action: "search"}, method: "get", class: "nifty_form") do %>

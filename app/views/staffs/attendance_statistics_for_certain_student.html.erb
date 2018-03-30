@@ -1,5 +1,6 @@
 <!--Copyright (c) 2018 Team Foxtrot-->
 <!--Licensed under MIT License-->
+
 <div class="col-md-12 text-center mx-auto">
   
     <% if !@attendance_on_practicals.nil? %>
@@ -14,6 +15,7 @@
           </tr>
         </thead>
         <tbody>
+          <!--goes through the array prepared in the controller-->
         <% @attendance_on_practicals.each_with_index do |attendance, index| %>
           <tr>
             <td><%= index+1 %></td>

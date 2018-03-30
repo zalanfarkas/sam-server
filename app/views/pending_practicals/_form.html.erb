@@ -22,9 +22,9 @@
   </div>
   
   <div class="form-group">
+    <!--displays list of current practicals (current practicals gathered in the corresponding controller action)-->
     <%= form.select :practical_id, options_for_select(@current_practicals.map{|practical| ["#{practical.course.course_title},  #{practical.location}", practical.id]}), {}, {class: "form-control"}%>
     
-    <%#= form.collection_select(:practical_id, @current_practicals, :id, ) %>  
   </div>
   <div class="actions">
     <%= form.submit "Start Practical", class: "btn btn-primary" %>

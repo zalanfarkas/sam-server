@@ -19,6 +19,7 @@
 
 
 <div id="accordion">
+  <!--goes through the hash prepared in the controller-->
 <% @courses.each do |course| %>
   <% if !(@hash[course.course_title].empty?) %>
     <div class="card primary-color">

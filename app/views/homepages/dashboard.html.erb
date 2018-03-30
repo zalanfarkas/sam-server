@@ -1,6 +1,9 @@
 <!--Copyright (c) 2018 Team Foxtrot-->
 <!--Licensed under MIT License-->
 
+<!--dashboard for the logged-in users-->
+<!--it depends on the user type which element are rendered-->
+
 <% if ["staff_course_coordinator_and_demonstrator", "staff_course_coordinator", "staff_demonstrator", "student_demonstrator"].include?(session[:user_type]) %>
 
 <div class="row text-center text-lg-left">

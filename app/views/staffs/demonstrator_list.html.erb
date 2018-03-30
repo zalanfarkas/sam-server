@@ -3,6 +3,7 @@
 
 <div class="col-md-12 mx-auto">
   <div id="accordion">
+    <!--goes through the hash prepared in the controller-->
   <% @hash.each do |course_title, practicals| %>
     <div class="card primary-color">
       <a class="card-link" data-toggle="collapse" href="#<%= course_title %>">
