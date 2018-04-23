@@ -5,14 +5,14 @@
 # boundary cases and to test the system
 
 # students who are demonstrators
-zalan = Student.create!(email: 'milkshake.9601@gmail.com', password: 'password', sam_student_id: '12345678', first_name: 'Zalan', last_name: 'Farkas', card_id: '13645246150', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
+zalan = Student.create!(email: 'milkshake.9601@gmail.com', password: 'password', sam_student_id: '12345678', first_name: 'Zalan', last_name: 'Farkas', card_id: '136447119212', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
 dovydas = Student.create!(email: 'dovydas@example.com', password: 'password', sam_student_id: '22222222', first_name: 'Dovydas', last_name: 'Pekus', card_id: '226198141759', picture: File.open(Rails.root + "app/assets/images/guy1.jpeg"))
 
 #students who are not demonstrators
-patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '33333333', first_name: 'Patrik', last_name: 'Bansky', card_id: '000088', picture: File.open(Rails.root + "app/assets/images/pato.jpg"))
+patrik = Student.create!(email: 'patrik@example.com', password: 'password', sam_student_id: '33333333', first_name: 'Patrik', last_name: 'Bansky', card_id: '136411968191', picture: File.open(Rails.root + "app/assets/images/pato.jpg"))
 alex = Student.create!(email: 'alex@example.com', password: 'password', sam_student_id: '44444444', first_name: 'Alex', last_name: 'Ioana', card_id: '136419745100', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 vladimir = Student.create!(email: 'vladimir@example.com', password: 'password', sam_student_id: '55555555', first_name: 'Vladimir', last_name: 'Yesipov', card_id: '136421539124', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
-edvinas = Student.create!(email: 'ed@example.com', password: 'password', sam_student_id: '11111111', first_name: 'Edvinas', last_name: 'Byla', card_id: '13642940185', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
+edvinas = Student.create!(email: 'ed@example.com', password: 'password', sam_student_id: '11111111', first_name: 'Edvinas', last_name: 'Byla', card_id: '136411273181', picture: File.open(Rails.root + "app/assets/images/guy2.jpeg"))
 
 #staff with two courses
 nir = Staff.create!(email: 'nir@example.com', password: 'password', sam_staff_id: "s_00000001", first_name: 'Nir', last_name: 'Oren', card_id: 'u00000003')
